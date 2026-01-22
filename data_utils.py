@@ -15,7 +15,12 @@ def Mol2SmilesCoords(mol, canonical=False):
     conf = mol.GetConformer()
     smiles = Chem.MolToSmiles(mol, canonical=canonical, doRandom=(not canonical))
     mol_smiles = Chem.MolFromSmiles(smiles)
-    atom_map = {atom.GetIdx(): mol.GetSubstructMatch(mol_smiles)[atom.GetIdx()] for atom in mol_smiles.GetAtoms()}
+    if mol_smiles is None:
+        return None, None, None
+    match = mol.GetSubstructMatch(mol_smiles)
+    if len(match) != mol_smiles.GetNumAtoms():
+        return None, None, None
+    atom_map = {atom.GetIdx(): match[atom.GetIdx()] for atom in mol_smiles.GetAtoms()}
     atom_seq = [atom.GetSymbol() for atom in mol_smiles.GetAtoms()]
     coordinates = np.array([conf.GetAtomPosition(atom_map[atom.GetIdx()]) for atom in mol_smiles.GetAtoms()])
     return smiles, atom_seq, coordinates

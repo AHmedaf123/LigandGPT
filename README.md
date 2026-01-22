@@ -1,60 +1,71 @@
-# 3DMolFormer
-This is the code repository for our paper published in ICLR 2025: [3DMolFormer: A Dual-channel Framework for Structure-based Drug Discovery](https://arxiv.org/abs/2502.05107).
+# LigandGPT: Curriculum-Guided Reinforcement Learning for Molecular Design
 
-## Dependencies
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/)
+[![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-red.svg)](https://pytorch.org/)
 
-```bash
-pytorch
-numpy
-scipy
-tqdm
-tensorboard
-multiprocessing
-rdkit
-openbabel
-```
+Official implementation of **LigandGPT**, a curriculum-guided reinforcement learning framework for structure-based molecular design.
+
+## Abstract
+
+Most deep learning models for structure-based drug design focus only on binding affinity. This 
+creates problems. Generated molecules are often unstable, lack drug-like properties, or are too hard to synthesize. This limits their real-world use. We present LigandGPT, a framework that solves this issue. It optimizes seven properties at once: binding affinity, bioactivity, drug-likeness,synthetic accessibility, and three stability measures (steric clash, torsional strain, and internal energy). The system uses a 12-layer transformer to generate molecules. A GNN-based model and QVina2.0 evaluate binding. RDKit provides physicochemical scores. Multi-objective learning faces reward interference and mode collapse. We solve this with a three-stage curriculum. It activates objectives gradually and uses Chebyshev scalarization for optimal balancing. This reduces reward variance and improves stability. Unlike previous methods that fix problems after generation, LigandGPT enforces physical constraints during generation. Combined with experience replay and novelty exploration, it converges faster and produces molecules with lower strain while maintaining strong binding affinity. Our results show that enforcing constraints during generation works better than post-hoc corrections for stable molecular design. 
 
 ## Datasets
 
-For pre-training, we use:
+| Dataset | Purpose | Source |
+|---------|---------|--------|
+| Uni-Mol | LigandGPT 3D pre-training | [GitHub](https://github.com/deepmodeling/Uni-Mol) |
+| CrossDocked2020 | Protein–ligand pair pre-training | [GitHub](https://github.com/gnina/models) |
+| ChEMBL | AdvanceGNN pre-training | [ChEMBL](https://www.ebi.ac.uk/chembl/) |
+| PDBbind v2020 | AdvanceGNN fine-tuning (binding affinity) | [PDBbind](https://www.pdbbind-plus.org.cn/) |
+| TargetDiff split | RL generation benchmarks | [GitHub](https://github.com/guanjq/targetdiff) |
 
-- Molecular pretraining and pocket pretraining datasets by Uni-Mol: https://github.com/deepmodeling/Uni-Mol/tree/main/unimol
-- Pocket-ligand pair data by CrossDocked2020: https://github.com/gnina/models/tree/master/data/CrossDocked2020
+## Usage
 
-For the docking task, we use:
-
-- The PDBbind v2020 dataset: https://www.pdbbind-plus.org.cn/download
-
-For the pocket-aware drug design task, we use 
-
-- The training / test split by TargetDiff: https://github.com/guanjq/targetdiff
-
-## Pre-training
-
+### LigandGPT Pre-training
 ```bash
-python pretraining.py
+python pretraining.py --dataset_path ./data/ --ckpt_save_path ./checkpoints/
 ```
 
-## Supervised Fine-tuning for Docking
-
+### AdvanceGNN Pre-training (ChEMBL)
 ```bash
-python docking_finetuning.py
+python chEMBL-pretraining.py
 ```
 
-## RL Fine-tuning for Molecule Generation
-
+### AdvanceGNN Fine-tuning (PDBbind)
 ```bash
-python generation_finetuning.py
+python PDBbind-finetuning.py --pretrained_path ./outputs/chembl_pretrain/best_model.pt
 ```
+
+### RL Fine-tuning (Molecule Generation)
+```bash
+python generation_finetuning.py --ckpt_load_path ./checkpoints/final.pt --n_steps 700
+```
+
+## Model Architecture
+
+| Component | Details |
+|-----------|---------|
+| LigandGPT | 12 layers, 12 heads, 768-dim (~85M params) |
+| AdvanceGNN (bioactivity GNN) | 5 GIN + 2 GAT layers (~5M params) |
 
 ## Citation
 
-```bash
-@inproceedings{3DMolFormer,
-  title={3DMolFormer: A Dual-channel Framework for Structure-based Drug Discovery},
-  author={Hu, Xiuyuan and Liu, Guoqing and Chen, Can and Zhao, Yang and Zhang, Hao and Liu, Xue},
-  booktitle={International Conference on Learning Representations (ICLR)},
+```bibtex
+@article{LigandGPT,
+  title={LigandGPT: Curriculum-Guided Reinforcement Learning for Molecular Design},
+  author={Your Authors},
+  journal={Your Venue},
   year={2025}
 }
 ```
+
+## License
+
+MIT License - see [LICENSE](LICENSE) for details.
+
+---
+
+**Repository:** `https://github.com/YOUR_USERNAME/LigandGPT`
 

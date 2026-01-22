@@ -101,6 +101,8 @@ class PairDataset(torch.utils.data.Dataset):
         if lig_mol is None:
             return None
         smiles, lig_atoms, lig_coords = Mol2SmilesCoords(lig_mol, canonical=False)
+        if smiles is None:
+            return None
         lig_coords = lig_coords - data['ligand_center_of_mass'].numpy()
 
         tokens, numbers = self._tokenizer.tokenize(protein=data['protein_atom_name'], prot_coords=prot_coords,
@@ -143,7 +145,8 @@ class ProtLigPairDataset(torch.utils.data.Dataset):
 
         p = np.random.uniform()
         smiles, lig_atoms, lig_coords = Mol2SmilesCoords(lig, canonical=(p < self.rand_aug))
-        
+        if smiles is None:
+            return None
         lig_coords = lig_coords - center
         if self.rot_aug:
             random_rotation = R.random().as_matrix()
@@ -165,10 +168,16 @@ class ProtLigPairDataset(torch.utils.data.Dataset):
 
 
 def collate_fn(encoded_seqs):
+    # Filter out None entries
     encoded_seqs = [item for item in encoded_seqs if item is not None]
-    max_length = max([len(seq[0]) for seq in encoded_seqs])
+    
+    # If nothing left after filtering, return None
+    if len(encoded_seqs) == 0:
+        return None
 
-    collated_arr_x = torch.zeros(len(encoded_seqs), max_length, dtype=torch.long)  # padding with zeroes
+    max_length = max(len(seq[0]) for seq in encoded_seqs)
+
+    collated_arr_x = torch.zeros(len(encoded_seqs), max_length, dtype=torch.long)
     collated_arr_y = torch.zeros(len(encoded_seqs), max_length, dtype=torch.long)
     collated_arr_x_num = torch.zeros(len(encoded_seqs), max_length, dtype=torch.float)
     collated_arr_y_num = torch.zeros(len(encoded_seqs), max_length, dtype=torch.float)
