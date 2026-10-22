@@ -81,7 +81,6 @@ logs/
 checkpoints/
 checkpoints_docking/
 generated_molecules/
-*.pt
 *.pth
 !docking/qvina02
 
