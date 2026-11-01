@@ -1,0 +1,46 @@
+setting                 strict   95% Wilson CI     | per-target
+plain_k10                3/128=0.023  [0.008, 0.067] | T0:0/64 T3:3/64
+plain_full               8/128=0.062  [0.032, 0.118] | T0:3/64 T3:5/64
+current_k10              9/128=0.070  [0.037, 0.128] | T0:8/64 T3:1/64
+current_rl_step0         9/128=0.070  [0.037, 0.128] | T0:9/64 T3:0/64
+struct_syntax_k10       14/128=0.109  [0.066, 0.175] | T0:8/64 T3:6/64
+struct_syntax_full      13/128=0.102  [0.060, 0.166] | T0:7/64 T3:6/64
+struct_valence_k10      52/128=0.406  [0.325, 0.493] | T0:25/64 T3:27/64
+struct_valence_full     43/128=0.336  [0.260, 0.421] | T0:17/64 T3:26/64
+
+kekulize failures: structure of the aromatic atoms
+-- plain_k10: 10 kekulize failures
+     4  5-ring aromatic without donor (o/s/[nH])   e.g. Nc1c(cc(c1)F)O
+     3  aromatic atom outside any ring   e.g. c1c(Cl)cc(C)cc1-cccc(c1)ccc1
+     3  6-ring electron count wrong (e.g. odd number of pi atoms)   e.g. O(C)c1ccc(c(OC)n1CN)NSc1cccc(c1)=O
+-- current_k10: 28 kekulize failures
+    10  5-ring aromatic without donor (o/s/[nH])   e.g. c1cccc(c1)-c1cc(c(c1)Cl)Cl
+     7  aromatic ring size not 5/6 (7)   e.g. c1(cccc(c1)-c1cccc(c(c1)F)F)F
+     7  aromatic atom outside any ring   e.g. c1c(ccc(c1)-c1ccccc1)cccccc1ccc1
+     1  aromatic ring size not 5/6 (14)   e.g. c1c(cc(c1)-c1ccc(-c1ccccc(c1)F)F)=1
+     1  6-ring electron count wrong (e.g. odd number of pi atoms)   e.g. c1ccc(cc1)=c1cccc(c1)-c1ccc(cc1)Cl
+     1  aromatic ring size not 5/6 (3)   e.g. c1(-c2ccccc2)cc1
+     1  aromatic ring size not 5/6 (8,10,11)   e.g. c1c(ccc2)c1-cc1ccc2cccc1
+-- struct_syntax_k10: 18 kekulize failures
+     6  5-ring aromatic without donor (o/s/[nH])   e.g. Nc1c(cc(c1)F)O
+     4  aromatic atom outside any ring   e.g. c1(cccc2cccc2)cc1CC(=N)C1NCc1cc(Cl)=O
+     4  aromatic ring size not 5/6 (7)   e.g. c1ccc(cc1)-c1cccc(cc1)OCCCCC(=O)CC(=O)OC
+     2  6-ring electron count wrong (e.g. odd number of pi atoms)   e.g. c1(C2NC3C(CCC(c3c(c3C(F)F)F)F)C2C3)CCCCCNc1
+     2  aromatic ring size not 5/6 (8)   e.g. c1(c2cccc(Br)ccc2)CC1
+-- struct_valence_k10: 72 kekulize failures
+    26  6-ring electron count wrong (e.g. odd number of pi atoms)   e.g. C(c2cc(cc(c2)c(OC(O)C(=O)ccc1)O)C(C)=O)=N1
+    22  aromatic atom outside any ring   e.g. C1N=CNN(N)N=C1N(C1N(C(C(N)=O)C(=O)F)C)c1cccc1NC(OC1C)O
+    10  5-ring aromatic without donor (o/s/[nH])   e.g. c1c(ccc1)N1c2CC(=N2)NCC(O)C1C(O)CCO
+     3  aromatic ring size not 5/6 (4)   e.g. n1cnc2ccc2cn(n2N)C1N(N)ncncncnc21OC(F)OC(=O)NCC1
+     3  aromatic ring size not 5/6 (8)   e.g. c1(c2cccc(Br)ccc2)CC1
+     3  aromatic ring size not 5/6 (3)   e.g. C(N1C(C(=O)NC(=C=O)C2NNC(N3CC=O)C(C1)=O)N=C=C2CC)N=NC2CC=C2C=C1C=C=CC=
+     2  aromatic ring size not 5/6 (7)   e.g. c1cc(c2scc1C(N)=C(n1c(ccc2)C)CO)(C)O1
+     1  aromatic ring size not 5/6 (8,13)   e.g. C(=O)C(N)Nc1nnc2c3ccc(N)ccc2cc1OC(Cl)OC(N=C)=NC1N=NCC=C(O)N=C(N)NN1C=C
+     1  aromatic ring size not 5/6 (4,10)   e.g. c1c2c(-c3occ3nccc2)COc(N)(O)C(=O)C1
+     1  aromatic ring size not 5/6 (9)   e.g. N1(n2c(N)c3cc(ncnc21)(N)CC(=O)N)COP(O)OP(=O)=C1OP(O)(=O)OP(=O)=NP(O)=N
+
+valence-mode settings: failures by category (pooled 128)
+  struct_valence_k10 {'rdkit:kekulize(aromatic ring invalid)': 72, 'valid': 52, 'rdkit:valence': 2, 'no_termination': 2}
+  struct_valence_full {'rdkit:valence': 2, 'valid': 43, 'rdkit:kekulize(aromatic ring invalid)': 83}
+
+type_violation samples across ALL settings: 0 of 1024
