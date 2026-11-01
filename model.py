@@ -1,6 +1,12 @@
 import torch
 from torch import nn
 import torch.nn.functional as F
+# nn.TransformerEncoder switches to a fused "fast path" whenever autograd is off or no parameter requires grad: the frozen prior,
+# and all sampling under torch.no_grad(). On this model that path differs from the standard one by up to 0.47 in the logits
+# (about 0.02 nats per token), so identical weights gave different log-probs for the agent (standard path) and the prior
+# (fast path), and sampling used a slightly different distribution from the one the loss evaluates. The standard path matches a
+# float64 reference to 2e-4, so it is used everywhere. Set before any forward pass; importing this module is enough.
+torch.backends.mha.set_fastpath_enabled(False)
 class LigandGPT(nn.Module):
     def __init__(
         self,
