@@ -1,15 +1,34 @@
-# Core dependencies
-torch>=2.0.0
-numpy>=1.24.0
-scipy>=1.10.0
-tqdm>=4.65.0
-tensorboard>=2.12.0
-rdkit>=2023.3.1
-pandas>=2.0.0
-lmdb>=1.4.0
-selfies>=2.1.0
-PyTDC>=0.4.0
-rch-geometric>=2.3.0
-scikit-learn>=1.3.0
-scipy>=1.10.0
-wandb
+# LigandGPT environment, rebuilt inside ./.venv (Python 3.13.5). Versions are the ones actually installed.
+# Install order matters for torch: use the cu128 index (driver supports CUDA 13.0, wheels are cu128).
+--extra-index-url https://download.pytorch.org/whl/cu128
+torch==2.11.0+cu128
+triton==3.6.0
+
+# Core
+numpy==2.5.4
+scipy==1.18.1
+pandas==3.1.0
+tqdm==4.70.1
+scikit-learn==1.9.1
+matplotlib==3.11.2
+lmdb==3.0.0
+selfies==2.2.0
+six==1.17.0
+
+# Chemistry
+rdkit==2026.9.1
+torch-geometric==2.8.1        # was "rch-geometric" (typo) in the original file
+PyTDC==0.3.6                  # NEEDS A ONE-LINE PATCH, see PATCHES below
+
+# Ligand/receptor preparation (obabel CLI from openbabel-wheel cannot write pdbqt here: libXrender.so.1 missing)
+openbabel-wheel==3.1.1.23
+meeko==0.8.0
+gemmi==0.7.5
+
+# Not installed in .venv: only used by the GNN training scripts, not by the RL path
+# tensorboard>=2.12.0
+# wandb
+
+# PATCHES applied inside .venv (re-apply after rebuilding the environment):
+#  1. tdc/chem_utils/oracle/oracle.py line 21: "from rdkit.six import iteritems" -> "from six import iteritems"
+#     (rdkit.six no longer exists in any RDKit release; original saved as oracle.py.orig next to it)
