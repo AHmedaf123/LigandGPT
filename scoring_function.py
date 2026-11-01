@@ -10,6 +10,7 @@ from torch_geometric.data import Data, Batch
 from rdkit import Chem, RDLogger
 from rdkit.Chem import AllChem, rdMolTransforms
 from rdkit.Chem.rdForceFieldHelpers import UFFGetMoleculeForceField
+from meeko import MoleculePreparation, PDBQTWriterLegacy
 from tdc import Oracle
 RDLogger.DisableLog('rdApp.*')
 VDW_RADII_MAP = {
@@ -314,14 +315,23 @@ def write_molecule_to_sdf(molecule: Chem.Mol, sdf_path: str) -> bool:
         return True
     except Exception:
         return False
+_MEEKO_PREPARATION = None
 def convert_sdf_to_pdbqt(sdf_path: str, pdbqt_path: str) -> bool:
+    """SDF (with explicit hydrogens) -> AutoDock PDBQT with Meeko (AD4 atom types, Gasteiger charges, torsion tree).
+    Replaces the obabel call: the obabel wheel cannot write PDBQT without the system library libXrender."""
+    global _MEEKO_PREPARATION
     try:
-        subprocess.run(
-            ['obabel', sdf_path, '-O', pdbqt_path, '-xh'],
-            check=True,
-            capture_output=True,
-            timeout=5
-        )
+        if _MEEKO_PREPARATION is None:
+            _MEEKO_PREPARATION = MoleculePreparation(rigid_macrocycles=True)   # default macrocycle handling writes CG0/G0 pseudo-atoms QVina cannot parse
+        molecule = Chem.SDMolSupplier(sdf_path, removeHs=False)[0]
+        if molecule is None:
+            return False
+        setups = _MEEKO_PREPARATION.prepare(molecule)
+        pdbqt_string, is_ok, _ = PDBQTWriterLegacy.write_string(setups[0])
+        if not is_ok:
+            return False
+        with open(pdbqt_path, "w") as handle:
+            handle.write(pdbqt_string)
         return True
     except Exception:
         return False
