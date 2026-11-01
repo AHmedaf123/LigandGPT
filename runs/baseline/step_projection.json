@@ -1,0 +1,69 @@
+{
+ "inputs": {
+  "scoring_docking_s_per_valid_molecule": {
+   "mean": 3.665277777777778,
+   "min": 3.1785714285714284,
+   "max": 4.2250000000000005
+  },
+  "sampling_s": 3.703333333333333,
+  "update_s_per_sequence": 0.11225,
+  "cpus": 4,
+  "note": "measured on a host with load average 11-55 (shared); first run under heavier load was 6-10 s per valid molecule; update trains on valid molecules + 8 replay"
+ },
+ "projection": {
+  "validity0.363_batch32": {
+   "valid_molecules": 11.6,
+   "sampling_s": 3.7,
+   "scoring_and_docking_s": 42.6,
+   "update_s": 2.2,
+   "step_s": 48.5,
+   "hours_300_steps": 4.0,
+   "hours_600_steps": 8.1
+  },
+  "validity0.363_batch48": {
+   "valid_molecules": 17.4,
+   "sampling_s": 3.7,
+   "scoring_and_docking_s": 63.9,
+   "update_s": 2.9,
+   "step_s": 70.4,
+   "hours_300_steps": 5.9,
+   "hours_600_steps": 11.7
+  },
+  "validity0.363_batch64": {
+   "valid_molecules": 23.2,
+   "sampling_s": 3.7,
+   "scoring_and_docking_s": 85.2,
+   "update_s": 3.5,
+   "step_s": 92.4,
+   "hours_300_steps": 7.7,
+   "hours_600_steps": 15.4
+  },
+  "validity0.7_batch32": {
+   "valid_molecules": 22.4,
+   "sampling_s": 3.7,
+   "scoring_and_docking_s": 82.1,
+   "update_s": 3.4,
+   "step_s": 89.2,
+   "hours_300_steps": 7.4,
+   "hours_600_steps": 14.9
+  },
+  "validity0.7_batch48": {
+   "valid_molecules": 33.6,
+   "sampling_s": 3.7,
+   "scoring_and_docking_s": 123.2,
+   "update_s": 4.7,
+   "step_s": 131.5,
+   "hours_300_steps": 11.0,
+   "hours_600_steps": 21.9
+  },
+  "validity0.7_batch64": {
+   "valid_molecules": 44.8,
+   "sampling_s": 3.7,
+   "scoring_and_docking_s": 164.2,
+   "update_s": 5.9,
+   "step_s": 173.8,
+   "hours_300_steps": 14.5,
+   "hours_600_steps": 29.0
+  }
+ }
+}
