@@ -202,21 +202,21 @@ def get_constraint_thresholds(curriculum_stage: int, valid_ratio: float = 1.0) -
     if curriculum_stage <= 1:
         base_thresholds = {
             'energy_max': 300.0,
-            'sa_min': 3.0,
+            'sa_max': 7.575,   # SA gate: reject sa > P90 / P80 / P70 of the valid baseline molecules
             'steric_max': 18.0,
             'torsion_max': 4.0
         }
     elif curriculum_stage == 2:
         base_thresholds = {
             'energy_max': 200.0,
-            'sa_min': 2.7,
+            'sa_max': 6.805,   # (runs/baseline/baseline.json, 93 valid molecules, structured decoder, targets 0 and 3)
             'steric_max': 15.0,
             'torsion_max': 3.0
         }
     else:  # Stage 3
         base_thresholds = {
             'energy_max': 150.0,
-            'sa_min': 2.5,
+            'sa_max': 6.254,
             'steric_max': 12.0,
             'torsion_max': 2.0
         }   
@@ -225,7 +225,7 @@ def get_constraint_thresholds(curriculum_stage: int, valid_ratio: float = 1.0) -
         logger.warning(f"Valid ratio {valid_ratio:.2%} < 30%, relaxing Stage 3 constraints by 20%")        
         return {
             'energy_max': base_thresholds['energy_max'] * relaxation_factor,
-            'sa_min': base_thresholds['sa_min'] * 0.9,  # Slightly reduce requirement
+            'sa_max': base_thresholds['sa_max'] * 1.1,  # relaxing allows a higher (worse) SA
             'steric_max': base_thresholds['steric_max'] * relaxation_factor,
             'torsion_max': base_thresholds['torsion_max'] * relaxation_factor
         }    
@@ -243,7 +243,7 @@ def violates_hard_constraints(
     if energy is not None and energy > thresholds['energy_max']:
         return True    
     sa = scores.get('sa')
-    if sa is not None and sa < thresholds['sa_min']:
+    if sa is not None and sa > thresholds['sa_max']:
         return True    
     steric = scores.get('steric')
     if steric is not None and steric > thresholds['steric_max']:
