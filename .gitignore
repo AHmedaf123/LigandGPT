@@ -100,3 +100,7 @@ GNN/outputs/
 
 # Large data files (should be downloaded separately)
 data/
+
+# Symlink to ../data and TDC downloads (oracle/fpscores.pkl lives in data/oracle/)
+/data
+oracle/

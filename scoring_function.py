@@ -635,7 +635,22 @@ def calculate_scores_for_batch(
 def create_qed_oracle() -> Oracle:
     return Oracle(name='QED')
 def create_synthetic_accessibility_oracle() -> Oracle:
-    return Oracle(name='SA')
+    """TDC reads ./oracle/fpscores.pkl relative to the working directory (and downloads it there if absent), then
+    caches the table in a module global. Run the first call from the data folder so the 9 MB file lives in
+    <data>/oracle/ and never in the repo. LIGANDGPT_DATA overrides the folder (default: ./data next to this file)."""
+    data_dir = os.environ.get('LIGANDGPT_DATA', os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data'))
+    if not os.path.isdir(data_dir):
+        raise FileNotFoundError(f"data folder not found: {data_dir} (set LIGANDGPT_DATA)")
+    start_directory = os.getcwd()
+    try:
+        os.chdir(data_dir)
+        oracle = Oracle(name='SA')
+        score = oracle('CC(=O)Nc1ccc(O)cc1')            # warm-up call: loads fpscores into TDC's cache
+        if not isinstance(score, (int, float)) or not 1.0 <= float(score) <= 10.0:
+            raise RuntimeError(f"SA oracle returned {score!r} for paracetamol; expected a score in [1, 10]")
+    finally:
+        os.chdir(start_directory)
+    return oracle
 def initialize_scoring_oracles() -> Dict[str, Oracle]:
     return {
         'qed': create_qed_oracle(),
