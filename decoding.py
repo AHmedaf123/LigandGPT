@@ -17,6 +17,7 @@ from dataclasses import dataclass, field
 from typing import Dict, List, Optional, Set
 
 import torch
+import torch.nn.functional as F
 
 # tokens that never belong inside the SMILES block
 NON_SMILES = ("<PAD>", "<PROT_START>", "<PROT_END>", "<PROT_COORDS_START>", "<PROT_COORDS_END>", "<LIG_START>",
@@ -226,10 +227,55 @@ def build_mask(states: List[Optional[SmilesState]], vocab, steps_left: int, devi
     return mask.to(device)
 
 
+# ---- KV cache. The pocket prompt (~1500 tokens) is identical for every sample, so its keys/values are computed once
+# with batch 1 and shared; each generated token then costs one step. Mirrors LigandGPT.forward (pre-norm layers, eval).
+def _layer(layer, x, attend):
+    h = layer.norm1(x)
+    q, k, v = F.linear(h, layer.self_attn.in_proj_weight, layer.self_attn.in_proj_bias).chunk(3, dim=-1)
+    q, k, v = (t.view(t.shape[0], t.shape[1], layer.self_attn.num_heads, -1).transpose(1, 2) for t in (q, k, v))   # [B, H, T, hd]
+    x = x + layer.self_attn.out_proj(attend(q, k, v).transpose(1, 2).reshape(x.shape))
+    return x + layer.linear2(layer.activation(layer.linear1(layer.norm2(x))))
+
+
+@torch.no_grad()
+def prefill(model, ids, nums):
+    """Run the prompt once (ids [1, L]). Returns per-layer (k, v) [1, H, L, hd] and the lm/num head outputs at the last position."""
+    x = model.token_embed(ids) * nums.unsqueeze(-1) + model.position_embed.weight[: ids.shape[1]].unsqueeze(0)
+    kv = []
+
+    def attend(q, k, v):
+        kv.append((k, v))
+        return F.scaled_dot_product_attention(q, k, v, is_causal=True)
+    for layer in model.encoder_stack.layers:
+        x = _layer(layer, x, attend)
+    return kv, model.lm_head(x[:, -1]), model.num_head(x[:, -1])
+
+
+@torch.no_grad()
+def decode_step(model, tok, num, pos, kv_prompt, kv_new):
+    """One new token per sample (tok, num: [B, 1]) at position pos. kv_new is a per-layer list of this batch's own keys/values."""
+    x = model.token_embed(tok) * num.unsqueeze(-1) + model.position_embed.weight[pos:pos + 1].unsqueeze(0)
+    for li, layer in enumerate(model.encoder_stack.layers):
+        def attend(q, k, v, li=li):
+            kn, vn = (k, v) if kv_new[li] is None else (torch.cat([kv_new[li][0], k], 2), torch.cat([kv_new[li][1], v], 2))
+            kv_new[li] = (kn, vn)
+            kp, vp = kv_prompt[li][0][0], kv_prompt[li][1][0]                     # [H, L, hd] shared by all samples
+            B, H, _, hd = q.shape
+            qh = q[:, :, 0].transpose(0, 1)                                       # [H, B, hd]: all samples against the shared keys in one GEMM
+            s = torch.cat([torch.bmm(qh, kp.transpose(1, 2)).transpose(0, 1),     # [B, H, L]
+                           torch.einsum("bhd,bhtd->bht", q[:, :, 0], kn)], dim=-1) * hd ** -0.5
+            a = torch.softmax(s, dim=-1)
+            L = kp.shape[1]
+            o = torch.bmm(a[..., :L].transpose(0, 1), vp).transpose(0, 1) + torch.einsum("bht,bhtd->bhd", a[..., L:], vn)
+            return o[:, :, None]                                                  # [B, H, 1, hd]
+        x = _layer(layer, x, attend)
+    return model.lm_head(x[:, 0]), model.num_head(x[:, 0])
+
+
 @torch.no_grad()
 def sample_smiles(model, vocab, prompt_ids: torch.Tensor, prompt_nums: torch.Tensor, n: int, *, structured: bool,
                   temperature: float = 1.0, top_k: int = 10, max_new_tokens: int = 200, valence: bool = False,
-                  min_atoms: int = 4, generator: Optional[torch.Generator] = None):
+                  min_atoms: int = 4, generator: Optional[torch.Generator] = None, use_cache: bool = True):
     """Sample n ligands for one pocket prompt.
 
     prompt_ids / prompt_nums: [1, L] pocket tokens (with coordinates) ending in <LIG_START>.
@@ -246,9 +292,15 @@ def sample_smiles(model, vocab, prompt_ids: torch.Tensor, prompt_nums: torch.Ten
     done = torch.zeros(n, dtype=torch.bool, device=device)
     coord_ids = torch.tensor([vocab["[x]"], vocab["[y]"], vocab["[z]"]], device=device)
     model.eval()
+    if use_cache:
+        kv_prompt, lg, nm = prefill(model, prompt_ids, prompt_nums)
+        lg, nm, kv_new, L = lg.expand(n, -1), nm.expand(n, -1), [None] * len(model.encoder_stack.layers), prompt_ids.shape[1]
     for step in range(max_new_tokens):
-        logits, num_pred = model(ids, nums)
-        logits = logits[:, -1, :].float()
+        if use_cache:
+            logits, num_pred = lg.float(), nm
+        else:
+            logits, num_pred = model(ids, nums)
+            logits, num_pred = logits[:, -1, :].float(), num_pred[:, -1]
         if structured:
             mask = build_mask([None if done[i] else states[i] for i in range(n)], vocab, max_new_tokens - step, device)
             logits = logits.masked_fill(~mask, float("-inf"))
@@ -262,7 +314,7 @@ def sample_smiles(model, vocab, prompt_ids: torch.Tensor, prompt_nums: torch.Ten
         nxt = torch.where(done, torch.zeros_like(nxt), nxt)
         new_num = torch.ones(n, device=device)
         is_coord = torch.isin(nxt, coord_ids)
-        new_num = torch.where(is_coord, num_pred[:, -1, 0], new_num)
+        new_num = torch.where(is_coord, num_pred[:, 0], new_num)
         ids = torch.cat([ids, nxt[:, None]], dim=1)
         nums = torch.cat([nums, new_num[:, None]], dim=1)
         if structured:
@@ -272,4 +324,6 @@ def sample_smiles(model, vocab, prompt_ids: torch.Tensor, prompt_nums: torch.Ten
         done = done | (nxt == end_id)
         if bool(done.all()):
             break
+        if use_cache:
+            lg, nm = decode_step(model, nxt[:, None], new_num[:, None], L + step, kv_prompt, kv_new)
     return ids[:, prompt_ids.shape[1]:].tolist(), done.tolist()
