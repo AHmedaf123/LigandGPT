@@ -193,17 +193,26 @@ def prepare_experience_replay(mo_optimizer_instance, current_sequence_length, nu
         return er_seqs, er_nums, er_valid_mask, er_smiles, er_scores, er_score_dicts
     return [], [], [], [], [], []
 
+def sequence_log_probs(model, encoded_sequences, numbers_sequences):
+    """Per-token log-probabilities of encoded_sequences[:, 1:] under `model`, with dropout DISABLED (eval mode).
+    Every log-probability that enters the loss (agent, frozen prior, and any stored behavior policy) must come from this
+    one function so the ratio compares like with like. The caller's train/eval mode is restored afterwards. Gradients
+    flow if autograd is enabled; wrap the call in torch.no_grad() for the prior.
+    Returns (token log-probs [B, T-1], full log-probs [B, T-1, V])."""
+    was_training = model.training
+    model.eval()
+    try:
+        logits, _ = model(encoded_sequences[:, :-1], numbers_sequences[:, :-1])
+    finally:
+        model.train(was_training)
+    log_probabilities = torch.log_softmax(logits, dim=-1)
+    token_log_probabilities = torch.gather(log_probabilities, 2, encoded_sequences[:, 1:].unsqueeze(-1)).squeeze(-1)
+    return token_log_probabilities, log_probabilities
 def compute_reinforce_loss(agent_model, prior_model, all_encoded_sequences, all_numbers_sequences, advantages_tensor, entropy_coefficient):
-    agent_model.eval()
     with torch.no_grad():
-        prior_logits, _ = prior_model(all_encoded_sequences[:, :-1], all_numbers_sequences[:, :-1])
-        prior_log_probabilities = torch.log_softmax(prior_logits, dim=-1)
-        prior_token_log_probabilities = torch.gather(prior_log_probabilities, 2, all_encoded_sequences[:, 1:].unsqueeze(-1)).squeeze(-1)
-        prior_likelihood = prior_token_log_probabilities.sum(dim=1)    
-    agent_model.train()
-    agent_logits, _ = agent_model(all_encoded_sequences[:, :-1], all_numbers_sequences[:, :-1])
-    agent_log_probabilities = torch.log_softmax(agent_logits, dim=-1)
-    agent_token_log_probabilities = torch.gather(agent_log_probabilities, 2, all_encoded_sequences[:, 1:].unsqueeze(-1)).squeeze(-1)
+        prior_token_log_probabilities, _ = sequence_log_probs(prior_model, all_encoded_sequences, all_numbers_sequences)
+        prior_likelihood = prior_token_log_probabilities.sum(dim=1)
+    agent_token_log_probabilities, agent_log_probabilities = sequence_log_probs(agent_model, all_encoded_sequences, all_numbers_sequences)
     agent_likelihood = agent_token_log_probabilities.sum(dim=1)
     kl_divergence_mean = (agent_likelihood - prior_likelihood).detach().mean().item()
     log_ratio = agent_likelihood - prior_likelihood.detach()
