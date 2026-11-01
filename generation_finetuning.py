@@ -16,6 +16,7 @@ from vocabulary import read_vocabulary
 from training_utils import predict_smiles
 from scoring_function import calculate_scores
 from mo_mpo import MultiObjectiveOptimizer
+from data_utils import receptor_paths
 def get_lmdb_data(lmdb_path):
     env = lmdb.open(
         lmdb_path,
@@ -360,7 +361,10 @@ def process_training_step(step_index, agent_model, prior_model, mo_optimizer_ins
         grad_norm
     )
 def run_datapoint_generation(datapoint_data, datapoint_index, prior_model, initial_agent_model, tokenizer_instance, vocabulary_instance, training_arguments):
-    prot_file = os.path.join(training_arguments.data_path, 'test_set', datapoint_data['protein_filename'])
+    receptor_pdb, prot_file = receptor_paths(datapoint_data['protein_filename'], training_arguments.data_path)
+    for required in (receptor_pdb, prot_file):
+        if not os.path.exists(required):
+            raise FileNotFoundError(f"receptor file missing: {required} (docking would silently return no score)")
     data_tag = f"{datapoint_index}-{datapoint_data['protein_filename'].split('_rec')[0].replace('/', '-')}"   
     output_directory = os.path.join(training_arguments.mol_save_path, training_arguments.run_name + data_tag)
     os.makedirs(output_directory, exist_ok=True)

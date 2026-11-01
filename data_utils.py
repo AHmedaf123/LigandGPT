@@ -1,3 +1,4 @@
+import os
 import numpy as np
 from rdkit import Chem
 from rdkit.Chem import rdchem
@@ -6,6 +7,14 @@ from rdkit import RDLogger
 
 RDLogger.DisableLog('rdApp.error')
 ptable = rdchem.GetPeriodicTable()
+
+def receptor_paths(protein_filename, data_path):
+    """(full receptor PDB, prepared PDBQT) for a datapoint.
+    The lmdb's protein_filename points to a *_pocket10.pdb that does not exist under test_set/. Docking uses the full
+    receptor <dir>/<id>_rec.pdb; its PDBQT (Meeko) lives in <data_path>/receptors_pdbqt/ with the same relative path."""
+    rel = protein_filename.split('_rec')[0] + '_rec.pdb'
+    return (os.path.join(data_path, 'test_set', rel),
+            os.path.join(data_path, 'receptors_pdbqt', rel[:-len('.pdb')] + '.pdbqt'))
 
 def normalize_coords(coordinates):
     return coordinates - coordinates.mean(axis=0)
