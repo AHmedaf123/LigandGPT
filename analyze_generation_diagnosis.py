@@ -1,9 +1,10 @@
 """Confidence intervals, kekulize-failure structure and type-violation count for results/generation_diagnosis/samples.csv.
-Run: .venv/bin/python analyze_generation_diagnosis.py > results/generation_diagnosis/analysis.txt"""
-import csv, collections, math, sys
+Run: .venv/bin/python analyze_generation_diagnosis.py [results/generation_diagnosis] > results/generation_diagnosis/analysis.txt"""
+import csv, collections, math, os, sys
 import os; os.chdir(os.path.dirname(os.path.abspath(__file__)))
 from rdkit import Chem, RDLogger; RDLogger.DisableLog('rdApp.*')
-rows=list(csv.DictReader(open("results/generation_diagnosis/samples.csv")))
+RUN = sys.argv[1] if len(sys.argv) > 1 else "results/generation_diagnosis"
+rows=list(csv.DictReader(open(os.path.join(RUN, "samples.csv"))))
 def wilson(k,n,z=1.96):
     p=k/n; d=1+z*z/n; c=(p+z*z/(2*n))/d; h=z*math.sqrt(p*(1-p)/n+z*z/(4*n*n))/d; return c-h,c+h
 print("setting                 strict   95% Wilson CI     | per-target")

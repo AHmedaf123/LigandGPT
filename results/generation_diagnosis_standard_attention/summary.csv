@@ -1,0 +1,9 @@
+setting,n,strict_valid,strict_rate,unique_valid,mean_len
+plain_k10,128,3,0.0234375,3,32.453125
+plain_full,128,8,0.0625,8,32.53125
+current_k10,128,9,0.0703125,9,27.6171875
+current_rl_step0,128,7,0.0546875,6,25.7421875
+struct_syntax_k10,128,14,0.109375,14,64.6875
+struct_syntax_full,128,13,0.1015625,13,64.3203125
+struct_valence_k10,128,52,0.40625,52,64.84375
+struct_valence_full,128,43,0.3359375,43,56.53125
