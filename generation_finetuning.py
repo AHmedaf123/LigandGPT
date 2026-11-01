@@ -14,7 +14,7 @@ from model import LigandGPT
 from tokenizer import ProtLigTokenizer
 from vocabulary import read_vocabulary
 from training_utils import predict_smiles
-from scoring_function import calculate_scores
+from scoring_function import calculate_scores, COUNTERS
 from mo_mpo import MultiObjectiveOptimizer
 from data_utils import receptor_paths
 def get_lmdb_data(lmdb_path):
@@ -422,6 +422,9 @@ def run_datapoint_generation(datapoint_data, datapoint_index, prior_model, initi
                 print(f"✓ CONTINUING: Protein shows promise ({steps_with_valid}/25 steps with valid molecules)")
                 print(f"{'='*80}\n")        
         if step_idx % 50 == 0:
+            print(f"step {step_idx}: counters since last print: {dict(COUNTERS)} {dict(current_mo_optimizer_state.counters)}")
+            COUNTERS.clear()
+            current_mo_optimizer_state.counters.clear()
             current_memory_state.to_csv(os.path.join(output_directory, f"step{step_idx}.csv"), index=False)
         if step_idx % 10 == 0:
             gc.collect()

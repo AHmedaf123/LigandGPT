@@ -1,7 +1,7 @@
 import numpy as np
 from typing import Dict, List, Optional, Tuple
 from dataclasses import dataclass, replace
-from collections import deque, OrderedDict
+from collections import Counter, deque, OrderedDict
 import logging
 try:
     from rdkit.Chem.Scaffolds import MurckoScaffold
@@ -230,10 +230,15 @@ def get_constraint_thresholds(curriculum_stage: int, valid_ratio: float = 1.0) -
             'torsion_max': base_thresholds['torsion_max'] * relaxation_factor
         }    
     return base_thresholds
+def is_unscored(scores: Dict[str, Optional[float]]) -> bool:
+    """A valid molecule whose 3D build or docking failed: no docking score or no steric/torsion/energy score."""
+    return any(scores.get(key) is None for key in ('docking', 'steric', 'torsion', 'energy'))
 def violates_hard_constraints(
     scores: Dict[str, Optional[float]],
     thresholds: Dict[str, float]
 ) -> bool:
+    if is_unscored(scores):
+        return True
     energy = scores.get('energy')
     if energy is not None and energy > thresholds['energy_max']:
         return True    
@@ -638,6 +643,7 @@ class MultiObjectiveOptimizer:
         self.stats = {obj.name: create_running_statistics() for obj in self.objectives}        
         self.iteration = 0
         self.curriculum_stage = 1
+        self.counters = Counter()    # gate failures, printed and reset every 50 steps by the RL loop
         self.pareto_archive = []
         self.reward_history = deque(maxlen=100)
         self.pareto_ratio_history = deque(maxlen=100)
@@ -787,7 +793,8 @@ class MultiObjectiveOptimizer:
                 rewards[i] = -1.0
                 continue            
             if violates_hard_constraints(scores, thresholds):
-                rewards[i] = -1.0
+                self.counters['gate_unscored' if is_unscored(scores) else 'gate_violation'] += 1
+                rewards[i] = 0.0          # gate failure (was -1.0); invalid molecules keep -1.0 above
                 continue            
             base_reward = compute_base_reward_from_scores(scores, weights)            
             base_reward = float(np.clip(base_reward, -2.0, 2.0))

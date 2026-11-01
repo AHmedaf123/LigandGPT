@@ -2,6 +2,8 @@ import os
 import hashlib
 import subprocess
 import tempfile
+from collections import Counter
+from concurrent.futures import ThreadPoolExecutor
 from functools import reduce
 from typing import List, Tuple, Optional, Dict, Callable, Any, NamedTuple
 import numpy as np
@@ -13,6 +15,14 @@ from rdkit.Chem.rdForceFieldHelpers import UFFGetMoleculeForceField
 from meeko import MoleculePreparation, PDBQTWriterLegacy
 from tdc import Oracle
 RDLogger.DisableLog('rdApp.*')
+COUNTERS = Counter()      # valid molecules whose 3D build or docking failed; the RL loop prints and resets this every 50 steps
+def cpu_quota() -> int:
+    """CPUs this container may really use (cgroup quota; nproc reports the host's 80)."""
+    try:
+        quota, period = open('/sys/fs/cgroup/cpu.max').read().split()
+        return max(1, int(int(quota) / int(period)))
+    except Exception:
+        return os.cpu_count() or 1
 VDW_RADII_MAP = {
     1: 1.20, 6: 1.70, 7: 1.55, 8: 1.52, 9: 1.47,
     15: 1.80, 16: 1.80, 17: 1.75, 35: 1.85, 53: 1.98
@@ -89,7 +99,8 @@ def compute_minimum_angle_deviation(angle: float, reference_angles: List[float])
     deviations = [abs(angle - ref) for ref in reference_angles]
     return min(60.0, min(deviations))
 def parse_smiles_to_molecule(smiles: str) -> Optional[Chem.Mol]:
-    return Chem.MolFromSmiles(smiles)
+    molecule = Chem.MolFromSmiles(smiles)
+    return molecule if molecule is not None and molecule.GetNumAtoms() > 0 else None     # '' parses to an empty molecule that makes embedding raise
 def add_hydrogens_to_molecule(molecule: Chem.Mol) -> Chem.Mol:
     return Chem.AddHs(molecule)
 def embed_molecule_conformer(molecule: Chem.Mol, random_seed: int = 42) -> bool:
@@ -354,7 +365,8 @@ def build_qvina_command(
         "--size_y", str(box_size[1]),
         "--size_z", str(box_size[2]),
         "--out", output_path,
-        "--exhaustiveness", "4"
+        "--exhaustiveness", "4",
+        "--cpu", "1"      # one core per job; jobs run in parallel, one per available CPU (the default would grab all 80 threads)
     ]
 def execute_qvina_docking(command: List[str]) -> bool:
     try:
@@ -577,14 +589,22 @@ def score_single_molecule(
     qed_oracle: Oracle,
     sa_oracle: Oracle,
     gnn_model: Any,
-    molecule_cache: Dict[str, MoleculeData]
+    molecule_cache: Dict[str, MoleculeData],
+    docking_scores: Optional[Dict[str, Optional[float]]] = None
 ) -> Tuple[MoleculeScoreResult, Dict[str, MoleculeData]]:
     molecule_data, updated_cache = create_molecule_data_with_cache(smiles, molecule_cache)    
     if molecule_data is None:
         empty_properties = PropertyScores(None, None, None, None, None)
         return build_molecule_score_result(None, empty_properties, None), updated_cache    
     property_scores = evaluate_property_scores(molecule_data, qed_oracle, sa_oracle)
-    docking_score = perform_qvina_docking(smiles, receptor_file, box_center, temp_directory)
+    if docking_scores is not None and smiles in docking_scores:
+        docking_score = docking_scores[smiles]
+    else:
+        docking_score = perform_qvina_docking(smiles, receptor_file, box_center, temp_directory)
+    if not molecule_data.has_conformer:
+        COUNTERS['valid_no_3d'] += 1
+    if docking_score is None:
+        COUNTERS['valid_dock_failed'] += 1
     bioactivity_predictions = predict_bioactivity_for_batch([smiles], gnn_model)
     bioactivity_score = bioactivity_predictions[0]    
     result = build_molecule_score_result(docking_score, property_scores, bioactivity_score)
@@ -613,6 +633,14 @@ def calculate_scores_for_batch(
     accumulated_scores = []
     current_molecule_cache = molecule_cache.copy()
     current_score_cache = score_cache.copy()        
+    pending = [s for s in dict.fromkeys(smiles_batch) if generate_cache_key(s, receptor_file) not in current_score_cache]
+    def dock_one(smiles):
+        try:
+            return perform_qvina_docking(smiles, receptor_file, box_center, temp_directory)
+        except Exception:                             # e.g. RDKit raises on an empty SMILES: no score, not a crash
+            return None
+    with ThreadPoolExecutor(cpu_quota()) as pool:     # QVina is a subprocess, so threads give real parallelism; one job per CPU
+        docked = dict(zip(pending, pool.map(dock_one, pending)))
     for smiles in smiles_batch:
         cache_key = generate_cache_key(smiles, receptor_file)            
         if cache_key in current_score_cache:
@@ -626,7 +654,8 @@ def calculate_scores_for_batch(
             qed_oracle,
             sa_oracle,
             gnn_model,
-            current_molecule_cache
+            current_molecule_cache,
+            docked
         )        
         score_list = convert_score_result_to_list(score_result)
         current_score_cache[cache_key] = score_list
