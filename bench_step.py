@@ -1,4 +1,5 @@
-"""Seconds per RL step on target 0 (batch 32/48/64): sample (KV cache) -> score+dock (parallel) -> policy-update cost.
+"""Seconds per RL step on target 0 (batch 32/48/64): sample (KV cache) -> score+dock (parallel). (The update-cost block was removed when
+the RL loss was rebuilt; its measurement is kept in runs/baseline/step_bench.json.)
 Run: .venv/bin/python bench_step.py"""
 import json
 import time
@@ -8,7 +9,6 @@ import torch
 
 import decoding as dec
 import diagnose_generation as dg
-import generation_finetuning as gf
 import scoring_function as sf
 from data_utils import receptor_paths
 from model import LigandGPT
@@ -50,29 +50,4 @@ for n in (32, 48, 64):
     print(n, rows[n], flush=True)
 out["per_batch"] = rows
 
-# policy-update cost: forward+backward of the real loss on micro-batches of full-length sequences (prompt + 100 generated tokens)
-agent, prior = mk(), mk()
-agent.load_state_dict(torch.load("final.pt"))
-prior.load_state_dict(torch.load("final.pt"))
-prior.eval()
-for p in prior.parameters():
-    p.requires_grad_(False)
-agent.train()
-upd = {}
-for mb in (2, 4):
-    try:
-        x = torch.cat([ids.expand(mb, -1), torch.randint(1, 60, (mb, 100)).cuda()], 1)
-        nm = torch.ones_like(x, dtype=torch.float)
-        torch.cuda.reset_peak_memory_stats()
-        t0 = sync()
-        loss = gf.compute_reinforce_loss(agent, prior, x, nm, torch.ones(mb).cuda(), 0.1)[0]
-        loss.backward()
-        upd[mb] = dict(seconds=sync() - t0, peak_gib=torch.cuda.max_memory_allocated() / 2**30)
-        agent.zero_grad(set_to_none=True)
-        del loss
-    except torch.OutOfMemoryError:
-        upd[mb] = "OOM"
-        torch.cuda.empty_cache()
-    print("update micro-batch", mb, upd[mb], flush=True)
-out["update_microbatch"] = upd
-json.dump(out, open("runs/baseline/step_bench.json", "w"), indent=1)
+print(json.dumps(out))

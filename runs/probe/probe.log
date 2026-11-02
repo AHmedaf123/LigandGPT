@@ -1,0 +1,110 @@
+parameters: 91,743,745
+target 0: prompt 1641 tokens, budget 200, stages at 33 and 66; gate values torsion 5/4/3, energy 300/200/150 are RECONSTRUCTED, SA gate = baseline P90/P80/P70
+step   0 stage 1 valid 10/32 pass  4 reward -0.613 dock -6.68 kl -0.0000 band 100% replay 0.00 90s
+step   1 stage 1 valid 17/32 pass 11 reward -0.263 dock -6.72 kl 0.0032 band 100% replay 0.11 48s
+step   2 stage 1 valid 13/32 pass  7 reward -0.456 dock -6.81 kl 0.0273 band 100% replay 0.20 41s
+step   3 stage 1 valid  8/32 pass  1 reward -0.733 dock -6.80 kl 0.0629 band 100% replay 0.20 74s
+step   4 stage 1 valid 13/32 pass  7 reward -0.467 dock -6.93 kl 0.1274 band 100% replay 0.20 43s
+step   5 stage 1 valid 11/32 pass  6 reward -0.543 dock -6.87 kl 0.0873 band 100% replay 0.20 32s
+step   6 stage 1 valid  9/32 pass  8 reward -0.572 dock -6.44 kl 0.1479 band 100% replay 0.20 38s
+step   7 stage 1 valid 12/32 pass  8 reward -0.476 dock -6.18 kl 0.1409 band 100% replay 0.20 37s
+step   8 stage 1 valid 11/32 pass  8 reward -0.510 dock -6.16 kl 0.1385 band 100% replay 0.20 31s
+step   9 stage 1 valid 15/32 pass  9 reward -0.366 dock -6.63 kl 0.2857 band 100% replay 0.20 96s
+step  10 stage 1 valid 12/32 pass  7 reward -0.497 dock -6.90 kl 0.8921 band 100% replay 0.20 55s
+step  11 stage 1 valid 14/32 pass  9 reward -0.383 dock -6.98 kl 0.5218 band 100% replay 0.20 215s
+step  12 stage 1 valid 15/32 pass 12 reward -0.309 dock -6.81 kl 0.8352 band 100% replay 0.20 59s
+step  13 stage 1 valid 14/32 pass 11 reward -0.353 dock -7.05 kl 0.6168 band 100% replay 0.20 53s
+step  14 stage 1 valid 15/32 pass  8 reward -0.377 dock -6.54 kl 0.5194 band 100% replay 0.20 47s
+step  15 stage 1 valid 10/32 pass  7 reward -0.554 dock -7.04 kl 0.7577 band 100% replay 0.20 39s
+step  16 stage 1 valid 18/32 pass 13 reward -0.188 dock -6.59 kl 0.9888 band 100% replay 0.20 47s
+step  17 stage 1 valid 12/32 pass 11 reward -0.422 dock -6.72 kl 0.2692 band 100% replay 0.20 40s
+step  18 stage 1 valid 12/32 pass  7 reward -0.498 dock -6.60 kl 0.6566 band 100% replay 0.20 32s
+step  19 stage 1 valid 13/32 pass  7 reward -0.460 dock -6.81 kl 0.5388 band 100% replay 0.20 43s
+PROBE HEALTHY @ step 20: validity 0.40 | in_band 100.0% | max replay share 0.20 | docking mean -6.71 (first 20 steps -6.71) | kl 0.3809 | grad_norm 62.19
+step  20 stage 1 valid 18/32 pass  9 reward -0.270 dock -6.53 kl 0.4754 band 100% replay 0.20 51s
+step  21 stage 1 valid 14/32 pass  6 reward -0.448 dock -6.65 kl 0.6065 band 100% replay 0.20 49s
+step  22 stage 1 valid 13/32 pass  8 reward -0.453 dock -6.92 kl 0.8588 band 100% replay 0.20 61s
+step  23 stage 1 valid 18/32 pass 17 reward -0.123 dock -6.51 kl 0.7205 band 100% replay 0.20 78s
+step  24 stage 1 valid 16/32 pass 10 reward -0.319 dock -6.22 kl 0.5734 band 100% replay 0.20 48s
+step  25 stage 1 valid 13/32 pass  8 reward -0.433 dock -7.22 kl 0.7209 band 100% replay 0.20 46s
+step  26 stage 1 valid 16/32 pass 12 reward -0.277 dock -6.75 kl 1.0751 band 100% replay 0.20 49s
+step  27 stage 1 valid 19/32 pass 14 reward -0.144 dock -6.23 kl 1.0420 band 100% replay 0.20 62s
+step  28 stage 1 valid 18/32 pass 13 reward -0.188 dock -6.79 kl 0.8476 band 100% replay 0.20 51s
+step  29 stage 1 valid 16/32 pass 11 reward -0.290 dock -7.07 kl 0.7718 band 100% replay 0.20 59s
+step  30 stage 1 valid 22/32 pass 13 reward -0.063 dock -6.44 kl 1.1863 band 100% replay 0.20 129s
+step  31 stage 1 valid 15/32 pass  8 reward -0.388 dock -6.39 kl 1.0312 band 100% replay 0.20 837s
+step  32 stage 1 valid 12/32 pass  4 reward -0.551 dock -5.90 kl 0.7494 band 100% replay 0.20 28s
+step  33 stage 2 valid 18/32 pass  5 reward -0.342 dock -6.68 kl 0.9531 band 100% replay 0.20 35s
+step  34 stage 2 valid 16/32 pass  9 reward -0.330 dock -6.26 kl 1.1421 band 100% replay 0.20 62s
+step  35 stage 2 valid 19/32 pass  9 reward -0.223 dock -6.81 kl 1.5076 band 100% replay 0.20 557s
+step  36 stage 2 valid 18/32 pass  8 reward -0.291 dock -6.25 kl 1.0018 band 100% replay 0.20 31s
+step  37 stage 2 valid 16/32 pass  8 reward -0.356 dock -6.80 kl 0.8612 band 100% replay 0.20 58s
+step  38 stage 2 valid 16/32 pass  8 reward -0.349 dock -6.49 kl 1.7309 band 100% replay 0.20 45s
+step  39 stage 2 valid 19/32 pass  9 reward -0.236 dock -6.27 kl 1.5606 band 100% replay 0.20 40s
+PROBE HEALTHY @ step 40: validity 0.52 | in_band 100.0% | max replay share 0.20 | docking mean -6.56 (first 20 steps -6.71) | kl 0.9708 | grad_norm 57.03
+step  40 stage 2 valid 20/32 pass 12 reward -0.160 dock -6.22 kl 1.8757 band 100% replay 0.20 632s
+step  41 stage 2 valid 20/32 pass  9 reward -0.207 dock -6.32 kl 1.3590 band 100% replay 0.20 51s
+step  42 stage 2 valid 22/32 pass 11 reward -0.110 dock -6.30 kl 0.9145 band 100% replay 0.20 34s
+step  43 stage 2 valid 18/32 pass 11 reward -0.230 dock -6.13 kl 1.3528 band 100% replay 0.20 35s
+step  44 stage 2 valid 16/32 pass 11 reward -0.293 dock -6.43 kl 0.9537 band 100% replay 0.20 38s
+step  45 stage 2 valid 17/32 pass  8 reward -0.317 dock -6.28 kl 1.4183 band 100% replay 0.20 32s
+step  46 stage 2 valid 20/32 pass 10 reward -0.191 dock -6.22 kl 1.6682 band 100% replay 0.20 37s
+step  47 stage 2 valid 17/32 pass  9 reward -0.299 dock -6.32 kl 1.9255 band 100% replay 0.20 43s
+step  48 stage 2 valid 22/32 pass 13 reward -0.066 dock -6.60 kl 1.9660 band 100% replay 0.20 114s
+step  49 stage 2 valid 18/32 pass 13 reward -0.183 dock -6.65 kl 1.7258 band 100% replay 0.20 46s
+SUMMARY step 50: counters {'invalid': 824, 'scored': 457, 'gate_cheap': 208, 'valid_no_3d': 28, 'valid_dock_failed': 83} | archive 100 | replay buffer 100 | baseline 0.339
+step  50 stage 2 valid 20/32 pass 10 reward -0.193 dock -6.12 kl 2.4631 band 100% replay 0.20 43s
+step  51 stage 2 valid 22/32 pass 13 reward -0.073 dock -6.06 kl 2.5942 band 100% replay 0.20 46s
+step  52 stage 2 valid 24/32 pass 19 reward +0.100 dock -5.98 kl 2.0371 band 100% replay 0.20 66s
+step  53 stage 2 valid 24/32 pass 15 reward +0.025 dock -6.05 kl 2.6855 band 100% replay 0.20 46s
+step  54 stage 2 valid 26/32 pass 21 reward +0.206 dock -6.37 kl 1.9913 band 100% replay 0.20 76s
+step  55 stage 2 valid 24/32 pass 13 reward +0.001 dock -6.26 kl 2.3838 band 100% replay 0.20 54s
+step  56 stage 2 valid 18/32 pass  7 reward -0.300 dock -6.64 kl 2.8855 band 100% replay 0.20 211s
+step  57 stage 2 valid 21/32 pass 14 reward -0.087 dock -6.16 kl 2.5413 band 100% replay 0.20 56s
+step  58 stage 2 valid 22/32 pass 12 reward -0.080 dock -6.59 kl 2.7431 band 100% replay 0.20 177s
+step  59 stage 2 valid 18/32 pass 11 reward -0.224 dock -6.37 kl 2.3869 band 100% replay 0.20 42s
+PROBE FAILED docking worse @ step 60: validity 0.64 | in_band 100.0% | max replay share 0.20 | docking mean -6.30 (first 20 steps -6.71) | kl 1.9936 | grad_norm 45.13
+step  60 stage 2 valid 19/32 pass 15 reward -0.120 dock -6.35 kl 3.4471 band 100% replay 0.20 55s
+step  61 stage 2 valid 22/32 pass 16 reward -0.014 dock -6.08 kl 2.5456 band 100% replay 0.20 58s
+step  62 stage 2 valid 22/32 pass 15 reward -0.035 dock -6.13 kl 3.5127 band 100% replay 0.20 46s
+step  63 stage 2 valid 21/32 pass 17 reward -0.023 dock -6.24 kl 3.9895 band 100% replay 0.20 62s
+step  64 stage 2 valid 25/32 pass 17 reward +0.106 dock -6.32 kl 5.9426 band 100% replay 0.20 56s
+step  65 stage 2 valid 23/32 pass 17 reward +0.037 dock -6.20 kl 2.2200 band 100% replay 0.20 52s
+step  66 stage 3 valid 28/32 pass 19 reward +0.232 dock -5.65 kl 3.5874 band 100% replay 0.20 54s
+step  67 stage 3 valid 24/32 pass 15 reward +0.045 dock -6.13 kl 3.0010 band 100% replay 0.20 78s
+step  68 stage 3 valid 23/32 pass 16 reward +0.026 dock -6.32 kl 3.9676 band 100% replay 0.20 53s
+step  69 stage 3 valid 23/32 pass 15 reward +0.001 dock -5.91 kl 3.8081 band 100% replay 0.20 44s
+step  70 stage 3 valid 23/32 pass 10 reward -0.087 dock -6.39 kl 3.4545 band 100% replay 0.20 35s
+step  71 stage 3 valid 17/32 pass 13 reward -0.205 dock -6.55 kl 4.3934 band 100% replay 0.20 51s
+step  72 stage 3 valid 20/32 pass 16 reward -0.065 dock -6.17 kl 4.0527 band 100% replay 0.20 47s
+step  73 stage 3 valid 26/32 pass 19 reward +0.162 dock -6.07 kl 4.1616 band 100% replay 0.20 56s
+step  74 stage 3 valid 22/32 pass 10 reward -0.120 dock -6.09 kl 3.9767 band 100% replay 0.20 38s
+step  75 stage 3 valid 21/32 pass 11 reward -0.138 dock -5.79 kl 3.3710 band 100% replay 0.20 39s
+step  76 stage 3 valid 26/32 pass 18 reward +0.164 dock -5.97 kl 4.2112 band 100% replay 0.20 278s
+step  77 stage 3 valid 26/32 pass 16 reward +0.105 dock -5.72 kl 2.7812 band 100% replay 0.20 50s
+step  78 stage 3 valid 24/32 pass 14 reward +0.022 dock -6.17 kl 4.2068 band 100% replay 0.20 52s
+step  79 stage 3 valid 25/32 pass 10 reward -0.027 dock -6.12 kl 3.7152 band 100% replay 0.20 36s
+PROBE FAILED docking worse @ step 80: validity 0.72 | in_band 100.0% | max replay share 0.20 | docking mean -6.12 (first 20 steps -6.71) | kl 3.7173 | grad_norm 38.95
+step  80 stage 3 valid 21/32 pass 12 reward -0.125 dock -5.90 kl 4.6636 band 100% replay 0.20 38s
+step  81 stage 3 valid 23/32 pass 18 reward +0.046 dock -5.94 kl 4.3434 band 100% replay 0.20 57s
+step  82 stage 3 valid 24/32 pass 14 reward +0.007 dock -6.05 kl 3.9077 band 100% replay 0.20 40s
+step  83 stage 3 valid 24/32 pass 17 reward +0.064 dock -6.07 kl 4.3308 band 100% replay 0.20 56s
+step  84 stage 3 valid 24/32 pass 13 reward -0.005 dock -6.45 kl 5.0767 band 100% replay 0.20 42s
+step  85 stage 3 valid 25/32 pass 16 reward +0.082 dock -5.96 kl 4.1378 band 100% replay 0.20 54s
+step  86 stage 3 valid 22/32 pass 16 reward -0.003 dock -6.06 kl 4.4219 band 100% replay 0.20 52s
+step  87 stage 3 valid 24/32 pass 12 reward -0.011 dock -6.52 kl 4.9506 band 100% replay 0.20 46s
+step  88 stage 3 valid 23/32 pass 16 reward +0.011 dock -6.04 kl 4.4992 band 100% replay 0.20 56s
+step  89 stage 3 valid 24/32 pass 16 reward +0.045 dock -5.98 kl 3.6419 band 100% replay 0.20 53s
+step  90 stage 3 valid 27/32 pass 15 reward +0.120 dock -5.93 kl 3.6072 band 100% replay 0.20 44s
+step  91 stage 3 valid 26/32 pass 15 reward +0.099 dock -6.18 kl 4.2748 band 100% replay 0.20 58s
+step  92 stage 3 valid 28/32 pass 21 reward +0.278 dock -6.18 kl 3.7417 band 100% replay 0.20 59s
+step  93 stage 3 valid 24/32 pass 11 reward -0.041 dock -6.13 kl 4.7199 band 100% replay 0.20 43s
+step  94 stage 3 valid 25/32 pass 13 reward +0.021 dock -6.10 kl 5.5237 band 100% replay 0.20 50s
+step  95 stage 3 valid 22/32 pass 12 reward -0.089 dock -6.06 kl 6.3085 band 100% replay 0.20 51s
+step  96 stage 3 valid 19/32 pass  9 reward -0.241 dock -5.91 kl 4.6259 band 100% replay 0.20 40s
+step  97 stage 3 valid 28/32 pass 19 reward +0.232 dock -5.96 kl 4.5924 band 100% replay 0.20 61s
+step  98 stage 3 valid 24/32 pass 10 reward -0.058 dock -6.35 kl 4.3679 band 100% replay 0.20 37s
+step  99 stage 3 valid 28/32 pass 17 reward +0.189 dock -6.09 kl 4.3382 band 100% replay 0.20 59s
+SUMMARY step 100: counters {'invalid': 436, 'scored': 726, 'gate_cheap': 344, 'valid_dock_failed': 73, 'valid_no_3d': 21} | archive 100 | replay buffer 100 | baseline 0.349
+PROBE FAILED docking worse @ step 100: validity 0.76 | in_band 100.0% | max replay share 0.20 | docking mean -6.09 (first 20 steps -6.71) | kl 4.5037 | grad_norm 34.42
+PROBE FAILED (at least one window failed)

@@ -275,12 +275,14 @@ def decode_step(model, tok, num, pos, kv_prompt, kv_new):
 @torch.no_grad()
 def sample_smiles(model, vocab, prompt_ids: torch.Tensor, prompt_nums: torch.Tensor, n: int, *, structured: bool,
                   temperature: float = 1.0, top_k: int = 10, max_new_tokens: int = 200, valence: bool = False,
-                  min_atoms: int = 4, generator: Optional[torch.Generator] = None, use_cache: bool = True):
+                  min_atoms: int = 4, generator: Optional[torch.Generator] = None, use_cache: bool = True, return_masks: bool = False):
     """Sample n ligands for one pocket prompt.
 
     prompt_ids / prompt_nums: [1, L] pocket tokens (with coordinates) ending in <LIG_START>.
     structured=False reproduces the original 3DMolFormer sampler (no masks, temperature, top-k).
     Returns (generated token ids [n, T] as a list of lists, finished flags). Generation stops per sample at <LIG_END>.
+    With return_masks a third value is returned: the support the sampler drew from at every step (grammar mask AND top-k), bool [n, steps, V]
+    on the CPU, so the RL loss can use exactly the distribution that was sampled from.
     """
     device = prompt_ids.device
     ids = prompt_ids.expand(n, -1).clone()
@@ -291,6 +293,7 @@ def sample_smiles(model, vocab, prompt_ids: torch.Tensor, prompt_nums: torch.Ten
     end_id = vocab[END]
     done = torch.zeros(n, dtype=torch.bool, device=device)
     coord_ids = torch.tensor([vocab["[x]"], vocab["[y]"], vocab["[z]"]], device=device)
+    masks = []
     model.eval()
     if use_cache:
         kv_prompt, lg, nm = prefill(model, prompt_ids, prompt_nums)
@@ -309,8 +312,12 @@ def sample_smiles(model, vocab, prompt_ids: torch.Tensor, prompt_nums: torch.Ten
             v, ix = torch.topk(logits, min(top_k, logits.shape[-1]))
             probs = torch.softmax(v, dim=-1)
             nxt = ix.gather(-1, torch.multinomial(probs, 1, generator=generator)).squeeze(-1)
+            if return_masks:                                   # the support actually sampled from: grammar mask AND top-k
+                masks.append(torch.zeros_like(logits, dtype=torch.bool).scatter_(1, ix, torch.isfinite(v)))
         else:
             nxt = torch.multinomial(torch.softmax(logits, dim=-1), 1, generator=generator).squeeze(-1)
+            if return_masks:
+                masks.append(torch.isfinite(logits))
         nxt = torch.where(done, torch.zeros_like(nxt), nxt)
         new_num = torch.ones(n, device=device)
         is_coord = torch.isin(nxt, coord_ids)
@@ -326,4 +333,5 @@ def sample_smiles(model, vocab, prompt_ids: torch.Tensor, prompt_nums: torch.Ten
             break
         if use_cache:
             lg, nm = decode_step(model, nxt[:, None], new_num[:, None], L + step, kv_prompt, kv_new)
-    return ids[:, prompt_ids.shape[1]:].tolist(), done.tolist()
+    out = ids[:, prompt_ids.shape[1]:].tolist(), done.tolist()
+    return out + (torch.stack(masks, dim=1).cpu(),) if return_masks else out
