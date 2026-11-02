@@ -1,0 +1,599 @@
+{
+ "validity": {
+  "probe 1 original (curriculum, old code, no size columns)": {
+   "windows": [
+    0.396875,
+    0.51875,
+    0.6390625,
+    0.71875,
+    0.7578125
+   ],
+   "se": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "last_minus_first": 0.3609375
+  },
+  "curriculum (re-run, new columns)": {
+   "windows": [
+    0.359375,
+    0.5140625,
+    0.6171875,
+    0.6703125,
+    0.778125
+   ],
+   "se": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "last_minus_first": 0.41874999999999996
+  },
+  "fixed, time-average of the repo stage vectors": {
+   "windows": [
+    0.365625,
+    0.440625,
+    0.58125,
+    0.6921875,
+    0.7640625
+   ],
+   "se": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "last_minus_first": 0.3984375
+  },
+  "fixed, literal weights from the task": {
+   "windows": [
+    0.36875,
+    0.465625,
+    0.609375,
+    0.6890625,
+    0.7546875
+   ],
+   "se": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "last_minus_first": 0.38593749999999993
+  }
+ },
+ "docking mean (kcal/mol)": {
+  "probe 1 original (curriculum, old code, no size columns)": {
+   "windows": [
+    -6.7093172670807455,
+    -6.566666719576721,
+    -6.288842933884297,
+    -6.1090298662207365,
+    -6.0839039383561655
+   ],
+   "se": [
+    0.05553985771071364,
+    0.07364284787118802,
+    0.044563809251306596,
+    0.05049396493328891,
+    0.03891246944036537
+   ],
+   "last_minus_first": 0.62541332872458
+  },
+  "curriculum (re-run, new columns)": {
+   "windows": [
+    -6.894697045454546,
+    -6.5313428358208965,
+    -6.336841740890688,
+    -6.150794365079366,
+    -6.110033444816053
+   ],
+   "se": [
+    0.10042618333251961,
+    0.07837801087274684,
+    0.04847088409537053,
+    0.04880977970639533,
+    0.03211526105828981
+   ],
+   "last_minus_first": 0.7846636006384928
+  },
+  "fixed, time-average of the repo stage vectors": {
+   "windows": [
+    -6.597222314814815,
+    -6.545113458646616,
+    -6.308734104803494,
+    -6.194137166123778,
+    -6.278370501567399
+   ],
+   "se": [
+    0.10991297917677038,
+    0.06705411827730916,
+    0.04576100262519559,
+    0.036854319787330794,
+    0.04464899246579398
+   ],
+   "last_minus_first": 0.3188518132474156
+  },
+  "fixed, literal weights from the task": {
+   "windows": [
+    -6.599999626168226,
+    -6.444585796178344,
+    -6.394520456621004,
+    -6.118812145214521,
+    -6.102638311345646
+   ],
+   "se": [
+    0.09517514959515705,
+    0.07699555307596459,
+    0.04570827222206409,
+    0.040739391107734384,
+    0.039031076277857055
+   ],
+   "last_minus_first": 0.49736131482258017
+  }
+ },
+ "heavy atoms, valid molecules": {
+  "curriculum (re-run, new columns)": {
+   "windows": [
+    32.04347834782609,
+    25.744680699088143,
+    24.012658759493668,
+    21.84382235431236,
+    20.39558261044177
+   ],
+   "se": [
+    1.0684321210308405,
+    0.8416621449274925,
+    0.7477270802193154,
+    0.6894822718057521,
+    0.5760072805212392
+   ],
+   "last_minus_first": -11.647895737384317
+  },
+  "fixed, time-average of the repo stage vectors": {
+   "windows": [
+    33.02991431623932,
+    28.074467127659574,
+    24.33602158602151,
+    20.959369232505644,
+    20.86094173824131
+   ],
+   "se": [
+    1.5111185985378164,
+    0.9439993551789932,
+    0.7609339940995298,
+    0.589452339454577,
+    0.46178160811218
+   ],
+   "last_minus_first": -12.168972577998012
+  },
+  "fixed, literal weights from the task": {
+   "windows": [
+    29.944915296610166,
+    27.298656577181205,
+    24.228205615384617,
+    20.346939274376417,
+    18.76190443064182
+   ],
+   "se": [
+    0.9955538461020936,
+    0.8862595756014209,
+    0.9424114873474088,
+    0.7524770724855745,
+    0.4726049984231296
+   ],
+   "last_minus_first": -11.183010865968345
+  }
+ },
+ "heavy atoms, docked molecules": {
+  "curriculum (re-run, new columns)": {
+   "windows": [
+    24.1287875,
+    20.965174129353233,
+    19.979757651821863,
+    17.9206351984127,
+    16.78595357859532
+   ],
+   "se": [
+    0.8297382224936891,
+    0.5528966447535056,
+    0.3557674952246495,
+    0.34659959838504006,
+    0.2708565286936979
+   ],
+   "last_minus_first": -7.342833921404683
+  },
+  "fixed, time-average of the repo stage vectors": {
+   "windows": [
+    22.24074064814815,
+    20.42857240601504,
+    18.7379915720524,
+    17.53745947882736,
+    17.473354545454548
+   ],
+   "se": [
+    0.9884522979501243,
+    0.5016230322356253,
+    0.36902146231650335,
+    0.3152637974288566,
+    0.2747693847703781
+   ],
+   "last_minus_first": -4.767386102693603
+  },
+  "fixed, literal weights from the task": {
+   "windows": [
+    21.588784859813085,
+    20.414013375796177,
+    19.20091328767123,
+    16.356435544554458,
+    16.34564759894459
+   ],
+   "se": [
+    0.5598259841270579,
+    0.5239700681967484,
+    0.34006994934138574,
+    0.24179256702573534,
+    0.27177990861172946
+   ],
+   "last_minus_first": -5.243137260868494
+  }
+ },
+ "ligand efficiency (kcal/mol/heavy atom)": {
+  "curriculum (re-run, new columns)": {
+   "windows": [
+    -0.3040447727272727,
+    -0.3330934328358209,
+    -0.3363661538461538,
+    -0.3661675,
+    -0.38784762541806017
+   ],
+   "se": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "last_minus_first": -0.08380285269078747
+  },
+  "fixed, time-average of the repo stage vectors": {
+   "windows": [
+    -0.3143728703703703,
+    -0.34107015037593985,
+    -0.3562506113537118,
+    -0.37925381107491857,
+    -0.3772890909090909
+   ],
+   "se": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "last_minus_first": -0.06291622053872059
+  },
+  "fixed, literal weights from the task": {
+   "windows": [
+    -0.32341626168224297,
+    -0.3354948407643312,
+    -0.3529514611872146,
+    -0.39629808580858084,
+    -0.39579839050131926
+   ],
+   "se": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "last_minus_first": -0.0723821288190763
+  }
+ },
+ "SA (docked)": {
+  "probe 1 original (curriculum, old code, no size columns)": {
+   "windows": [
+    5.306951366459628,
+    5.098630211640212,
+    4.769729214876034,
+    4.552360668896322,
+    4.628718356164384
+   ],
+   "se": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "last_minus_first": -0.6782330102952434
+  },
+  "curriculum (re-run, new columns)": {
+   "windows": [
+    5.394904772727274,
+    5.117943482587065,
+    4.9459035627530366,
+    4.584950992063492,
+    4.490431404682274
+   ],
+   "se": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "last_minus_first": -0.9044733680449992
+  },
+  "fixed, time-average of the repo stage vectors": {
+   "windows": [
+    5.258716851851852,
+    4.900162857142857,
+    4.732632183406113,
+    4.679728534201954,
+    4.694171034482759
+   ],
+   "se": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "last_minus_first": -0.5645458173690932
+  },
+  "fixed, literal weights from the task": {
+   "windows": [
+    5.230080093457944,
+    5.1021240127388525,
+    4.911124063926941,
+    4.575819900990099,
+    4.599135963060687
+   ],
+   "se": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "last_minus_first": -0.6309441303972569
+  }
+ },
+ "UFF energy (docked)": {
+  "probe 1 original (curriculum, old code, no size columns)": {
+   "windows": [
+    92.54190043478259,
+    77.94942751322752,
+    59.01512863636364,
+    46.570565953177265,
+    49.59601921232876
+   ],
+   "se": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "last_minus_first": -42.94588122245383
+  },
+  "curriculum (re-run, new columns)": {
+   "windows": [
+    96.4530971969697,
+    67.50141378109453,
+    59.55388955465588,
+    48.288401626984125,
+    41.61454056856188
+   ],
+   "se": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "last_minus_first": -54.838556628407815
+  },
+  "fixed, time-average of the repo stage vectors": {
+   "windows": [
+    80.55874305555555,
+    66.92723511278196,
+    55.29015812227074,
+    54.44020433224755,
+    54.47759115987461
+   ],
+   "se": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "last_minus_first": -26.08115189568094
+  },
+  "fixed, literal weights from the task": {
+   "windows": [
+    76.02171271028038,
+    69.16883070063693,
+    57.19297547945205,
+    46.37733673267327,
+    45.77924145118734
+   ],
+   "se": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "last_minus_first": -30.242471259093044
+  }
+ },
+ "gate-passing molecules per step": {
+  "probe 1 original (curriculum, old code, no size columns)": {
+   "windows": [
+    8.05,
+    9.45,
+    12.1,
+    14.95,
+    14.6
+   ],
+   "se": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "last_minus_first": 6.549999999999999
+  },
+  "curriculum (re-run, new columns)": {
+   "windows": [
+    6.6,
+    10.05,
+    12.35,
+    12.6,
+    14.95
+   ],
+   "se": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "last_minus_first": 8.35
+  },
+  "fixed, time-average of the repo stage vectors": {
+   "windows": [
+    5.4,
+    6.65,
+    11.45,
+    15.35,
+    15.95
+   ],
+   "se": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "last_minus_first": 10.549999999999999
+  },
+  "fixed, literal weights from the task": {
+   "windows": [
+    5.35,
+    7.85,
+    10.95,
+    15.15,
+    18.95
+   ],
+   "se": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "last_minus_first": 13.6
+  }
+ },
+ "kl_to_prior": {
+  "probe 1 original (curriculum, old code, no size columns)": {
+   "windows": [
+    0.3808655,
+    0.9708115000000002,
+    1.9935609999999997,
+    3.7172815,
+    4.503691000000001
+   ],
+   "se": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "last_minus_first": 4.122825500000001
+  },
+  "curriculum (re-run, new columns)": {
+   "windows": [
+    0.36660149999999997,
+    0.8479829999999999,
+    1.617445,
+    3.270688,
+    4.6136245
+   ],
+   "se": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "last_minus_first": 4.247023
+  },
+  "fixed, time-average of the repo stage vectors": {
+   "windows": [
+    0.32280699999999996,
+    0.733846,
+    1.2768475000000001,
+    2.2749115,
+    2.6454595000000003
+   ],
+   "se": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "last_minus_first": 2.3226525000000002
+  },
+  "fixed, literal weights from the task": {
+   "windows": [
+    0.36788899999999997,
+    0.9291369999999999,
+    1.7533585000000003,
+    3.2663785000000005,
+    3.9571304999999994
+   ],
+   "se": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "last_minus_first": 3.5892414999999995
+  }
+ },
+ "docking_stage1_steps_0_32": {
+  "probe 1 original (curriculum, old code, no size columns)": {
+   "mean": -6.65850350340136,
+   "se": 0.05270749590891717
+  },
+  "curriculum (re-run, new columns)": {
+   "mean": -6.767692038461539,
+   "se": 0.07438680484994617
+  },
+  "fixed, time-average of the repo stage vectors": {
+   "mean": -6.571584808743169,
+   "se": 0.07079159213129065
+  },
+  "fixed, literal weights from the task": {
+   "mean": -6.539800945273632,
+   "se": 0.07343175491694658
+  }
+ }
+}

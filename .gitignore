@@ -104,3 +104,5 @@ data/
 # Symlink to ../data and TDC downloads (oracle/fpscores.pkl lives in data/oracle/)
 /data
 oracle/
+/docking/unidock-1.1.0/unidock-1.1.0-cuda120-linux-x86_64
+/docking/unidock-1.1.0/lib/

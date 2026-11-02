@@ -106,6 +106,7 @@ def add_hydrogens_to_molecule(molecule: Chem.Mol) -> Chem.Mol:
 def embed_molecule_conformer(molecule: Chem.Mol, random_seed: int = 42) -> bool:
     embedding_parameters = AllChem.ETKDGv3()
     embedding_parameters.randomSeed = random_seed
+    embedding_parameters.timeout = 10          # seconds; a timed-out embedding returns -1 and counts as a 3D build failure
     return AllChem.EmbedMolecule(molecule, embedding_parameters) == 0
 def optimize_molecule_geometry(molecule: Chem.Mol, max_iterations: int = 200) -> None:
     AllChem.UFFOptimizeMolecule(molecule, maxIters=max_iterations)

@@ -32,7 +32,7 @@ from vocabulary import read_vocabulary
 
 OBJECTIVES = ["docking", "bioactivity", "qed", "sa", "steric", "torsion", "energy"]
 FIELDS = ["step", "stage", "n_valid", "n_gate_pass", "reward_mean", "docking_mean", "bioactivity_mean", "qed_mean", "sa_mean",
-          "steric_mean", "torsion_mean", "energy_mean", "kl_to_prior", "entropy", "log_ratio_mean", "percent_in_band", "grad_norm",
+          "steric_mean", "torsion_mean", "energy_mean", "heavy_atoms_mean", "heavy_atoms_docked_mean", "ligand_efficiency_mean", "kl_to_prior", "entropy", "log_ratio_mean", "percent_in_band", "grad_norm",
           "replay_share", "archive_size", "wall_seconds"]
 
 
@@ -220,6 +220,27 @@ def policy_update(agent, prior, optimizer, prompt_ids, prompt_nums, gens, masks,
                 percent_in_band=float(in_band), grad_norm=grad_norm)
 
 
+def reserve_gpu(gib=5):
+    """The GPU is shared and a neighbour sometimes fills it completely (any allocation then fails, observed for minutes). Wait until `gib` GiB can be
+    taken, then keep it in PyTorch's cache for the whole run (no empty_cache), so the run is not killed half way. Peak use is ~3.3 GiB."""
+    while True:
+        try:
+            torch.empty(int(gib * 2**30), dtype=torch.uint8, device="cuda")
+            return
+        except torch.OutOfMemoryError:
+            time.sleep(5)
+
+
+def parse_fixed_weights(spec):
+    """None (curriculum) | 'avg' (equal-thirds time average of the three stage vectors) | 'docking=0.45,qed=0.1,...'."""
+    if spec is None:
+        return None
+    if spec == "avg":
+        stages = [mo_mpo.get_curriculum_weights(s) for s in (1, 2, 3)]
+        return {k: sum(w[k] for w in stages) / 3 for k in stages[0]}
+    return {k: float(v) for k, v in (kv.split("=") for kv in spec.split(","))}
+
+
 def probe_health(rows, n_batch):
     """PROBE HEALTHY / FAILED over the last 20 steps: validity > 20%, no NaN, fresh samples in band, replay <= 40%, docking not worse."""
     w, first = rows[-20:], rows[:20]
@@ -259,12 +280,15 @@ def run_target(target, args, prior, voc, tk, txn, keys, split, oracles, gnn, tmp
     agent.eval()
     optimizer = torch.optim.AdamW(agent.parameters(), lr=args.learning_rate, weight_decay=0.01)
     norm, objectives = Normalizer(), mo_mpo.create_objectives()
+    fixed_weights = parse_fixed_weights(args.fixed_weights)
     ctx = dict(cache={}, counters=collections.Counter(), oracles=oracles, gnn=gnn, rec=rec, center=center, tmp=tmp)
     json.dump(dict(args=vars(args), prompt_tokens=L, token_budget=budget, receptor=rec, center=center,
                    thresholds={s: mo_mpo.get_constraint_thresholds(s) for s in (1, 2, 3)}, weights={s: mo_mpo.get_curriculum_weights(s) for s in (1, 2, 3)},
-                   stage_boundaries=[args.n_steps // 3, 2 * args.n_steps // 3],
+                   stage_boundaries=[args.n_steps // 3, 2 * args.n_steps // 3], fixed_weights=fixed_weights,
                    note="torsion 5/4/3 and energy 300/200/150 gate values are reconstructed (the lost originals could not be recovered); SA gate = baseline P90/P80/P70"),
               open(os.path.join(out_dir, "config.json"), "w"), indent=1)
+    if fixed_weights is not None:
+        print(f"CONTROL ARM: no curriculum, fixed weights {fixed_weights}, stage-2 gates for all {args.n_steps} steps", flush=True)
     print(f"target {target}: prompt {L} tokens, budget {budget}, stages at {args.n_steps // 3} and {2 * args.n_steps // 3}; "
           f"gate values torsion 5/4/3, energy 300/200/150 are RECONSTRUCTED, SA gate = baseline P90/P80/P70", flush=True)
     f = open(os.path.join(out_dir, "metrics.csv"), "w", newline="")
@@ -274,8 +298,8 @@ def run_target(target, args, prior, voc, tk, txn, keys, split, oracles, gnn, tmp
     end_id = voc[dec.END]
     for step in range(args.n_steps):
         t0 = time.time()
-        stage = mo_mpo.resolve_stage(step, args.n_steps)
-        weights = mo_mpo.get_curriculum_weights(stage)
+        stage = mo_mpo.resolve_stage(step, args.n_steps) if fixed_weights is None else 2      # control: no stage transitions, stage-2 gates throughout
+        weights = mo_mpo.get_curriculum_weights(stage) if fixed_weights is None else fixed_weights
         th = mo_mpo.get_constraint_thresholds(stage, float(np.mean(valid_hist)) if len(valid_hist) >= 20 else 1.0)
         # ---- sample (structured decoder, KV cache) and store the behaviour log-prob
         rows_ids, _, step_masks = dec.sample_smiles(agent, voc, prompt_ids, prompt_nums, args.batch_size, structured=True, valence=True, top_k=10,
@@ -328,11 +352,17 @@ def run_target(target, args, prior, voc, tk, txn, keys, split, oracles, gnn, tmp
         replay_buffer = sorted(best.values(), key=lambda e: -e["reward"])[:100]
         valid_hist.append(sum(valid) / len(valid))
         mean_of = lambda n: float(np.mean([sc[n] for _, sc in scored if sc.get(n) is not None])) if scored else float("nan")  # noqa: E731
+        heavy = lambda i: Chem.MolFromSmiles(smiles[i]).GetNumHeavyAtoms()  # noqa: E731
+        heavy_valid = [heavy(i) for i in range(len(smiles)) if valid[i]]                       # all valid molecules
+        lig_eff = [sc["docking"] / heavy(i) for i, sc in scored]                              # kcal/mol per heavy atom, docked molecules (more negative = better)
         nan = stats.get("nan", False)
         stat = lambda k_: float("nan") if nan else stats[k_]  # noqa: E731
         row = dict(step=step, stage=stage, n_valid=sum(valid), n_gate_pass=len(scored), reward_mean=float(rewards.mean()), docking_mean=mean_of("docking"),
                    bioactivity_mean=mean_of("bioactivity"), qed_mean=mean_of("qed"), sa_mean=mean_of("sa"), steric_mean=mean_of("steric"),
-                   torsion_mean=mean_of("torsion"), energy_mean=mean_of("energy"), kl_to_prior=stat("kl_to_prior"), entropy=stat("entropy"),
+                   torsion_mean=mean_of("torsion"), energy_mean=mean_of("energy"),
+                   heavy_atoms_mean=float(np.mean(heavy_valid)) if heavy_valid else float("nan"),
+                   heavy_atoms_docked_mean=float(np.mean([heavy(i) for i, _ in scored])) if scored else float("nan"),
+                   ligand_efficiency_mean=float(np.mean(lig_eff)) if lig_eff else float("nan"), kl_to_prior=stat("kl_to_prior"), entropy=stat("entropy"),
                    log_ratio_mean=stat("log_ratio_mean"), percent_in_band=stat("percent_in_band"), grad_norm=stat("grad_norm"),
                    replay_share=len(chosen) / len(all_gens), archive_size=len(archive), wall_seconds=time.time() - t0)
         rows.append(row)
@@ -345,8 +375,6 @@ def run_target(target, args, prior, voc, tk, txn, keys, split, oracles, gnn, tmp
             ctx["counters"].clear()
         if args.probe and (step + 1) % 20 == 0:
             healthy = probe_health(rows, len(gens)) and healthy
-        if step % 10 == 0:
-            torch.cuda.empty_cache()
     f.close()
     json.dump(archive, open(os.path.join(out_dir, "archive.json"), "w"), indent=1, default=float)
     return healthy
@@ -371,12 +399,14 @@ def main():
     ap.add_argument("--grad_clip", type=float, default=5.0)
     ap.add_argument("--max_new_tokens", type=int, default=200)
     ap.add_argument("--seed", type=int, default=0)
+    ap.add_argument("--fixed_weights", default=None, help="control arm: no curriculum; 'avg' or 'docking=0.45,qed=0.1,...'; stage-2 gates all run")
     ap.add_argument("--probe", action="store_true", help="print PROBE HEALTHY/FAILED every 20 steps")
     args = ap.parse_args()
     random.seed(args.seed)
     np.random.seed(args.seed)
     torch.manual_seed(args.seed)
     torch.backends.cudnn.deterministic = True
+    reserve_gpu()
     voc, tk = read_vocabulary(args.vocab_path), ProtLigTokenizer()
     state_dict = torch.load(args.ckpt_load_path)
     prior = LigandGPT(vocab_size=len(voc), d_model=768, nhead=12, num_layers=12, dim_feedforward=3072, context_length=2048).cuda()
