@@ -257,35 +257,37 @@ def violates_hard_constraints(
         return True    
     return False
 def get_curriculum_weights(curriculum_stage: int) -> Dict[str, float]:
+    # steric has weight 0 in every stage (the steric gate still applies). The equal-thirds average of the three vectors is
+    # docking 0.450, bioactivity 0.097, QED 0.093, SA 0.093, torsion 0.080, energy 0.187 = the no-curriculum control.
     if curriculum_stage == 1:
         return {
-            'docking': 0.35,
-            'bioactivity': 0.35,
-            'energy': 0.15,
-            'sa': 0.05,
-            'qed': 0.05,
-            'steric': 0.03,
-            'torsion': 0.02
+            'docking': 0.60,
+            'bioactivity': 0.06,
+            'energy': 0.14,
+            'sa': 0.07,
+            'qed': 0.07,
+            'steric': 0.0,
+            'torsion': 0.06
         }
     elif curriculum_stage == 2:
         return {
-            'docking': 0.30,
-            'bioactivity': 0.30,
-            'energy': 0.20,
-            'sa': 0.08,
-            'qed': 0.06,
-            'steric': 0.04,
-            'torsion': 0.02
+            'docking': 0.40,
+            'bioactivity': 0.14,
+            'energy': 0.14,
+            'sa': 0.13,
+            'qed': 0.13,
+            'steric': 0.0,
+            'torsion': 0.06
         }
     else:
         return {
-            'docking': 0.28,
-            'bioactivity': 0.28,
-            'energy': 0.22,
+            'docking': 0.35,
+            'bioactivity': 0.09,
+            'energy': 0.28,
             'sa': 0.08,
-            'qed': 0.06,
-            'steric': 0.05,
-            'torsion': 0.03
+            'qed': 0.08,
+            'steric': 0.0,
+            'torsion': 0.12
         }
 def compute_base_reward_from_scores(
     scores: Dict[str, Optional[float]],

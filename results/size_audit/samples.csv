@@ -1,0 +1,513 @@
+target,smiles,n_tokens,category,src,valid
+0,O=S(C1OC(O)(C(C1O)CN=CC(N)C(C)O)NCC1)COCCC(O1)C,47,valid,baseline,True
+0,C(C)(O)C1C(C(N)O)NC(NO)C(n1c2cc(cc21)F)c(F)CC(F)=NN=NN=Nc1,58,valid,baseline,True
+0,c1cccc(N)c2c(ncc2)C1C1N=Cccccc1,31,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,COC1=C(NC(=O)CCO)CCSC(N)=C(c1ccccc1)CC(N)CCC1,45,valid,baseline,True
+0,n1c2n(c(COC)nc2c3nc(c2)CC1Occc2)CC(CC)=CCOC1OC(F)OCCCOCC2OCOOC(O)=NC(OC)C1OC1=COCCOC=COC2(O)OCOC1C=C2OCC=NCCN1N=NCOC1NCC1NN=NCC1N=NCC=1OC(N1)NCOOCOCC21OCCC12N1OCC1OC1OC(=O)N1OC2NC1OCCN=NOCOC1=NC1C3O1,199,valid,baseline,True
+0,CC1C(O)C(O)C(P(=O)O)C(O)N(n2cnc(N)cnc2)n1,41,valid,baseline,True
+0,c1cc(ccc1)C(OCc1nc(OCN)ncnc1)C,30,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,c1(c2ccc(c2)C(C1=NCCC(O)=N)=N)N,31,valid,baseline,True
+0,c1c2cccc(OC(=O)ccc3OC1=NC(N)=O)COC1C(O)(O)C1OCOP(O)=NC(O)OC1OC=C=C3NCC1c1ccc1cc12OC=NCO1,88,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,c1(-c2cc(c1O)c(nc(cc3)CCOC3)cccn12)=NCC1,40,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,c1cccc(c1)C1CCC1CN=Cc1ccccc2C1N=NC(C2)CCN1NC1O,46,valid,baseline,True
+0,c1(cc2ccc1CCN)=NC2C(NCCC(C)NC2)CC(=O)CCOCN2,43,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,N=S(O)(=O)CC(c1cccc2ccc(=O)cc1)C(N)=NNCC2,41,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,c1c(cc(SCCc2c(C)(C(O)O)O)OC(=O)N)c1ccc(O)cc1OC1cccccc(OCC)=NN2,62,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,N1=NC(F)=CC(N)c1cc(-c1cc(O)N)C(N)C1,35,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,NC(CC1N=NC(NN=O)N=C(N)C)c1ccccn1n2ccc2OCNC(N)=NC1,49,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,C1(=O)NC(C(C(O)C1C(O)N)C(n2c(N)c2ccc3N)n1)-cc1c(O)nc2N(N)cc1=C(O)C2OC1=NN2C1cc1OC1OC=C1OCCN1OC1c1=NOC2(O)OC2OC=NCC=COC1OC1NC=NC1N1N=NC=NC3OC=NC1CC12C=NC2NC12,157,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,N1C(=NC1=NC(O)n2ncncnc2)C2=C1OC(CN)N=NC1NCN(O)OP(=O)C(O)(O)OC2,62,valid,baseline,True
+0,c1nc2c(ccc(F)c2cc1)(NC1)C(NCO)=NC(N1C(NC)C(O)=O)O,49,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,O=C1C(=C(N)C2N=CN=NCC(N)=O)COP(C=O)C=C1OCCN2,44,valid,baseline,True
+0,c1cccc1n(C(=O)NCC(N)NCc1ccc(cc1O)O)Cl,36,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,C12OC(NCNC(N)C2CO)CC(C3)C(=O)C(C(N2)N=O)=C1OC(O)COCOCCC(C=O)OC1N=COCOC22CCC2C=C1SC=1OC=C=NC1NCC(O)C12OC1C1OC1=C1OC=COCOC=NC21N=NCNC=C2N=NC2N=N3,143,valid,baseline,True
+0,c1c(c(c(OC)n2c1)CC(O)C1C(N)CC)COP(O)(=O)OP(O)OP(O)OC=C(O)OC2O1,62,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,C(N)C(C(O)C(Nc1c(ccccc1)=O)O)CC(OC)=O,37,valid,baseline,True
+0,C1n2c3CC1C(C1)C=C(CC23C(N)N)OP(N)OCC(O)=CC(C2)OCccc2cc1,55,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,Nc1cccccc1C(O)c1cccc1N1cc(c1)O,30,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,c1cnc1C(=O)NCCc1ccccc1,22,valid,baseline,True
+0,C(N)(C(C1O)NCCC(N=O)=O)=c1ccc(O)oncn2nc2,40,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,n1n(nc2c1cc1C(CC(c1ccccc1)Cl)Cl)C(=O)NCC1=C=NC2,45,valid,baseline,True
+0,C(CCCSc1ccccc1NN)c1c(c1O)C(C)OC(=O)c1ccccc(C)OC1,48,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,N1C(N=NNNc2cccc2)=C(N)NCC21C1N(C1)CNCC(N)=C(N)N(O)N2,52,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,P(OC(OP(O)(OCC1CC(C(n2n3cnc(N)nc(c2)C1=O)Cl)O)O)O)OP(=O)=NC#COCOP(=O)OC1OCCCOC(=O)OC1OP(=O)OC#CCCOC=2OC(=O)OC2O3,111,valid,baseline,True
+0,n1c(C2C(NCN)C(CC1)CNCC(O)CCOC1O)OCN=Cc1ccc(Cl)c1OC(=NC=O)C1O2,60,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,c1ccc1ccc1CC(N)=C(C)OC(O)C(OC)C=SCN=NNc1ccccc21OCOC=C1cc1CC(=N)C1=NN=COC1=CC3C=Nc1=C1OC=C1NC1cc12N=NC=1occ1cccccc1OCN=NC(F)=NC=4OC12OC2=NCOC=NC2OCCOC12NC(=O)NNC2(OCC)N=NC12N2N=NC2=COC=NC=NCC12OC13N2N4,200,no_termination,baseline,False
+0,C1C(n2cncnc2)nc(nc2=O)cnc1SCOC1COP(=O)(O)OP(O)=NC=C1OP(O)OP(O)OC(O)OC1OP(O)(=O)OC1OCOC1OC=COC(=O)OOCOC1OC(O)=S(=O)O2,116,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,C(O)(C1Cc2cccc(O)n2)C(CC(C)O)CC2OC(=CCN)c2ccc1,46,valid,baseline,True
+0,c1c2c(Cl)c(C)cc1C(CCOCC(N)CC(O)C1)CC(=O)OC1NCOc1c2ccccnc21N1OC1=NCCN=NNC1=NC(O)OC12,82,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,c1c(F)cc(F)cc1CCN1C(=O)nccc(C1)O,32,valid,baseline,True
+0,c1c(C(N)c2cc(ccc1)CCC)CC12Oc1cccc2=C(Ncc2CN)cccc3sc12-cc1c(=O)c1OC1OC(C(=O)C)=NCNC1Oc12N=NCC12N=NOC=NC3CNNC3=NCC(=O)N=NC=NC1ccc1cc1=NCC(F)=NC1OC=NC12c1OC1C12OC22C1=NN1OCN2N=NC=NC3NOC(=N)OCN=NC(F)=N1,198,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,c1(Cl)ccc(c1)SC(NCC(N)N)CNCC(=O)CC1CN1C=N,40,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,c1(cccccc1)CC1C(=O)OCNCC1Cc1cccccc2C(C1)CCOC(N)COCCOC12COc1,59,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,CC1C2C(c1c(cccc1OC(C)=S)N=C=C(N)N)N=CCC3c1scc1NC(F)c12OC=1N=NC(=O)C(N)=CC2NC1ON=SC2NNNCC21OC1c1=NOCOCOC3=NC1NC1OC2=NC(=O)N=N1,125,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,OC1C(C(CO)N)NN1OC(NC2N=C=C1Cc1cc(F)F)c1c(O)CC(C2)OC1,52,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,C1CC(O)C(C(O)C(C(C(O)=O)N)OC(O)N)=NCc1cc(ccc2)=C2,49,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,c1ccc(Sc2cc(=O)n(C3N)cn2N)OCC1C(CC)C(=O)N=NC1C=CNNOC1OC=CNOC(O)=CC1NC1=NCCCOC1OC1CCOC1OC1N2NCCCOCOCOC21OC21COC2C12NOC1OC1OC=NC=NNN=NCN=NC12NNC2N1CC=NC12N1OCOC12N=NC=1c2=NC=2OC=NC4=NC2N=NCC2=NN=C3OC24N,200,no_termination,baseline,False
+0,CC1C(NNC(O)CC)=C1CNCCOc2c(OC3C)NCN2c1C(=O)NC#CCOC12N=C(N2N)C1OC=NC1C#CC=1OC2OC1OC=NNC2O3,88,valid,baseline,True
+0,c1cc2cc(F)c3ccc(N1)CN=Cc1oc1cncn2c2NCC(F)=C=NCC=NC1NC1=NN1OC13N=NN=C2,69,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,P(O)(OC1OC(n2cncnc1)N)(CC(C(=O)O)O)C1OP(O)OP(O)(O)=C1OC(O)c1ccc12,65,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,S(=O)(N=O)CC(O)N=O,18,valid,baseline,True
+0,OP(=SC1O)C(OCC(O1)OC(=C(C1C(n2n3)O)nccc2)O1)OP(O)OP(O)(O)P(=O)OP(O)OP(O)(O)OCC2OP(O)=NC=COC1OP(O1)=NC1OCC1=C1OP(=O)OSC#CC2NC1OC=C2OC=1OCOCOC=CN2N2OC=NC1OCC22N1OCOCOCOC1COC(=O)OC1OCOC12N2OC3O2,191,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,c1cc2c(CCNC12CC(N=NC(c3ccc4n5)C2CCO)=O)NC2CC2NC1=COCN=NC=NCC1=C=C2N=C=NC1=NC1N=NCC12N=CNc2=C2C1=NNC=NN1cc1NN2COC12OCOC1OCN2C3=NNC1OC12c(=O)OC12OC12n3NC=NN=NC2=NC21c(O2)NC3CN=NC(=O)OC12N1NOC22cc2N1OC45,200,no_termination,baseline,False
+0,c1nc(c2c(OCC(C)OC2)C2)cncnc1cc1OC(=O)N1C1C=C(C)CN1N2,52,valid,baseline,True
+0,C(=O)C=NCCCOc1ccc(cc1)C1OC(CO)OCC(C)OC1,39,valid,baseline,True
+0,C(CN)C(=O)C=C(C1OCCC(O)C(O1)Cc1c(Cl)ccccc1)C,43,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,c1cc(CC)c(O)c(-n2c(cc(F)c2)c1OC1OCc1N2cc(C)=NCO)C1N=NCCC=C1cc1cccn21,68,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,C1=C(CC(N)=N)CCN1C1N=NN=C1NN=NC=CCCO,36,valid,baseline,True
+0,c1n(ccccc1C1c(C(=O)C)O)Cn1c1cc(C)NCCCC(=O)NC=CC=C1,50,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,c1c(cc(C(O)N)cc1)C(=O)cn1n(c2)CNCCC1CN(C1O)Cc1c1ccn2c1,54,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,c1ccc(c1)-n2c(c(C(=O)N)=N)ncnc2ncn2N(C)c12N=CCOC1=O,51,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,c1(-c2cc(c(cc2OCC(O)C=C(N)Ccccc(O)CN)c1)O)O,43,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,Cc1cc(Cl)c(c(C)nc1)C1ccccc1,26,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,C1Cc2ccc(c(C(F)=O)c(c4c3NC(c(N)C4)=NO)C2)NCCCC1OC1N=NC1OC1N=NC(=C2)OCCC1N3N=cc1ccnc12,85,valid,baseline,True
+0,n1c2cnc(CCCNCC(C(O)=O)O)cc1NC1c2cccc21NCOC(=O)C(C)O2,52,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,C(=O)C(C1N(C(F)Cl)C)n2cncn1C(=CCC2CO)OC,38,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,S(=O)c1ncc(c1)=O,16,valid,baseline,True
+0,C(C(O)N(C)CN)C(C(C)N)C1C(O)COC(O)C(F)Cc1cccc1OC(F)OCOCO1,56,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,OC(C(c1cccccc1)OCCNCCC(=O)N)C1=Nc1ccccc2ccc2,44,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,c1cccc(c1CC(O)O)=O,18,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,c1c(cc(cc1)N)C(C1)OCC(CC2)c1cccc(F)c1C(=O)C=NN1C1=NN=C=NC1C1C=C1OC1NN1NC1=Nc1C=NC=NC1N=NC13OC2NN1NNN2N1scc1cc(OC4)=NN2OC12C1cccc12cccc1OC2=NCOC(=NC=O)OC(F)OC12OC=NC3OC(Cl)=NC=2N=NC=NN=NCOC2O4,190,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,n1c(nc(Cl)c1)OCC(CCO)C(C)C(C(=O)CCC#N)C,38,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,c1cccc(C(N)=O)cc1c(ccc1C)OC(N)=NC1N,35,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,n1c2cc(c3c1OC(O)cccc2)=NC(NO)Nc2c1N=NCC=NNC=NC#CC2NCOC1CC1C=NNC1CC#CO3,70,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,n1c(n2c(Cl)n2-c(ccc2)c(ccccc2)C2)C(C2=O)N1,41,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,c1cnnc2c(OC1C(NC(c2ccc(O)F)Cl)c1)=NCC=CNC(CC1)O,46,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,C1CN(C(O)=C(O)CCC(CCOC)=O)NC(C(=O)C1N)Cl,39,valid,baseline,True
+0,c1(ccc(c1)CCC1)N=NCCC1C=CC1=NC(=O)OCOC2NCC(N=O)NN1C=1C=NNC12,60,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,C1C(N=NCC(N=O)N)c2cc(nc2)nc1,28,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,c1(c2c(ccc1)-cc1ccc(C(=O)N)ccccc1)C(N)n1C(=O)OCOC21,51,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,c1nccc(F)C(C(C(NCC)Cc2)cccccc2)c1,33,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,c1c2c(nc(C1)-c3ccc(Cl)c(n3)c(N)c2)C,34,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,c1(O)c(cccc1C(C(N)=O)-c1cccc1)NC2CC(N=O)C=NC=1OCN=CC1N=C2,57,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,C12C(C(CCCC=C)C(CCC2)C(C)CCC)C2N=NC1CN1N=CN=CCC(=CN)C2N=C=N1,60,valid,baseline,True
+0,n1c(cc2c(C(c3ccnc31F)C(C(C(O2)O)P(O)(OP(=O)O)O)O)=O)=O,54,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,C(C)C1C(OCNCC2)nc1ncnc2c2CNN=CNNC(CC2)cc2ccc12C(O)OCC(=O)OCN=C(N1O)O,68,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,C(O)N(Cc1ccccc(c1)cccnc1)CC1O,29,valid,baseline,True
+0,c12c(OC3N=C(N)CN(CC2=CNNO)nc3nc1N)(C)Cc1=CC=CN1,47,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,c1c(nc2ncnc(-c3cccc3)CCNCN)C1=N2,32,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,C1CC(C(CO)C(O)N)C1NC1CC1NNCCCC1COC(N=O)NCN=CC2=C1OCC1NC=CCCC(O)C2=N1,68,valid,baseline,True
+0,O=C1C2N=C(c3ccccc3)C2CN2CC(=C=NN=N)C3OCC2c1C(N)ncc1COC1C(O)=C1NCC(F)OC1=NOC1=NCOC1C=NN1OCOCOC(=O)N=CC21OC1=NCC=NC1=NC=1OCON=NC2=NNNN2N=CC1OC1OCc1=C2N=NC12NC(NC1O)N2OCCOC=NCOC14C2=NC12NNCCCOCC=1C=NC1OC,200,no_termination,baseline,False
+0,c1(Cl)n2c(nc3ccc4ncn3n4c2)NCCCCS2C(=O)NCC2=C(C41)OC(NC)N=NCCC21NC=C1NOC(=O)OC=1C=C=NC1NC12Cc12OCC2=C=NCOC1cc2=CC12CC3N=NC=2Cc1OC(O)C1ccc14SCON(OCC2c1)N3,151,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,C1CC(OCCCC(=O)C)NN1C(C(N)=O)OCC1COCCOC(N)=C2C=NCCC2C1,53,valid,baseline,True
+0,c1(c(C(=O)OC1C(C(C(OP(=O)O)(O)O)O)=O)O)S,40,valid,baseline,True
+0,n1cncn2n(-c3cccccc4)c3nc3CC1CCCC(CC2)CCCOC2=C=C3N=NC1N=NN(N)C(=O)OC1OCOC2=NCC=3OC(=O)OC12OCC=NOC1OOC1OC(N)=NC1C(F)OC=NOCOC=NC3NC(=C3)N1OC3=NC21OC12NC=NN=NN=NOC3N=NN=cc3OCC1OC12NC(=O)OCCC12OC2=NC=2N4OC,200,no_termination,baseline,False
+0,O=C(C1CNC)OC(O)n1c(C)ccc1OCC=N1,31,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,C(Nc1cc(F)c1)-c1ccc2c(c1)OP(=O)=SC2,35,valid,baseline,True
+0,C1CSC(c2nc3c(s3)N)cc(Cl)c(c1)(F)C(=O)N=C=NCc1ccccc2oc1,53,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,CNC1CNC(O)C2(C(C3(O)C(C)O)OP(O)(=O)O)OCc2nc2n1N1-cnc12c12cncnc1COCN1NC1=NC2=NC2OC12CC1OC(O)OC1OC1=NC2=NC=1OCC(O)C1N=SCC=C2OC1OC=2C1OC1N=NN=NCCOC(O)=CC(O)=NC=NC1OC=1N=NC=NN=NC=NCOCOC1OC1=NCC1=NC2N2OC32,200,no_termination,baseline,False
+0,c1ccccc2c(c2)OCNC1=CCCN=C2CC(=N)NCC21OC(N2c1)CCc1cccc(=O)NC1c1NOC1OC=Nc2,72,valid,baseline,True
+0,C1C(C(CC2C(C(OC(C(N)C2C)CC(=O)C(=O)O)CC)C)C1=O)=O,49,valid,baseline,True
+0,c1cc(Cl)ncc1-c2ccc(c2ccc2)C(N)c(CC)c1CCC(COC)OCC1=NNO2,53,valid,baseline,True
+0,c1c(SC(=O)N)CCCCCC1c2cc2c(Cl)c(cc32)nn2N1C(CC(Cc1)=O)OP(O)(O)=C2NOC1c2OCc1OCN=NC=1CC1OC1OC2=C=NC1N(O)N=c1cc1OCOCN1N2OCCCC(O)C(C1)CN=NCO3,135,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,c1c2c(c(cc1CC)OC(O)(O)ccnc2)C#CC(N)C#N,38,valid,baseline,True
+0,C12CNN=NC(CC2)=C(C(=O)N)C1C(O)Cl,31,valid,baseline,True
+0,O=C1C(C2(c3ccc(C)nc3)cn2)ncc1,29,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,O=C1C(CN)C(c2nccc(nc2)O)NCc1,28,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,CC1C(C2CC(=O)N2NC(C2)=CC(C(O1)C(O)O)C=O)OC(O)C1=CC=C1COC=1c2c1cccccc1-nc1,73,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,c1ccc(Cc1cc(CO)N)=O,19,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,c1ccc(c2cccc1)NC(C2)C(CC)COC(=O)CC1NCC=CC2NC#COCN2C1,52,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,Clc1cc(cccc1)C1c(C(N)C1)NNC(OC)C(=O)O,36,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,C(C)CCCC(CCc1ccccc2c1)CNCCCN1NN2C(=Nc1C1)CC(=O)COC=C2C=c1C(C)OC1cccc1ccc(F)=NN2,79,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,c1n(C(N)CN)c(c1)=O,18,valid,baseline,True
+0,c1(n2c(CN)c2n(ccccc2)c1)-ccccc2,31,valid,baseline,True
+0,c1cccc(c1)C(N)C(c1cncc2C)=CCCCCC(=C2)NN=C=CC2N=C=C=C1NC2,56,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,C1C2C=CCC(c1ccc(O)c(F)c1)-c1cccccc(Br)o2,39,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,N(C(O)CN=N)C(N)CCO,18,valid,baseline,True
+0,C1CC(CCC(N)C(C(=O)CCO)C(O)C(O)N)C(=O)O1,39,valid,baseline,True
+0,c1(sc2c(c(-c3cccc(c5)N)c3c3)C(CNC1)=O)OC=C(C)C2=CCNCC2=COC#Cc1(F)C=NC1OC3N=NC1OC1CC=CC(C1c2)NC=3OC(=O)OC(OC1)=NC2=NCOC1OCOC1=CC2=NC12NNC=NN1OC2N2N1OC1NC1N=NC=NN=NCC1OC1N=NC=C2COC=NC12NNN(CO)OCC12N5N1O,200,no_termination,baseline,False
+0,n1c(NC(O)O)C(O)OCC(C)C1OP(O)=O,30,valid,baseline,True
+0,O(C(CC(Nc1c2cc(CO)=CN2)N)=CC(N)CC1C=O)CCc1c2cc(F)cc1=CC(F)OC#CC2,64,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,OC(O)c1C(C1OC(OC(CO)CC1)CC1)COCO,32,valid,baseline,True
+0,c1ccc(c(-c2ccc(-cc2ccc2cc2)OC)C1)=O,35,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,C1=C(NCN=NC(=N)N)c1cccc(O)cc1cccc1,34,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,C(c1ccoc(CNc1cc2)C(N)=O)C1CSC=C1N1CCC(N)C=CC=NCCC=NC(=C3)NC=C1OCN=NN2C1=NN1N=C1OC=C1C1=NC1OC1=NC1OC1=NOC1OC=2NOC(O)=NCNCOC2N2OCC12NC1C1NC(=O)OCOC=C=NCOCC=NC21OC(C3N2)O,167,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,Fc1c(cc(cc1Cl)C(C(F)O)NC)CC(N=NN)=O,34,valid,baseline,True
+0,C1(CN)C2N(N=CC(N(N=O)C3)C3OCC(O1)ncnc12N)C(C)=NCC(NC1N)O,56,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,c1cn(C(O)C(N)=O)CN=CCC1C=CC1OP(O)OP(=O)OC(O)=N1,47,valid,baseline,True
+0,C(CC2NCC2N(NC(C2=C(N)O2)N=CC1)O)NCc1ccccc(n2)n2,47,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,C(O)c1cc(O)nc(s1)CC(O)C=O,25,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,O=S(=O)(CC1n2c(nc(nnc2)N)C1O)O,30,valid,baseline,True
+3,c1cc(-c2ccccc1)OC1C(OC)OC=NCc1cccc12OC#COC2N=NC2=NNC1,53,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,O(C(n1c2cc1)N)CC(C(=O)NC(=O)O)OP(=O)OP(=O)(O)OP(O)(O)(O)OP(N3)(=O)OP(O)=NNC(=O)OCCc1cc1OC1OC1cccc2C1cc(Cl)=NC1OC12OC(O2)OCC=NC(F)=NNN1COCC(O)OCC21OCC2=NCC1N=NNC1OC(O1)=CC1OCCN=NCNN1OCOC(O)=NCOC(OCC)O3,199,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,c1n(-c2cccc(c2)nc1)C(=N)N,25,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,N1Cc2scc(cccc5)C3=C(N)C1OC1NN=NCC=C=C2C1COC1C#CC1C1CC2=C1OCOC1=NC12N=NC21C(O)OCOCC=NC1OC(=O)COC21OCOC1=C=NC1N=NC21N=NC1CC(C2)COC=NC1C2=NC2COCNC(Cl)N2OC14OCOCCC=NC1OC=NC21OC(OC(N21)=O)CS(CN=O)=NCC23N54,199,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,c1(-c2ccc(cc2nc21C(OP(O)N)O)OP(=O)O)(O)N(O)OC1=NCN=NC1OP(=O)OCOP(C)=NC1OC1OP(O)OCOC(O)=NN1OC=NC1OC1OC1=NN2,106,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,C(C(P(O)(O)(OP(=O)(O)O)c1cccc1)(O)O)O,37,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,C(O)c1cc(cc1)C(N)C(C)=O,23,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,c1c2cccc2nc2nc1NCCCN1CCCCCCC2=N1,32,valid,baseline,True
+3,C(c1c(O)cc2C=N)OCc1cccc2O,25,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,C1CNCC(=O)C1CCC1C(C(=O)C(C13NC1)O)CCOP(=O)(O)P(O)OP(O)OP(=O)(O)OP(O)OC1OCOC1=CC1OP(O)OP(O)N2OP(O)OC1OC=NC1OP(O)OC(O)COC1OCOC=COP(O)OC1=NC(=O)OC=NCOP(O)OC21SCOCCC12cc1OC1COCCOP(O)OCOCOCCCCNCOCOCOC=NC23,200,no_termination,baseline,False
+3,C(=O)c1cc(CC1N=O)cccc1OCC(CC(=O)O)OCS(=O)=NCC(O)=NC1,52,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,c12cc(c(CC(=O)N=N)=O)cc(F)c2NCC1,32,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,C1CC(C=NC23N=NC(=NC=N2)cc2ccccc1)=NC=Nccccc1C=NCCCOC12N=NCC(O)=NC1CCC1=cccc1=NS1OC1OC1=NCC=1NCC(F)C2=NC(NC12)(N=O)C1OC(C(=O)O)=NCOCCCN2OC21OC=NNCC1=NNNC12NCCCOC21OC1N=NC(=O)OC1CCNC1OCOCOCCOCOCCCCN1C3N,200,no_termination,baseline,False
+3,n12n(cnccc1)CC1C(=O)C(OP(=O)(O)OP(=O)(OP(=O)O)N)OC(O1)=C1OP(=O)=C1cccccc12OC#C1,79,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,NC(=O)Nc1cc(=O)cc1,18,valid,baseline,True
+3,c1(O)c(cc1)C(O)(CO)OP(O)(=O)CCC1OP(O)(O)=NS(O)OC(N)(C1c2)OP(=O)=CC2,67,valid,baseline,True
+3,n1c(C2CN(N)C1O)CC(C1)=NC(=O)N=NCC=NC1CC2,40,valid,baseline,True
+3,OC(CC(=O)O)Oc1c(ccc1)=O,23,valid,baseline,True
+3,O=C1C(NC(C(=O)O)C1O)C(C(=O)CSC1C(=O)cccc1)(Cl)O,46,valid,baseline,True
+3,C1C(CC1C)C(O)C(C(OP(=O)O)O)(O)OC1OP(=O)=C1O,43,valid,baseline,True
+3,c12sc(N)C(C2C(N)C(=N)C3)CCN=C1CC1OCC1=Ncccccc1Cc12OCC(=O)CC1OC12N=NCCCOCC12CN1OCOC1cc(O)CC12C12OC(N=O)=NCCCCC(C1)=NN=NCC(=O)N=NC21OCOCC1c1=NCN1OC1CC(O1)=NCOC1=COCCOC12c1SCOCOC1=NC=C=C(CC=O)OC12CC=C13,199,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,N1C(CC(O)=O)OCc1c(ccc1)NC1,26,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,c1(cccc1N1C(=O)CC(C(C)O)OC(O)OP(=O)O)OP(O)OP(=O)(O)cc1,54,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,c1(CO)=Nc2cccc1-c(-cccc21)=SCC21OP(O)(O)NP(=O)(O)C(O)OP(O)(O)(OP(=O)O)OC1OC(=O)OC1OC1OC1OC2,91,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,C1(C(=O)OC(C)=O)C(O)=CCCc2ccc2n(cn21)NC1CC(CC2)C(O)N=NC1N,57,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,C1CNC=C(O)Oc1csc(c1)C(=O)C1,27,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,c1(OC(C(OC(C1)O)=O)C1OP(O)(O)=O)c(O)NP(O)CC1,44,valid,baseline,True
+3,NC1=NC(=O)COC(CN)(C(=O)N)CCS1C(O)=O,35,valid,baseline,True
+3,c1c(C=O)ccc1C(O)C,17,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,n1cc2cc1OC(C(C1O)=N)CCC1C(N2)CO,31,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,Fc1nncc2c(c21)N,15,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,Nc1c(ccc1)-c1ccccc1,19,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,C1C(C1)CC(CC(O)OP(OP(=O)(O)O)O)=O,33,valid,baseline,True
+3,c1cc(cc1)CC(=O)Cc1cccc1F,24,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,c12c(c(c(Cl)N)c1)c(C(=O)N)C(O)C1ccc1N(cc12)C(=O)OC(O)=NC(=O)OC2NC1cccc1=NCOC1c12OCC(S)=NC21C1OC2=NC(NC1)=O,105,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,O=CC(O)c1c(ccc1)CCC(=NC1)C(O)OP(O)(=O)NP(O)(O)=S1,49,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,C(O)C(C(=O)O)n1C(O)cncn1N,25,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,c1c(C(=O)NC1)C(=O)C(O)COCSC1OP(O)(=O)OP(=O)OP(O)cncc1Cl,54,valid,baseline,True
+3,N1ccc2cc(cc2nn1)OP(=O)(O)OP(=O)(O)O,35,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,OCC(NC(=O)C(C)=O)=O,19,valid,baseline,True
+3,c1(C2C(ccc(c(c2)cccc1)N)C)N,27,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,OC(C1C(C1O)OP(OC(O)(O)C(O)OP(O)=O)O)OP(OP(=O)(O)O)=O,52,valid,baseline,True
+3,c1c(ccc1)C(C(O)C(C(O)O)O)CC,27,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,Cn1cc(Cl)c1CC(CC)O,17,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,c1(ccc(c1)CCCO)C(OC(C(=O)C1)O)N1,32,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,C1C(OCC(OC(n2cc3c(cc2)=O)Cl)cc1)COC(=O)C=NC(O)OP(O)(N)=Cc1NC1OC1OC(OP(=O)O)OP(=O)(O)OC1=NCC#COCOC=NCOC1CC1c1OC1sccc12N=NCCOC1S(C=O)=NC1OCOC1OCCC1OC1OC1NC12N=NCOC1NN=NCC=NOC(NC(=O)CC1O)=NC1OCOC1OCCOC3,198,valid,baseline,True
+3,FC1CCC(F)(F)C(C(F)OP(O)(OP(O)=O)(O)C1O)O,40,valid,baseline,True
+3,ClC(O)C(=O)C(C1N(O)C(CNC(=N)C)=O)OC(OC(O)=O)=NC1,47,valid,baseline,True
+3,O=P(NP(OP(=O)O)(=O)O)=O,23,valid,baseline,True
+3,O(O)c1c(C)c1,12,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,C(N)(CNC(SCC)=O)C(O)N,21,valid,baseline,True
+3,c1ncncn1NCC(O)OP(O)=O,21,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,c1c(ccc1)C(=O)C(O)OP(=O)OP(=O)OP(=O)O,37,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,C1C(=N)C1N=NCNc2c1cccc(C(=O)c2)N(C1)C=O,39,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,c12cc(C(C)cc2)cn(-cc2)C1=NC1C(O)=NC(CCCC(C1)=O)=NC1OC=NN=NNC2N1,63,valid,baseline,True
+3,C(NC(C(=O)C)N)ccc1N(c1ccccc1)N(cc1)C,36,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,C(O)C(=O)c1cccc1,16,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,C1NC(C(=O)NS)(C)NCCCC=C(N)NCC1,30,valid,baseline,True
+3,C(=O)(c1ccccc1NC(=O)C2=O)NC#CCCN(C(=O)CC1)CC(NC2=O)CCC2=NC1=NCCC2,65,valid,baseline,True
+3,c1cc(cc1)-c1nc1cccc(C(C)=O)N,28,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,c1c(ccc1)C(C(=O)O)OC(NCCCC)=O,29,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,N(=O)NCC1N(C(=O)C=O)C(N)=C(N)OCC1,33,valid,baseline,True
+3,c1n(ccc1Nc(C1nc1)CO)O,21,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,Clc1ccn(Cc1)C(=O)N=O,19,valid,baseline,True
+3,c1(c(c(O)c(c1)C(=O)N)NCC(C)=O)O,31,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,OC(=O)CC(=O)NC1OCC(C(O1)O)C(O)=O,32,valid,baseline,True
+3,C1C(CC(=O)C(N)C(N)=O)C(N)=C2COCCC(=O)C1OC2,42,valid,baseline,True
+3,C(CC(OP(=O)O)(O)OC)C1OC(=O)OP(O)OP(=O)OP(OP(O)=O)O1,51,valid,baseline,True
+3,N1C(N=O)C(C(O)=O)NC(C(CCC)C)=NC1,32,valid,baseline,True
+3,C(C(=O)NCC(=O)NC(CC(=O)c2)O)=Nc1c2=NCCCCC1,42,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,OC(O)C(CO)OP(OP(O)(=O)C1O)OC(O)C1,33,valid,baseline,True
+3,N(=O)Nc1cc(N=O)cc1,18,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,C1CN=C2CC3CNC2=NC1=C3C(O)C1C(O)=NC21cc2,39,valid,baseline,True
+3,c1cc(cc1)-nc1cc1NC(O)NCC(=O)C,29,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,C1(C(CC(O)CCCCCC1)OP1)(OP(OC(O)O)(O)O)OP(OC)OP(=O)OP(=O)ccc1cn2ncc2,67,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,c1(Cl)n(cc(n2)N)Nc1C(=O)NCCCCCCC1C2C=C(O)OCC(CC1)O,49,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,O=P(CC1OC(C(=O)N)C(C1)C)O,25,valid,baseline,True
+3,C1NC2C(=C2CC(CC2C(C(CC)=O)O)=O)cc1OCNc2,39,valid,baseline,True
+3,C(C1)C2C(=O)NC2C(C2NO)C(=O)COCccccc12,37,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,CC1=C2NC(=NC(C4)N)C2=NCC2c1cccc1nc12OC(O)(O)NC1C(O)=NNC2=NC2N=NC1OC12N=C1C12N=NC1C1C(O)C1N=NCC(=O)OCOC=NCOCOCOC(O)OCC1OC21Scn2NC1=NCCOCC(NCCC1=O)C1=C=NC=NC(OCOCCOP(CC(OC2)O)O1)=NCC(=O)OCC(=O)OCCC=NN24,200,no_termination,baseline,False
+3,c12cc(cc2C(N)(C(C)C2)CC(O)C(=O)N)=Ncc1c(cc1)=C(cc(=O)Cl)OC(CCC(O)CC)=NN=NCC1C(C)CC1OC=NC(F)C1N1CN=NCC1OC=NCC(=C1)C=NC=NN=NOCC=NOCC21,131,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,N1=C2CCNCC(=O)N(C)C(C3)C(CN)OP(O)(O1)C1OP(O)=NP(O)(=O)OP(O)(OC1O)OP(O)=NC1cn(O)OC1-ccc21c(ncc2=O)=NP(O)OC(=O)C12C1-ccccc2OC22c1OCN2N=NCC1OCC1CC1CC1cn1OCC12N=NCC1OSC=NC12C12NCOCCC(=O)N=NCCCC1N=NCCC23,198,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,c1(O)cccc1-cc2nn(C1C(CS)O1)NS(=O)OP(OP(O)(OP(OP(=O)(O)O)(O)O)O)(=O)OP(=S)OC=N2,78,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,c12cn(c3cc(N)c(cc3n3cncnc23)O1)O,32,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,C(O)(c1cccc1CN)O,16,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,C(c1ccc(cc1)-c1ccccc1)O,23,valid,baseline,True
+3,c1c(ccc1)C(=NCC(=O)N)CC,23,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,O=CC(OCc1ccccc1)CC(C1)OCCOCOcn1,31,valid,baseline,True
+3,C1COCC1C(=O)C2C(O)N(C3CCC2)CCCc4ccc21OC(F)=NCC(F)=Ncc1OC21OC12c1OCN=NCOC1C1=NC=NN=NCCCC=NOC12SC(O)CC(F)=NC1OC=NC(F)(F)OC1=NC12N=NC=Nccccccc1N=NNC(Cl)=NCOC12NCC2OCC=NNCCNC2=NCCC1C21OC=NCCN=C2N=NCOC143,198,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,c1c(c(Cl)c(c(c1)N)(ccc1)Cl)CNcc1,30,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,C(=O)(C)CNCCCCCCCCCO,20,valid,baseline,True
+3,NC(=O)Nc1ccccc1,15,valid,baseline,True
+3,O=C(C1COC(=O)C(CC)N)C(=O)OC1(CO)NP(O)O,38,valid,baseline,True
+3,c1(O)c(C2=Nccc3)S(=O)nc1ncc1n2c(cn2)=NCOC1N1OC2=NC1CN1OP(=O)(O)OC(O)cc1ccccccc1OCCC1cc1=NCCC2=NC1=NC1OCCC(F)=NC12NCCC12N=NN=NC=NC1c1C=NN=NC1OCC1OCCC1=NOC12COCC=NCCC=NCCN1N=NC12NCC=NCC=NCCC=NC1OC12C3N1,200,no_termination,baseline,False
+3,c1ccc(n1C(N)NO)C1C(COccc1)C,27,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,c12nc(c(ncc3C(N)c4)nc2)NOC1cc(O)C(C)OCCS1OC1CC(CN1OP(=O)=O)=C2N1C#CC(O)OC1=NCCOC1OC1=NCOCC(O)=NC1=NCCNC(C2)OC(O)NCOCOCCC1OCCCNCC2N1OC12OC1OC2N=NC12NC(N=O)=NOCCC=NCOC1=NCOC=NCOCC1OCN=NCCOC(OC1OCC2)C234,200,no_termination,baseline,False
+3,CNC(NCc1ccc1)-c1ccccc1,22,valid,baseline,True
+3,c12c(cc(O)cc2)ccc1N,19,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,C1C(=CN)C1CC(=O)CC(=N)C(C(O)C)O,31,valid,baseline,True
+3,O=C(C(O)C(C(NCCCC2)CC(OSC1)=O)O)OC(NO)N=NCC1NCSc2,49,valid,baseline,True
+3,N1(NC(=O)CCCC1)C(CSSC(Cc2c1)=O)N=NC=NOCCC=NCCCCC1=NCC1NCCC1=NN=NC=NC=1C=CC1c2,77,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,c12cn2cc(ccc1)=O,16,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,O=C(C(=O)CS)NCCCC(=O)C2OCOP(O)(=O)cc(c1)OP(O)=NP(N)(=O)OP(O)OP(=O)=NP(=O)OP(O1)OP(O)OP(O)=NC2,93,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,O=C(c1cccc1)Occ(cc1)C(O)OC1O,28,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,c1(ccc(c1)C(=O)NS(=O)CS(=O)=O)O,31,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,c1(ccc(=O)ccc1)OC(O)=O,22,valid,baseline,True
+3,C1C(C(CO)C(=O)NC(=O)C(=O)O)OCC1,31,valid,baseline,True
+3,S1(=O)ccc(O)cc1OC(=O)OCO,24,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,c1cccc1CC(C=O)O,15,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,O(OP(=O)O)OC1C(=O)c2cc2nc(N)OC(O)c(O1)O,39,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,Cn1cnc2c3c(-n3c(cc3)c2)N=NC1CC=NC2N1CCN1C(=O)COCC=NCC=C(O)C2=NCOC=CC21CN2CC(=O)OCC1C1cc12NC1OC1=NC1NC12NC12NC1OC1cc12N=NSCOC12NC=Scc1OC(=NCC)CCNC12N(CCC1=O)N2OCC(F)=NCCSSC=NCN=NCCC21COCOC=NN=COCCOC13,199,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,C(C(=O)C(C(=O)O)c1)NC(c1cccc1)=NCC1,35,valid,baseline,True
+3,c1c2cn(nc2N)nc1=O,17,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,n1c(cccn1)C(CO)C(OP(=O)O)(OP(=O)O)O,35,valid,baseline,True
+3,c1c(cc(C(N)=O)Nc1)=O,20,valid,baseline,True
+3,C(=O)C(=O)Nc1cccc2cc1OC(C(=O)O)OC2,34,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,Nc1cc(cc1F)=O,13,valid,baseline,True
+3,OP(OP(=O)(OCCC1C(C(=O)O)O)O)OP(OP(O)(C(=O)OC1OP(O)O)OP(O)=O)O,61,valid,baseline,True
+3,OC(O)OCSC(=O)C1OC(=O)C(O)OP(O)=NP(=O)(O)OP(O)ccc1,49,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,O=C(C)CCN(C1)CC(=O)C(C1O)C,26,valid,baseline,True
+3,c1cccc1Oc(-cc2ccc(ccc2)=O)cc1NC(=O)CCC2=NOC1OC1N=NCC1C1CC3N=NC1C2N=C(NC12)OCCC(=O)C=NC1OC(NCC1cc1cc2Cl)CCC12C=C(CCO1)OCOC1OCCC=NCOCOCC1N=NNC21OCOCCCCOC=NN1N=NCCCCCCCOC(OCC21Cl)=NC2(N)OCOCOC12OC=NCN1C23O,200,no_termination,baseline,False
+3,c1c(c(Cl)c(n1)N)NC(=NO)cccc1OCOCN=NCC1,37,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,P(O)(O)CC(CC(C(=O)O)OP(=O)OP(=O)=O)(O)CC(O)n1cnc2c1=NC(O)=NC1OC(=O)C1C1OP(O)=Ncc(=O)OC=NC1OP(C)OCC1OC(O)=NC1N2,110,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,c1(CNS(NC1CC1C(C=O)c1c1)=O)OP(=O)=C(O)N(O)C(O)(O)OP(=O)OP(=O)OP(O1)O,68,valid,baseline,True
+3,C(=O)(CC(C(C)O)=O)C(CC(N=O)N)c1-c2cccc(c2)c1O,45,valid,baseline,True
+3,c1(C(=O)N(c1ccc(O)cc1CC)CC(O)C)C(OP(O)=O)(OP(O)=O)N1O,53,rdkit:kekulize(aromatic ring invalid),baseline,False
+3,c12c3nc(N)n(C1O)OC(C(C1O)C)C(C1)OP(OP(OP(=O)(O)O)O)=Scn1cn2n2cnc1OC1OC(O)=NP(c1)=NP(O)=NCC1OCOC1OP(O)=NCOCOC12OC(=O)OC21OC1=NNC1OCc1CC=NC(=O)C12OC1NCOCN1OCON(O)OC1OCOCOCSCOCC2COC1OCOCCOC1COC1OC1S23O1,199,rdkit:kekulize(aromatic ring invalid),baseline,False
+0,c1ccc(Cl)nc1-c1c2n(ncc3sc1)Nc(n1)C(O)OC(O)CCC3C1OCOCN=NCC2,57,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1ccc(C)cc1C(nnnnc1N)C(C(O)C)C#C1,33,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,OC1C(C(N1)=C(CNC(=O)O)OC)Nc1ccccc1,34,valid,fresh,True
+0,OC1C(C(OP(C(=O)O)=O)(Cc1c2cncncc1)O)OC(=O)NC=NCc1c1ccnccc12,59,valid,fresh,True
+0,c1c(-c2ccccn3C(N=C4)ncc3)c1-cccnc3OCc2NC(=NC(=O)C)CCNC2OCOC1OCCOC(=O)OC=NC2N2N(C)NC1OCOC1N=C1OCOC1OC2=NC1C=NOCOCCC=1N=NC1C(=O)SC1CCN=NC=NN1OC1=NCCOCOCC=NCOC1=NN=C=NC1cc3C=NN=NC=NC12NC1=NN=C2COC1=Nc4,198,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,OC(C)(C(=O)N)C(=O)CCCCC=NC1(C)c2ncnc12C,39,valid,fresh,True
+0,C(SC1OC(C(O)C(OCCC(COC1)=O)C(C)C(O)O)C)O,40,valid,fresh,True
+0,c1(ccc(cc1)CCNC(O)(N)CO)CCC1OC1,31,valid,fresh,True
+0,n1cnc2c3c(CO)c3c(CC3)C(C)cc4nc2cc2n1N=NCNN2NNCC2=C=COC1OC=C1C=NNCN=C=NC2N3N=NC2=C=NN=NCC12N=NNOC=C=C(NN)C(=O)OCC(=O)OC1OC3OC1=NC=2NC=2NC1C12NN1NN1OC12C(=O)OC1=NC=NCN=NCC=NC3=NN=NC(N)=NN3N=C2OCC1N2N43,199,valid,fresh,True
+0,C(c1cc(C(O)O)c(n1)-c1ccccc1)C(F)C,33,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1cccc(C2OC(C(CO)CCCCO)CC)CC(O1)CC1OP(=O)OP(O)OC(O)OC1OC1OC1=C2,63,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,O(C(Cc1cc(C(N)nno1)N)CNO)O,26,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,C1C(COC(O)SCC(CC(O1)CN2N=C(O)C)C(C)C)CCOC(=O)C1OC1OCOCOCN=NCOCC=C1OC1CO2,72,valid,fresh,True
+0,c1(NCC(n1cnc1)N)CCOC(COP(O)(O)(O)O)C1CO,39,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,FC(C(Nc1c2ccccc2)=CC=O)nc(cnc2)C1C(O)OCCOC(=O)N=NNOC=1NC=CS1NC1C(O)=CN=NC1N1c2N2N=C1cc1=CC2=C1ccc21ncc1Cc2,106,rdkit:valence,fresh,False
+0,S(=O)(O)(CC1O)c2c1c(CCNC3CCCCCC3)ncncnc21NNCCCC1,48,valid,fresh,True
+0,n1c2cc(O)cn1-cn(cnc2)C(N=O)nc2C1CC=NC1C1CCCOP(O)(O)(O)OCC1=C=C1OCC1O2,69,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,O=C1OC(C(C(CC)=O)C)NC1CC(Sc2c(=O)NCC=1CCC2)(N)C1,48,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,O=C1N(C1N=C(C1)C(OC1)O)OCCC(O)O,31,valid,fresh,True
+0,Clc1ccc(cc1)NC(Nc1cc(Cl)(cc1)Cl)C,30,valid,fresh,True
+0,c1(cc(C)n2cc(c(c2)OC(C)sc2N)=O)cc(cc1)N=C(O)NC1=NC(O)NCNC1OC1NNC1OCCC1OCOC#CN1OCC(=O)OC1=COCOC1=NCONC12N=C1,107,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1c(c2c(c(Br)cc2)=N)C1C(N(C(C1)=O)O)OCCCCCOCC1,45,valid,fresh,True
+0,P(O)(O)(O)=O,12,valid,fresh,True
+0,C(C(CCCO)CC(=C1)NCC2=CCc1cc(C)N)CC(CC(=O)O)(C)NC(=O)NC1OCN(CC3)C1OC=1C2NCCOC1OCCCOC(C)=NC(=O)NCCC1OC1OCC1OC=2NCOC2N1O3,118,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1c(C#N)c2c(n(C(NC(O)N)=C(CC(C1O)CC)C)CC=O)=N2,46,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1on1cc(N)c2c(cccc2)OC1CC(CN)=NCC21CNNC=1N2NCC(=C3)NN2C1C=1N=NCC(=O)C=NN2N=NC(N=O)=NNN2N=CCCC=1N=NC12C=C1NN=NNN(C12NN)NNC2=NN=NNN2OC1N1OCOC12P(O)C2N1NC(=O)OCOC12OC2=NCOC=NOC=NOC=1C=NC1C12OC12N=NC12OC1,200,no_termination,fresh,False
+0,N1CC(C1CC(O)NCC1CC(C(O)CCCC(c1cccc1ccc(c1)Cl)=O)=O)=O,52,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,C1C(OCSCc1cccc1Cl)C(C)OC(N)n1cc(c1)OCC1(C)O,42,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,C12C=NN(C1)C(C(C2)=O)NC(C2)CCc2c(N1cccc1)C,42,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,O(N)N=C1CCC(NCC2CCC2N(C3)CC=2O)NC1CCC=C=CC=C4OC2CC=2NN=NCC2N=C2N=C1C=C2OCCcc2NN=NN=C(O)OC(=O)NOC1C=NOC(C)NC=1OC1OC1=NOC1OC2N2NCCC1OC=NN=COCC1COCN1OC2=NC=NNC=NN2N=NN=NC1NC12NC=2NCCOCOCOC=NCOCC1OC14N3OC,200,no_termination,fresh,False
+0,N(C)CSC(O)(N)CC(n2cc(c3C)nc1N)=C1OC1C(N)N=NCSC(C(=O)C)OC1OCNN=NC21NCc2=NC1C1=CCC2=NC12OC=NC12N=NC12NNN2NC=2NCOC=2NC=2OOC2NC12OC1N=NC1OCOC12N2NC12NC1=NCC1OC=NN=C1OC12NN=C=NCC1=NC(N1CC1)=NC1OC1=NCC12N3O,200,no_termination,fresh,False
+0,c1n(CN)cn(nc1)OC(=O)NC=O,24,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1cc(C2(CCC2C(C(N)=N)NCCC2)N)nc1ncncnc(c2)=O,44,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1c(CC2ccc(OCNC2N1)C(F)(C)CCC2)OCCC(=O)N1C(OC)OC(C1)OC2C,56,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1(cc(cc1c1)Cc(SC(CCN)C(=O)N2)N=NC(=O)N)NCCCOCC11N=NCOC1Oc1cnc2n2N1C(CO)=S(c2)(=O)F,83,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c12nc(cc(c1Cl)c(Cl)COCO)Ccnc(F)c1NC(=C)nccc12,43,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1nc2cc(-c3c(c(cc4)C)n23)NC(CC)ccc1OC(O)OC(C)=NCOC=2C1COC=NC=NN=NN=NC1CC=2N1oc1=C(C1)OC=C1NCN=NC#CCOC2=NC1N=NCC12N1OCC1N=NCCC1=C2N1N=COC=NC(O)=NNC(F)NN1OCC2=C1N=NCN3NNC=2N=NN1OCC1=NC(c1)=NN1OC1OC2OC14,200,no_termination,fresh,False
+0,C1C(C(O)CCO)N=Cc1cccc2c(N)=NC1NNC(=C)CCCC=CC=NC2=NC=2OC1=C1NCC(N(C2)N2)=NOCN(C=N)OC1=C1NN2N(N)NC=N1,99,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,O=C1CCNCC(NC1)C2C(O)COP(O)(=O)NCCCCSC21OCO1,43,valid,fresh,True
+0,c1c(C(Nc2cc(Nccc(Br)c2)C)=NC2C(N)c1)NC(F)=NC=1OC(F)CCC1C1COC(=O)CC(F)(N)OC2=COCOCC=NO1,85,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,O(NCC(C1C(NC=C(CC2)O)C=C(N)C1CC(C)c2ncc2)nc1)C1NCC(=O)N1NCNC1=C=C(C)NCOC1NC1N=CCC=C(O)C=NC3OC2N=NOC=1CC2OC1C=1N2N=NCOC2=NC=4OC=4NN3OCC1O2,137,valid,fresh,True
+0,n1(c(cnc1)CC1)c(O)-c1ccc(Cl)c1CC(O)nc2nncc12,43,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c12c(c(Cl)n2ccc2cc(N)cc1)C(O)=NC1CCc1cc(Cl)c(Cl)CC1NCN1cc1N=CN=CC1C1=C(CO)OC3=NC1C1OC1C1CC(F)CC=C1C=NCCcc1OC(C(F)F)(F)OC2=NN=NC1OC=2cc1cccc1C=NC(F)NC2OC=N3,152,valid,fresh,True
+0,c1c2cc(cc1)C(NC)=C(N3CC)N=CSc1cccc1c21OCCOCN1NCOC1NC(F)OC1N=C(F)N=NC3,69,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,C1(CC1Oc2c(Cl)c(CC(N)=O)N)c1cc(cc(n1)F)OCCC(N=N)=NCC2=O,54,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1cc(-c2n(nccn1)C)CC(C(CC)CN1O)C=NC1NCN=NNCC1(NN=C)Nc1cncn1OC1C1C(O)=NC12,73,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,C1(O)C(CCN=CCC(N)C1)n1c2c(cc(C)nc1)OC(C)OC(=N2)C,48,valid,fresh,True
+0,OC1CN2C(CCC2CCC1=CNCCNC(CCNC1=O)O)C(C2C1)OP(=O)N(O)OCO2,55,valid,fresh,True
+0,C1CN(C2CN=C(N2C(=CC(C)=O)C(N)=O)CC2CCC1)N=C2,44,valid,fresh,True
+0,Fc1ccccc1C1cc2cc1ccc(c2)O,25,valid,fresh,True
+0,C1C(C=NC2C(C(N(O)C3CC)NC=NCNC2)C(N(N)CC3)C1)Cl,45,valid,fresh,True
+0,CC(OC1C(CC(=N)C(O)N)N)c1cc(c(c1c(-c1ccccc1)O)O)C#CNC1=O,55,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1(nc2ncc(CC(O)=O)Nc(c5n2)N)cc(CN)c1C(=O)N=NC2NN2C(=NO)C34C1(CCCC)OC(O)=C1OC1=CC(O)OC(=NN3)OC1c1=NOCC2=NC2OCC2=NC=C=NCC=C=NC12N=NNNC23NN2NC(C)C3c1OC1OCC=1OC=NN=NC(=O)c1NC1=NNC2(F)C=COC=NC=CN=NN1OC254,199,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,C1(N(Cc2cccc(c1)-cccoc(F)C)cc2)C(N)cc1CC(Cl)C1,45,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,C1CC1CC1N(C=C(C(NCN1)NC=O)CC=N)N,32,valid,fresh,True
+0,S(=O)(c1c(sc1)-c2cncccc(NCCC(=O)CCC4)CC2N1)=NC(N=O)N1NC#CN(N)CC1OC1CCCOCC2OC1N=C=Ccc1=NOC1oc2OCOC=2ccc1OC2-n2-cc12n2N=NC3=NC1N2OCC12occ1cc12OSCC1c1cc1COC12cc1OCOCCOC1=NC=NN=NC2=NC2=NCOCOC12OCC(N1)OC14,200,no_termination,fresh,False
+0,C1CCC(O)NC2C(O)C1C(N=NC=O)NC=3NCCCN=C(N)CC3C3C=NC1=NCCC1=NNC1=COC2N=c1N=CC1=NCOC1(O)O3,86,valid,fresh,True
+0,C1C2CCC(CC(C(O)CCO)N)COc2c(c1)Cl,31,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,C1(N)C(C(O)CC(OP(O)(O)=O)O)=C1C(O)n1c2c1nc21nc2nc2N1,52,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1c(ccc1Cl)Cc1ccc1ncc1NC(N)=CNC2=CCc(N)cccc1CCCCOCOC1=CCcc1cccc2,63,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,O=C1CN(C(C(CO)=O)C1Oc1ccccc1)O,30,valid,fresh,True
+0,CCNC(CNC(C(C(C2O)N)C(C(=O)C)O)C)C(C)COCNCc1ccc(O)NC1=CC1c(N=O)=NCCCOC12,71,valid,fresh,True
+0,OC(CC1CC(C(N)=O)n1cncc(c(Cl)C(N)O)n1)OP(=O)OCO1,46,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,OC(OC(C1CCO)C(O)=O)=N1,22,valid,fresh,True
+0,CCC(CC1)NC(C1)C(C(C(O)=O)=N)O,29,valid,fresh,True
+0,c1(Cl)c(C(O)cccc1)Cl,18,valid,fresh,True
+0,O1NC(N=O)C(N(C)C(C)C)O1,23,valid,fresh,True
+0,c1c(cc(Cl)c2c(O)c1)C(CN)CC1ncnc(c2)COCO1,39,valid,fresh,True
+0,c1ccc(C1C)cncc1CC1OCCC1N(C(C)=O)Cccc1,37,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1c(CC1O)cnc1CCCC(=O)C(C1C)=O,29,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,C1(C(O)O)C2C1C(OC(n3cncn3)CCCC3)c1cc2ccccc12OC=NCC1NC=NN=C=NCOC=CC=C2CC=2CNNOCCC2NC1SC1OC12NN=NC2=NC12N=COC2=CC=C=NNN1NN(F)OC1NC=C=NC1=C2NOCC1=NCCOC12NCC=4N=NNCCC=1OCC=NC1N=C=NC2N=NC21ON=NC=4OC12OC23,199,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,C(CC)(=O)N1CC1C(CC(=O)NC(N)=CC1)COCC(=CC(C)O)OC1,48,valid,fresh,True
+0,C(N)(Cc1cc(cc2cc(c(c2O)COC)=N)c1)=O,35,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,C1NC(C(C1)Oc2ccc(nc1)N)NC(CC2)CCN=CC(=O)N=NC1,45,valid,fresh,True
+0,C12C(C(C(NC(C)C2C=O)NC)Oc2nc(ncnc22)C)N=C1cccnc12C(O)=N1,56,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1c2oc(C(C3)cccc2)CC1NCC2C(CC=O)C1C(CN2)CC2C1=CCCN=NC1cccc1OC#CC=1c2=CC2c1OCC2OC=NN1OC12OC2=NC1NC12NN1CNC1=NN=C1NC(=O)OCC12OC=NNN1OC=2NC(F)OCC(=N1)ONC1COCON1OC2CCN=NC2=NC1=NC21N=NOC=NC12NCNCOC(C1)OC23,200,no_termination,fresh,False
+0,CC12C(C(C(C)C(=O)C2C(O)N)C(C(N=NN)C(=N)N)N=O)C2=NC1CNCC(C)C2,60,valid,fresh,True
+0,C1C(N)C1CC1C(OC(O)COC(C1O)O)O,29,valid,fresh,True
+0,S(O)(=O)(N)C(C1O)(C(NS)(C(N=N)C(=O)N)N1)O,41,valid,fresh,True
+0,c1c(F)cc(c1)-c1ccc(c(c2)=CC(=O)nc1C(N)O)C1OCOCCCOC(C)OC1OP(O)=NC1OCC#CC1CCC1NC1NCC(CO)=N2,89,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,n1c(nc1)C(C(O)N=Nc1ccccc2)CC1OCCC=1OC=COC(O)NCOC(OC1)NCC=CC1NC1N=C2,67,valid,fresh,True
+0,c1c(CC(O)c2onc2)cnc(O)n(C)c2nc1OCOC(C)C1NCc1CC1(N)CCOC(O)=NC1N=NOC1C#COCOC1OCO2,79,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,C(CN)C=C(c1ccccc1)OC(O)Occ1ccc1,31,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1cc2c(N=C2C3CC(=C2)nc2c(cc3)Cl)nc1,34,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,N1c2c(C3C=NNC3(N3CNC2)C(=O)CC(CNC(CC4)N3)NCC)=NC21C(O)CC(NCC)=S(Cl)OC1=C=NC1OC1OC12NC(C2=O)C2N1N=NC=2N3N=NNN=COC(=O)N1N=SC3NNCCC1c3=NC1OCC1OC13CC1N=NC1N=NCC1=NN=NNC1C1OC(=N)OC(=O)OCC=NC=NC1=NC1NC1N4N2,199,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,N1C(=O)N(C(C(=O)N)N)C2C(CO)C(CC=C(C2)OC(C(=O)CC)=O)COC1,55,valid,fresh,True
+0,C(=O)(NC1C(C1)C1C(C(O)CS(=O)C1)Cl)C(=O)O,39,valid,fresh,True
+0,o1c(-c2ccn3nc2N1C(C(=O)N)=CCCC3)C1OCCCC(=C3)N=C1CNOC(=O)CCC2C1NCN=NN2C=CC=CC3=NC1,81,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,C1CCC(C(N)Oc2cnc1-ccccn1)nc2N2C(C(=O)O)NC2Cc1cccc1C(O)=NC12OC12N=C1,67,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,C1C=NC1NC(NC(=NC(C)C1)C(C(C)C)CO)OCOP(O)(O)=N1,46,valid,fresh,True
+0,OC1CNc2c(non3cncnc(CO)n3)=C(CC2)N=NCc1,38,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,n1c(-c2ncs1)C1C(c2ccccc(C(C)nc2)N1)C2C,38,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,C(O)(CC1OC(N1)=NC1C(CO)O1)C(O)C1COCOC(C1N=O)O,45,valid,fresh,True
+0,C1(C(C1OCC(O)O)N)CC1NC(=Nc1c1ccc(F)C)CCCOC2C(C)=NOc(Cl)OCC2O1,60,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1cnc2c(c3cc(c3)CC(C1CO)CC(=N)CN=O)CCC2,39,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,C1CC(N=CCC(C)=NC=CCC1CCCC2=CNC2C2=NC2)NC,40,valid,fresh,True
+0,O=c1cc(cc(-c2n4c3cc(C(C)=N)c4)c(c41)N)OCC1cnc1nc2OC(C)=CN2N=NCN=NC1OC2N=NC3NCNC14,81,valid,fresh,True
+0,N(C)C(Cc1ccc(F)F)(F)c(c1)C(O)N,30,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,N1CC(C(=O)Nc1cc(c1)OC(=O)NC)=NC1=N,34,valid,fresh,True
+0,C12C(N=NC3Oc3ccc3c(OC(c1)-c3=O)CC(Cl)N=C1)OC(CO)NC1C1CC2=NC1,59,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,n1cnc2c(c2sc1c(ncn1)F)C(N(CO)N=O)NC(F)NC1O,42,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,C1=NC2C3C(c1C(=N)CCC3=NCN=CC2)CC(=O)CC,38,valid,fresh,True
+0,C12OC(C(N=C(NC(=O)O)CCc1ccccc1)Cl)(Nc1n2c(ccc1)C)OC1,51,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,N(C(=O)Nc1cc(cc1)C(=O)O)C1CN1CCC(CCCO)C,39,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c12nc3n(c3cc3N)c2c(C)cccnc1N2C(C)COC2=NCC(C2)C(C)=NC1OCCC(N2)=NC=NC(=C1)NOC(=O)OC1OC1=C2OC(=O)OC1NNOC1N=NCCC=NN=C1N=NC12NC12NCOC1C=1cc2=NN=NC=1C=NN=NC31N3C12NC12CC1=NNN=C3,171,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1(cc2c(CN)cc(c3)F)cc2c2nc1CC(F)C(F)NC1C(O)(F)NC1=SC(N)(O)c1OC1OC1=SCN=NC(C)NC1C2=C2N1OC1=NC=1C=NN=COCC=NC2=NNN=NC1OC=NN2N1NNC12NC=NC1NN1OC12OC=NCC2N2OC12OC=NCC12N=NC2=NN1NC=NC1NC12N1NC12NC1OC1N=NC3,198,valid,fresh,True
+0,c1(cc2c(cc3ccc3)N)sccc3nc2=NC=NNCCCC2C1=C=C1N(C2)OCCCC2=c1NC1=C(O)NNN=Sc1=C3CC=C(c2)O,85,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1cc(C(F)C(F)C(O1)F)n1cn1nccnc2nc2nc1c2NC1CC(CN=N)=NCC1NC(CC2)c1,64,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1cnc2n(C(F)(C2=C2Nccc2)CCN1C(CC1)Cl)OCOP(=O)OP(=O)OP(O)(=O)OC1,62,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c12c(SC(=O)NC2=CCCC2N=Cc1cc(ccc2)Cl)N,36,valid,fresh,True
+0,n1c(cnc2scn2)c2C(NC2)c(cc(c2)OCOC)=NC(C)C1OC1N(N)ncc2cnc1,57,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,NC1CC(C(C(N)N)n1cnc1)C(CC(C(C)=O)O)OP(O)(=O)OP(=O)=C(O)C1,57,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1n(c2OCCNC(N=CC2=NCC=3C24C(C=C2)O)N=NC(CC2)=O)OCCCC2C(=O)COC=C=C=NC=NC(S1)=Nc12NC(=O)OC=NNN1N1cc12OC=1COC=C(N1)c12CNN=NC=3COCOC1c12NC12N=NN1SC=NN=NC=NOC1=NC12c(=O)OC2=NOCc1c12OCC14,181,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,n1n(CC1Cn1c2cn(C(N)cn1)c1)NC(=Cc1c(nc2)C)C,42,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,o1C(N(NNCC)NC=C2CCN=NC(C21)NCCCCC1)OC(N=C2)=NC2=NC=N1,53,valid,fresh,True
+0,C1C(C(CN(C)C)C(=O)C(=O)N)NCC(O)Cc1cccc1cc1,42,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c12cc(NC(C2)C2CC(CO)=O)NN=C(C)C2=NNS(NC1=O)N,44,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1c2C(CCC(O)C(CO2)CO)(CN)CC1C(O)C1(C)COCOCC(c1cc(O)F)=O,55,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,o1CCC(C=O)C(n2c3cc1nc2nc2N)NCc1CCC1=CC=NN=NC1CN1N=C2c1c2OCN1OC1NC1COC(=N)N2N(OC=O)P(NN2)=c1OC1=NC12OC=2N=NCCOC2C12NC1COC(O)OC22OCC12OC12OCOC1OC(=N)OCC12NC=2c1OCOCNC1OC1OCOCOC1OC1NCCOCC14OCOSC1OCC2N34,199,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,n1ncnc2cn(n2N)C(C(O)=O)CC=CCCNN=CCC(=O)N=NC(C3)N=NOC(=O)C2Ccc1=NOC(=O)C(C1)NCOC=NNC2NC12N=NC2=NC=NCOC12NNCOC=NOC1OCN1OCOC1=NC12OCC1O3,133,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1c(C(NCC)c1ccccc1C2ccc(N)=N)NCC1C1=NNOCCOP(O)(O)(O)OC(C(O)O)=C2O1,66,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,O=C(c1cc(OC(N2OCC)CO)cc1OC2cncncc2)c1cc1-nc(F)C1=CCCC1NN1OCNC1N=NC2,67,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,O=C1C(C(C)C1C(C)n1cccccc(Cl)c1)Cl,31,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1cc(-c2c(ccc2)OCC1C)C1=NC(C(=N)CC1)=O,38,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,C1C(CC(C(O)=O)C(O1)N1nc1c(c2COC=C2)c(COC)cc1)CCCO1,50,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c12cc(C(C(O1)O)NC(nn2cnc(N)CO)C1O)OP(O)(O)=C=C(O)OP(O)OP(O)=NC(O)N1,67,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,n1(C(O)CC(CC(=C1O)O)CN1CNC(C)C(c1cccc1)=O)N(Cl)C(=O)N1C,54,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1(c(c(Cl)c1-c2c(ccccc1F)C1=NC(=O)CCC(=N)O)O)CC1NC=COCC1OC1NNN2N=NCOC1,69,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1ccc(c(C(C1)=NC(CN)N)C(C(N)C2)C=O)ccc1C(N)nc2c1,48,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1c(cccc1)S(=O)NC(C)(O)C(C(C1C(N)C(O)O)N=O)NCCC2C1C1OC(O)OC1NO2,63,valid,fresh,True
+0,c1c(CC2CC(CN2C(CC=C3C)N=C2)C)CCC(N)=C1C=1N=NN2NC2N=C=C(O)C2NN=NNC=CN=NCOCC1OC1=NNOC1=NC1=Ncc1=NNC1ccc12N=NC1NNC12N=NC12cccc14NC(C2)=NC1=COC(=O)OC12OC12NC(O1)=NC21OC2=NNC=NOC1N1OC12NC21C=2OCOC1N1ON4OC2,200,no_termination,fresh,False
+0,c1ccc(C)NC(NCOC(N)c1cccc(F)F)=O,31,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,C(NC1CN(O)C(C)C(C(=O)C=O)C1)nc2c(c1)OP(O)(=O)OC(=O)OP(O)OP(O)NC1O2,66,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1c(F)cc(OC(F)(F)F)c1ccccc(c1)OCCN(N)CCOCCNC1,45,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1(CN(C(=O)N)NC(Cl)N)c2ccc1cc21OC(CNCCC=NN=C1)c2NC1OC1C(F)(O)N=NC12N=NC21CCNO2,77,valid,fresh,True
+0,c1ccc(cc1)S(=O)(NC1)C(O)C(O)OC1OC,33,valid,fresh,True
+0,n1n(cnc1)NC(N)c1cccc(c1)=O,26,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1cnn(CN)c2cc(cc2)N(N)nnc1,26,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1c(ccc2nc(c1)C(CC)C1)C1N=NCCSCCc1cccc(O)c1OC1OC(O)OC1C(F)(F)COCC1OC1(F)C1=NCC=C2OC(F)N=C2COC1=NN2,98,valid,fresh,True
+0,c1(c(cccc1)OC=NNCC(C(N)ccc1)C)=NC1,34,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,C(N)=CCC(C(O)C2N=C)NC(=O)OCC2C(C1)=CCC(=C(N)N)C1,48,valid,fresh,True
+0,c1n(ccc2c(CN=Nc2C2C(=O)C)c1)CCCOc1ccc(=O)C#CC22C(N1)OC1CC1OC=NOCc1C(F)OCOC1(F)OCC(F)C1C(=N)C(O)cc(=O)OC=NC=NN=COC3=NC22N1OC1N2OC(O)=NC=NC(F)=NC1NN=NN1OC=NC(F)=NC(=N)NCC2=NNCC2=NNC1O3,182,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,C1(C)CC(C)C1=NC(N2CC=NC(C)N(C3)NO)CC1C(C2)OC2CCCC(=O)CCOC(=O)OC1OC1C(O)=NCOC=NC2NC12C=1OC=COCC=CN=NC(=O)OC=1OC=1OC=1c12OCOC=NCN2N=NOCC12c12OCCC=NCOC1=Ncc1OC12-c12OCOC=NN=NCOC3OC(O)OC(O)N2N3OCOC4N3N14,199,valid,fresh,True
+0,C1OCNC(C1C(=N)O)NC2C(C1CCCCC(CC1)O)COCC(Cl)=COCCN1NC1CCC(C2)O,60,valid,fresh,True
+0,c1ccccc1NC1N=CC2NCC1NOC(C)C1=CC1NOCC2,37,valid,fresh,True
+0,n1(cnc2c(cc3c(C2)n2)CCC(COC1OCCCOC(OC)nc1)NNC(O)O1)COCOC(=O)OCOCOCCOC1OC1=COC1=CNCCOC1OCNC1OCC1=CCc1=CC1N1ccc1n2N=NCOC=1CNC=2OC1n1cc1oc1OC1OC=NC3NC1OCOC2NC2=NNC=NC2=NN2OC2OCO1,175,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,C1(O)C(C(CO)C(O1)C(C(C(CO)=O)O)n1c2cnc2N2ccc1C)C(O)ccn1NC(=O)c1OC(=O)O2,71,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,C1C2C(OCCOP(O)C1OC(C(CC(O)O)O)n1c2c1nc1)=NC1c1OC=N1,51,valid,fresh,True
+0,C1C(=CC2NC2C=NCCC3C=C2)OCC(N=CCC(=O)O)=C2CNCCc1C#Ccc(=O)OCC(F)OCc1=NC1C2C1=NN1COC2C1OC=NCOCC2N1OCC=NC1=NN2C12N=NNC(F)CN=NN=NN1OC(=N)OC1OC1NC321,143,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,C1CN(CCO)n1cc(nc1)C(O)OC=C=C1OCO,32,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,CC1(C2OC(NC2N=NCC2)NC(O)NC1)OC(=O)NC(Nc2cccc2)=NNC2,51,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1cc(CCNC2=C(C(C(O2)C)C(C)CC)C)N1OCC2CC=NCO2,44,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c12c(nc(nc2CC2)OC=CCNC2C2)CCCC1CCCOccc1CC1N2,44,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1c(c(ccc2)C(N=O)NCCC2C(=O)C(O)O1)C,35,valid,fresh,True
+0,C1C(SC1C1C)OC1C(O)C(=C(N)C(CO)C1)COCC1,38,valid,fresh,True
+0,C1CC(C2C(C3CC(F)F)O)CCC1nnc(c3c(C)nc2)N=N,41,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,OC(C1C(=O)CCC(O)O)C1NCC(O)n1cnc2c1nc(CO)cn2,43,valid,fresh,True
+0,C(N1CC2(Cn2cnc(N)n3)C=CCC)cc1C2CC(NCC1)C=CC=C1OCCN=NCC3=NCOc12NN(O)C1,69,valid,fresh,True
+0,c1c(CNC(C(=O)N)CCC(C(CO)N)C2OCC(O1)COC2C(=O)N)C=O,49,valid,fresh,True
+0,N1C=C2C(O)C2OC(C(O)COC(F)=C2)OCC1CC(O)C(=O)OCCOP(O)N1OC1O2,58,valid,fresh,True
+0,c1c(S(C2CC(N=O)N)=NC1C3C1)OC(O)NC(N=O)NCCN=CCC1C(=O)NC=1NCC=NCC1OC21OC(=O)C=2N1N=COCC1OC1=C1C3ON=NCNC21,103,valid,fresh,True
+0,C1(NC2C3C(=NC(CC1)=C(CNC(CC(O2)=O)O)O)CCNC(O)CC)(O)SC1OC1OCOP(=O)OCOC(O)OCOP(=O)(O)OC=C1OCc1n1c(=O)OC2csccc12O3,111,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1ccc2CC(CC(C2)O)c1ccccc2cc3NCCC(N)N1CCC#COCC(F)OC3(F)OC1OCCc1nc1OCOC=1OCC(F)OC=NCOC1C1(F)OC=NC21,97,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,C(=O)COc1cc(cc(c1)F)C(C(C)F)OCCNNCC1=C=C=CNNCC1,47,valid,fresh,True
+0,OC(C(N)C(c1cc(OC(C)=O)O)N)C1C(O)N,33,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,N(C1C(O)CC(=O)NC(c2cccc(c3)cc2)C(=O)N)C1=CC1C(=O)CCOCC2C=NCNc2C=C=CCC1OC2N=NC1=NNN=NN=C1NC(=O)C1=NC2=CC2=NN1CC=NC12NCC4N2NC12NC12NN=NC1=COC1OC3=C=NC12N1OC=NC2N=NN=NOC=NC=NC1CCCOC(=C=O)OC2=NO4,191,valid,fresh,True
+0,n1c(ccc1-c1cc(n2cc(Cl)-cccc2)Cl)n1C(=O)Cl,38,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,C1C(C(c2cccc2)C(CC(N)=N)CC(=NC(O)C2)cccc2)cc1,45,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1ncc2ncnc(c2nc2)C(C(=O)O)C1OP(O)(=O)OP(O)OP(O)OP(O)=C1OC1OP(O)OP(O)=C1OP(O)=C=NC=C1OC=NC2,90,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,o1noc2cnc(NC(CCCC=3)NC2C(N3)F)=C=NC=3C=CCC=4N2C(O)=C2N=NN1OCNC(Cc12)NC1cc1cccc12cc12OCCOC(O1)=NC12csccccc12C1=NOC(F)=NCOC(=O)OC(=O)SCC1CC(=O)OC2=NC12OCC2OC2=NCN=NN1OC=NC21N=NCOC1OC1N=NC=NC=3N=NN2c1OC2,200,no_termination,fresh,False
+0,C(Cn1cc(C(c2O)ccccc2)CN=CC1)P(O)(O)(O)OP(O)O,44,valid,fresh,True
+0,C1CCNC(C1)Cn1c2OC(C(n(C)n(N)c3ccn3Cl)c1)OC(O)=N2,47,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,P(O)(O)(O)(O)C1C(O)C(n1c2cc3ncc3nc2)=O,38,valid,fresh,True
+0,c1cc(OCC2C(NCCN)=Cc2ccc(c2O)Cl)=NCc1ccc3OC(O)OC1=NCNC12C(NN)COCC2=C1N=NCN=NCC2N=Nc1=C2NC=NNC12cc1=c1N=NN1OC12NC2NN=NC(F)=NC1=NC12NOC1NNOC3OC(F)O2,144,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1cc(OC1C(C(=O)O)NC(c2nc2)C)ccc1C(C(C)O)(CC(C)=O)OC1,52,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,O(S)C(c1oc2cncc1)C(OCC)N=NCCCC2NCc1ccc(c1Cl)(Cl)Cl,47,valid,fresh,True
+0,c1c(Cl)c(NC(CC)N)=NCN1C1nc2c(C(=O)c2c(cc(F)s1)CC)P(F)O,53,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,n1ccc(n(F)F)n2c(nc2)CC2CNC(=NC2)ncnc3n2N1CNN=NC1CNNN2CCCC(O)=NOC12N=NNNN=NCC1=COC(O)CC=NC=NC1=NC1(O)OC1OC12NNC=NC1OC=1OCC1N=NCC12NC1OC12COCC12oc1OCOC=NC1OCOC(=O)NOCN2N=NC12N=NC3=NC(=C=O)OCOC=NN=NC2N1,199,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,n1cn(C2NC(=NC(N)CCCCCNC31)C1CC)C=C(N=C=O)CC=CCCN2CC1NC2=NC(C1)OC(=O)OC1OC2=NC1OCC=NC2=NCN2N=NNCOC12OC14NNOC2NC1N1cc21c1ccc21c12cccc1=NC22nc12ncc12c13CC12CCOC(=O)N2OC=NC=C2c2=NNCOCOC3=NOC12OCOC2c14N32,199,rdkit:valence,fresh,False
+0,NC(C(=C2CCN)N1)CC(CCCC1)CC(O)=CC(N=O)C1OCC1(N)OCOP(=O)CCC2,58,valid,fresh,True
+0,C1(=O)c2cc1nc(cnc(N)nc2)N,25,valid,fresh,True
+0,CN1C(CCCCC(CC2)NC2)c(c(F)cc2)cc1CCNCC(C)CC=NNN2,47,valid,fresh,True
+0,c1ccc(cc1Cl)C(C)(N)NC(C(C)CC)=O,30,valid,fresh,True
+0,C(C)C(N2CC(N)COC(C2O)c2ccc(c2)O)Cl,33,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c12cc(C(NC(C3CC1=N2)N=C1)NC=C(N)C)C(C)CC(O)=C(N)OC=NC#CC1N2CCNC=C2NC=1N=NN=NNC2N=NS1c1ccc2n2nc1-cc1occcc12n2sc22OC21ccn1OCN3,124,rdkit:valence,fresh,False
+0,O=S(CCC(N)C(=O)Nc2cccc2)=NC1C(SCC(=O)N(c1C)C(O)O)=O,51,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1cc2c(c(nc2N)CCCC(NCC(N1)CC)C1)OP(O)OP(=O)OP(O)(O)=C=C2OC=C1OC(O)OC1=C2O1,74,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,CC1C(C(CCC=N)C(N)C1C(CC(CC1O)N)=O)OCC1C(C)C1OCOCNCC1,52,valid,fresh,True
+0,C(N)C(N=C(N)C1N2c1c(CC=N)ccc1)OCCC(OCN)COC(=O)OC3C2N2N=C1C=NOCC2OC=NCCC12NC=NC=NC=NOc1OC1N=NN=cc1OC12nc(F)OC2CN1OC12cncccc2c1=NCC12n2OCCSC=NC1=NC1-ccc1SC=NCC(O3)OCN3NC21OCC(=O)C(=NC2)OC12SC2N=NOC12N3N,200,no_termination,fresh,False
+0,c1(Cl)cccc(Oc1)F,15,valid,fresh,True
+0,c1(c2cc(c(cc2)C(O)NCCO)NCN)nc2ccn2n1,36,valid,fresh,True
+0,N1C2C3C(SCN=NN=NSC(CC=N)CC(=O)O)N(C2)NC(=O)COCC(OC)=CC1=NCC=1COC=1C(N)=NCOC=1NC=1CC(O)=C=NNC1=C=NCC2C1=NCN=NNN=NN2N2N=NNN1OC2cc1=C1NN=NNc2=NNN=NCOC12N=NC2=NC12N=NC2=NN=C1NOC12OC1c12cc1=NCN=NC21c23N1c2,200,no_termination,fresh,False
+0,c1(cc(C(n2nc(C)CC)C(F)F)=O)sc1cc(F)c1c2cccc1,44,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,OC1C(NCc2ccc(NN)ccc(c2)Cl)C(N)OCCC1,34,valid,fresh,True
+0,C1CCN(C2C(=N)c3n(cc3)cc(c3nc1)CCC(O)OC)OC1C(O)OC(=O)C(=O)COC2OCC1OCCCCC(CC1)NN=NCC=NC1OC1=COC=NN1OC=NC=1OC1OC1(O)OCOC12N=C=NC=1NN=NC1N=NC1N=CNCC=NC(Cl)OC12N=NN=C1OCOC=Sc12NOCOC1cc12CC(=O)C=2OC1OC=2N13,199,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,Clc1cc(C(CC2NC3=NCC2C2)OCC2O)(C)C(O)=NCCC12CNOC(N)CC2=COC1OC(N)OC1OC1C=C1OC1OC(=C)OC1=C(N)OC=CCC12cnc1N=CN=C=C=NOC12C=2OC3=C1C=2,127,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,Clc1(C(N2N)ncnc1)C1OCC2OC(C(N)=O)NCCNC(=O)CC=CCCN3N1N=N3,55,valid,fresh,True
+0,c1(cc(Cl)c(Cl)cc(O)c1)C(NCCC1NCC1)c1cccc1,39,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1c(CN)c2cccc1OC(=N)nc1C(N)N=CC1OCC2,36,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1(O)c2nc(c(c2)-c3c(N=O)cccc3)c1OCCN1C(CC(C2)C(O)O)=C(O)CC(F)=C=CC2N=C2NCCC(F)=NC12,83,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,n1c(c2cccc2)C(=O)n1ccnc2c1N=NN=C12,34,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,C(O)C1OC(N=O)NC1NC(O)C(C(Oc1cnc(c1)C)N)O,40,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,OC1N=C(NC(=N)N)COCC(C)C(=O)O1,29,valid,fresh,True
+0,n1cn(c2nc(C(CC)CC)ccc1)OCNCC1C(=O)C(O)=NCC2=NN1,47,valid,fresh,True
+0,c1nc2CN=C(O)cnc2nccnc1CC(O)C(NC1)CS(=O)NC(=O)O1,47,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1c(O)cc2c(OCC(C(N)=CCNCC2)=NC=C(O)CN)=C(O)OC1,46,valid,fresh,True
+0,C1(CC=NCCCCCc2cc(cc(N)c2)N)ccc1F,32,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1c(ccccc1O)CC(NCC(F)C(F)(F)F)=O,32,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1(CC2C(NCCCCCC1=NN=NC2C3)c(=O)cn1)N=NN=NC(CC=C(C)C)CC2N1OCOC1NC1NNC2=CCCC1NN=NN=CC=C1C1OC=NC(=O)OC2=NNC21c12NC1=CN1OC(=O)OC=C1OCOC1c(NC12)=NC(F)=NN1OCC1C=2C1cc1OC1OCOCOC1cc1OCOC=2cc1N=NC12N=NN=NC13N2,200,no_termination,fresh,False
+0,n1c(c(cc1CC(=O)N)C)C(NC(c1cccc1)=O)N,36,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,O=C(NCC2C(CC3C2)=NC2)N=NC1C(C=O)C(O)OCOcnc(c2)OC12SC(F)C(F)C1OC(F)=NCC=C=C1C1N=C1c1=NOC1OCCNC=NCC3=C1OC12,105,valid,fresh,True
+0,C(CC1CC(N)N)c1ccn(cc1)OC(N)C1CO,31,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,NC1C2=C(C3C(O)C(C=O)N2)C1OCN(O)OC(=C)OCOP(=O)OC(O)c1csc12cc12OCP(O)=NC2OC1N=NCC1=C2ccccc2N=NC12OC21OC1N2c12-nn2c12N1cscccc21O3,126,rdkit:valence,fresh,False
+0,O(C(NCC1)=C2)CNC(C2)C(C(C=O)N=C2)C1C(CO)(C2)O,45,valid,fresh,True
+0,c1ccccc1c2c(-c1cc(ccc1)C)C(C(O)C)=NCC21OCCC=NCC1,48,valid,fresh,True
+0,C1C(CN)C(C(C)(CC(NO)c2c1c(F)-c(F)cncc1)F)=C1ccc(F)cc1C(F)=NC12,62,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1c(cc(F)c2ccc(-ccc3c(n(s2)cc2)C(F)=O)CCNC(N=O)=O)COCCCc1cc12ccc2OC1C(Cl)=CCC1=NNC1CC=CC#CC=NC(=NC)OC1OC=NC(N)NC=NNC(OCC)=COC1=NN1NC1N1OC2N=NNC3C1,145,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1c(NC2CC3C(C(C(=O)CCCCC(O3)O)=O)C)=c1c(CC)=NNC=1NCc1c1cccccc12,63,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,O(O)CC1CCOCC1n1c2cc(ncnc(n32)OCN)C1OC(C)OP(O)(O)OP(=O)OP(O)OC2=NOC1=C(O)OCOC1OC1OC1=NC=C1OC(O2)OC(O)NC1cnc1OC2NC=NCOC1C14OC1OC12N2OC#COC2=CN2P(=O)=C1OC2(O)NOC=NCOCC=C2c1NC12N(NC12)OC2=NCOC1OCCOCOC34,198,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1c(-c2cccc1cc(c2)Cl)CC(O)C(NC1)=Nc1c(C)F,40,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,C1(C(=O)NC(C(N)S(N)CNc2cccc(Cl)c2)C)(O)CO1,41,valid,fresh,True
+0,c1(c2scc3c1-c(ccc(c2)O)CCC)CCCC(C1)OC(F)CC=NC2=C=C=C3C(F)N=C2C(F)C1,67,valid,fresh,True
+0,C(c1cc(c(cc1)C(C1O)O)(O)NCCC(O)N)=NNNN1,39,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,C12C(c1c(OC(OCO)NN=NC(N=O)N)c1)=NNC(=O)N=C(Cl)N1CCCN2,52,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,n1(-c2cc3cc3)c(C)nc21ccccc12cc(C)OCN=C1OCCNCN1C3=NC1OC=NC12C=NC=2C3=NCN=NC2N1,77,rdkit:valence,fresh,False
+0,C(C)C(=O)c1cc1c(cc1)NC(NC1C(O)O)=N,34,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1c(ccc1)C(OCCN2CC3C1)CCOP(=O)(O)OP(=O)OP(O1)OC(O)=SC=C1OC(O)C1OSC1=NC12OCN(O)NC2OC(O)(O)OCC1N2OC(O)=NCOC(=O)OC2OC#CC1OC=1OC2OCCcc1C12N=NC(C=O)=NN=C1OCCCC(=O)C(O)OC1c22c1-n1cc1OC=NOCC1ccc2c12C(O)=NN23,200,no_termination,fresh,False
+0,C1(NC1C(CO)C(OCO)COCS1cnc1N)CO,30,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1(C(C(O)COCN=C(O)N)CCCOCC1)CC1C(N)N1,37,valid,fresh,True
+0,C1C2CCC(C=C(NC(C=C)N3)CC=O)cnc2NC1CCCC1C(OCC)=C(F)N=C1C(C)(F)C12NCC1OC1OC=NN1OC=C=C2N1C=2OC=NC1N=SCN=NN=NN1OC1=NC=C=NC2OC=NNC(=O)OC2NCC(=O)N2N1OC1=NC=NC32N1NC12,160,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,n1cc(ccc(c1)O)CNNCc1C(O)C1=C(O)F,32,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1(CN)C(=C)N(C1Cc1cccccc1)C(O)c1ccccc1,38,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1nc(C(=O)NC(CN1)C=C(CC)CC(N)S)CC(O)=O,38,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,O1C(C(C(F)N)C(N)(c2cc(-c1cccc2)C)C(=O)N)=NC1CCO1,48,valid,fresh,True
+0,c1cc(NSC(c2nc2cc2)CC(NO)n1C(O)N)N=NC(=N)OCCCOC1OC=NC2=NC=NC1,60,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c12c(C(C(=O)NCCC3)C(C1O)OCC1O)C(ncnc1)-ccccnc12nc1cc2N=NC1N2OCN=NC1OCN1OC=NN=NC2NN3C1OC1OC2=NC1,95,rdkit:valence,fresh,False
+0,c1(cccc1CC2C(O)CC(C)CCCC1O)C(C)=CC1=C(C)N=NN=NCc1cc12,53,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c12cc(CCN2)cnc2cnc1nccn2CCNC1CC1,32,valid,fresh,True
+0,C(N)C1C(C(C1O)C(=O)NCCCCCC(CNC=O)=O)=O,38,valid,fresh,True
+0,C(N)CC1NC(O)C(CC(C)Cc2cc(ccc2)N)c1,34,valid,fresh,True
+0,c1(cc(c1)O)CN1CCOc1cc(C)sc2n1cccc2c1,36,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,O(CCC(C1CC)OC1NC1C(N)Oc1cc(-c1ccc(OC)=O)=N)C2COC=NCC(NN=O)N21,61,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1cc(O)ccc1OC(OC=N)occ1OP(O)(O)OP(=O)OP(=O)OP(O)OP(O)(O)O1,58,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,C(COCCC(CO)N)P(O)c1c2c(c(nc2)N)nc(N)O1,38,valid,fresh,True
+0,N(CO)C1N(C(OP(=O)(O)O)O)COCC(C(O1)(C)C(N)=O)O,45,valid,fresh,True
+0,c1c2n(N=NCCCC2)c(ccc2c1)Scc(=O)Oc1cc(=O)cn2cc1,46,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1c(cc(ccc1OC)O)=Nc1ccc(c1)C(=O)N=N,35,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1c(N2C3=C=NN=C1)=NCC(c3nc1)CNCC1CC(CN(CN3)C2)=CC2=CNC1N=NC=NCC2=C=NN2N=C2N=NC1=CC=1OC13,88,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,O(c1cccc(C)c1NC(=O)C(N(c2ccnc1)N)=O)OCC(=O)NN1C1OSC(N1)COC(O)C(=O)NC(=O)O2,74,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1ccc(-c2c3cccc2c2)C(O)OC(=C(C(=O)N)C2)N=CCCCNNC2=NN=c1C1OC1c2=NCCN1C(=O)C(C)=NC=NOC21C1CNCC=C=NC1N1N=NC2=C=NOCOC(=NN=N1)O3,123,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c1cn2cc(cc2)ncc21NC1Ocnc(c(C)nc3)cn2N1c1cccc2=NC1C(N=N)N2cc1OC1C2ccccc12cn2c1OC(=O)NCCC(=O)OC12N=NN1OC=2N1ccccc1OC(=O)OC=2N2OCNC=1cccc1CC3OC=3N=NCOC1OCC=NN(CC1)C(=O)OC=NC(C(=O)C(C1O)=O)NCN=NCC12-c1C3N,200,no_termination,fresh,False
+0,OC1C(C(C(O)C)OP(O)(NP(=O)(O)O)O)(O)O1,37,valid,fresh,True
+0,C1C(=O)Oc2cc(C=O)cc(Cl)c1-c1cc(OC(C)c2)=C2N=NNNC1=C=CC1C=NC1C=N2,63,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,c12c3cc(cc2)NC2C1C(=O)S2c2c(c(c2)(F)n1)(F)OC(C1C(F)=O)OC(=O)OCCC(C)=C1C#CCC1OCC=C(N)C1OC1=NC=1N=C=CN2OC1OCC12C=NC12NC1=NNCOC1OC=NN1OSC=C3OC=C(C1O)O2,148,rdkit:kekulize(aromatic ring invalid),fresh,False
+0,C1C(CC2CCCNN3C=C(NC2C2)NC(C)N)c(c2)cc1cc2OCOCOCC1=NCCc1OC1CC(N2)N=C1OC2=NCNCC1C2=NCOCCC1=C=C=C=NOC3,99,valid,fresh,True
+0,c1n(cnc2ccc(c2=O)NN2CNCNC1=N)NC=1CCCC2=NC1,42,rdkit:kekulize(aromatic ring invalid),fresh,False

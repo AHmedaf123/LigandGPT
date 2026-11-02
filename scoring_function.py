@@ -88,6 +88,9 @@ def create_one_hot_encoding(value: Any, possible_values: List[Any]) -> List[int]
     return [1 if value == v else 0 for v in possible_values]
 def generate_hash_identifier(content: str, length: int = 12) -> str:
     return hashlib.md5(content.encode()).hexdigest()[:length]
+def qvina_seed_from_smiles(smiles: str) -> int:
+    """Docking seed derived from the SMILES (stable across processes, unlike hash()): the same molecule always gets the same QVina search."""
+    return 1 + int(hashlib.md5(smiles.encode()).hexdigest()[:8], 16) % 2147483646
 def normalize_dihedral_angle(angle: float) -> float:
     normalized = angle
     while normalized > 180:
@@ -352,10 +355,11 @@ def build_qvina_command(
     ligand_path: str,
     output_path: str,
     box_center: List[float],
-    box_size: List[int]
+    box_size: List[int],
+    seed: Optional[int] = None
 ) -> List[str]:
     qvina_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "docking", "qvina02")
-    return [
+    command = [
         qvina_path,
         "--receptor", receptor_path,
         "--ligand", ligand_path,
@@ -369,6 +373,7 @@ def build_qvina_command(
         "--exhaustiveness", "4",
         "--cpu", "1"      # one core per job; jobs run in parallel, one per available CPU (the default would grab all 80 threads)
     ]
+    return command + ["--seed", str(seed)] if seed is not None else command
 def execute_qvina_docking(command: List[str]) -> bool:
     try:
         result = subprocess.run(
@@ -425,7 +430,7 @@ def perform_qvina_docking(
         if not convert_sdf_to_pdbqt(ligand_sdf, ligand_pdbqt):
             return None        
         command = build_qvina_command(
-            receptor_path, ligand_pdbqt, docked_pdbqt, box_center, box_size
+            receptor_path, ligand_pdbqt, docked_pdbqt, box_center, box_size, seed=qvina_seed_from_smiles(smiles)
         )        
         if not execute_qvina_docking(command):
             return None        
