@@ -112,7 +112,10 @@ def embed_molecule_conformer(molecule: Chem.Mol, random_seed: int = 42) -> bool:
     embedding_parameters.timeout = 60          # seconds; a timed-out embedding returns -1 and counts as a 3D build failure
     return AllChem.EmbedMolecule(molecule, embedding_parameters) == 0
 def optimize_molecule_geometry(molecule: Chem.Mol, max_iterations: int = 200) -> None:
-    AllChem.UFFOptimizeMolecule(molecule, maxIters=max_iterations)
+    try:
+        AllChem.UFFOptimizeMolecule(molecule, maxIters=max_iterations)
+    except RuntimeError:
+        pass
 def extract_atom_positions(molecule: Chem.Mol) -> List[Any]:
     conformer = molecule.GetConformer()
     return [conformer.GetAtomPosition(i) for i in range(molecule.GetNumAtoms())]
