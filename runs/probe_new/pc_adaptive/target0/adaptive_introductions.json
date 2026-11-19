@@ -1,0 +1,37 @@
+[
+ {
+  "step": 30,
+  "objective": "bioactivity",
+  "metric_value": -6.873333333333334,
+  "threshold": -7.552955927051673,
+  "forced": true
+ },
+ {
+  "step": 46,
+  "objective": "qed",
+  "metric_value": -8.762673888887678,
+  "threshold": -8.498592841951318,
+  "forced": false
+ },
+ {
+  "step": 61,
+  "objective": "sa",
+  "metric_value": 0.43169803051763744,
+  "threshold": 0.41976952491081454,
+  "forced": false
+ },
+ {
+  "step": 76,
+  "objective": "torsion",
+  "metric_value": 5.487042886360471,
+  "threshold": 6.561875673063651,
+  "forced": false
+ },
+ {
+  "step": 91,
+  "objective": "energy",
+  "metric_value": 0.8702526127803232,
+  "threshold": 2.1494831023300556,
+  "forced": false
+ }
+]

@@ -1,0 +1,37 @@
+{
+ "target": 2,
+ "n_scored": 23,
+ "bounds": {
+  "docking": {
+   "lo": -11.0,
+   "hi": -5.310000000000002,
+   "minimize": true
+  },
+  "bioactivity": {
+   "lo": -17.23025770187378,
+   "hi": -7.722100162506104,
+   "minimize": true
+  },
+  "qed": {
+   "lo": 0.05988988226286545,
+   "hi": 0.48369875429885073,
+   "minimize": false
+  },
+  "sa": {
+   "lo": 5.631158859768164,
+   "hi": 9.522215835348073,
+   "minimize": true
+  },
+  "energy": {
+   "lo": 114.6931095120207,
+   "hi": 729.1715810007735,
+   "minimize": true
+  },
+  "torsion": {
+   "lo": 0.8983519164459667,
+   "hi": 7.411111671070654,
+   "minimize": true
+  }
+ },
+ "docking_vs_heavy_atoms_fit": null
+}

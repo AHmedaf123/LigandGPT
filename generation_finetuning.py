@@ -178,14 +178,15 @@ def pack(prompt_ids, prompt_nums, gens, masks=None):
     T = L + max(len(g) for g in gens)
     ids = torch.zeros(len(gens), T, dtype=torch.long)
     mask = torch.zeros(len(gens), T - 1)
-    allowed = None if masks is None else torch.ones(len(gens), T - 1, masks[0].shape[-1], dtype=torch.bool)
+    has_masks = masks is not None and any(m is not None for m in masks)
+    allowed = None if not has_masks else torch.ones(len(gens), T - 1, next(m for m in masks if m is not None).shape[-1], dtype=torch.bool)
     nums = torch.ones(len(gens), T)
     nums[:, :L] = prompt_nums.cpu()
     ids[:, :L] = prompt_ids.cpu()
     for i, g in enumerate(gens):
         ids[i, L:L + len(g)] = torch.tensor(g)
         mask[i, L - 1:L - 1 + len(g)] = 1.0
-        if allowed is not None:
+        if allowed is not None and masks[i] is not None:
             allowed[i, L - 1:L - 1 + len(g)] = masks[i][:len(g)]
     return ids.cuda(), nums.cuda(), mask.cuda(), None if allowed is None else allowed.cuda()
 
@@ -323,7 +324,7 @@ def save_checkpoint(path, step, agent, optimizer, rng_state, baseline, stage, ar
         "baseline": baseline,
         "stage": stage,
         "arm_state": arm_state,
-        "replay_buffer": [(e["smiles"], e["gen"], e["behaviour"], e["reward"]) for e in replay_buffer],
+        "replay_buffer": [(e["smiles"], e["gen"], e["behaviour"], e["reward"], e.get("mask")) for e in replay_buffer],
     }, path + ".tmp", _use_new_zipfile_serialization=True)
     os.replace(path + ".tmp", path)
 
@@ -336,7 +337,11 @@ def load_checkpoint(path, agent, optimizer):
     np.random.set_state(ckpt["rng_numpy"])
     torch.random.set_rng_state(ckpt["rng_torch"])
     torch.cuda.set_rng_state(ckpt["rng_cuda"])
-    replay = [dict(smiles=s, gen=g, behaviour=b, reward=r) for s, g, b, r in ckpt["replay_buffer"]]
+    replay = []
+    for entry in ckpt["replay_buffer"]:
+        s, g, b, r = entry[0], entry[1], entry[2], entry[3]
+        m = entry[4] if len(entry) > 4 else None
+        replay.append(dict(smiles=s, gen=g, behaviour=b, reward=r, mask=m))
     return ckpt["step"], ckpt["baseline"], ckpt["stage"], ckpt["arm_state"], replay
 
 
@@ -606,7 +611,7 @@ def run_target(target, args, prior, voc, tk, txn, keys, split, oracles, gnn, tmp
                 lo, hi, minimize = norm.bounds[newest_obj]
                 prior_mean = (lo + hi) / 2
                 prior_sd = (hi - lo) / 3.29  # P5-P95 ~ 3.29 SD
-                threshold = prior_mean - 0.25 * prior_sd if minimize else prior_mean + 0.25 * prior_sd
+                threshold = prior_mean - 0.10 * prior_sd if minimize else prior_mean + 0.10 * prior_sd
                 # average over last 15 steps from details
                 # simplified: use current step's mean
                 recent_vals = [d[newest_obj] for d in details if d.get("valid") and d.get(newest_obj) is not None]

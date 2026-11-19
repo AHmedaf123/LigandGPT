@@ -1,0 +1,16 @@
+[
+ {
+  "step": 10,
+  "objective": "bioactivity",
+  "metric_value": -6.652631578947369,
+  "threshold": -7.70363981762918,
+  "forced": true
+ },
+ {
+  "step": 20,
+  "objective": "qed",
+  "metric_value": -8.210365330731427,
+  "threshold": -8.709990949253905,
+  "forced": true
+ }
+]

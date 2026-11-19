@@ -101,7 +101,7 @@ class PolicyUpdate(unittest.TestCase):
         pn = torch.rand(1, 20).cuda() + 0.5
         behaviour = gf.behaviour_logp(agent, prompt, pn, gens)
         opt = torch.optim.SGD(agent.parameters(), lr=0.0)
-        cfg = argparse.Namespace(micro_batch=4, pos_adv_weight=1.0, log_ratio_clamp=0.7, kl_coef=1.0, ent_coef=0.005, grad_clip=5.0)
+        cfg = argparse.Namespace(micro_batch=4, log_ratio_clamp=0.7, kl_coef=1.0, ent_coef=0.005, grad_clip=5.0)
         adv = torch.tensor([1.0, -1.0, 0.5, -0.2, 0.0, 2.0]).cuda()
         st = gf.policy_update(agent, prior, opt, prompt, pn, gens, None, behaviour, adv, len(gens), cfg)
         self.assertFalse(st["nan"])
@@ -110,7 +110,7 @@ class PolicyUpdate(unittest.TestCase):
         self.assertEqual(st["percent_in_band"], 100.0)
         self.assertGreater(st["grad_norm"], 0.0)
 
-    def test_pos_adv_weight_changes_the_gradient(self):
+    def test_kl_coef_changes_the_gradient(self):
         agent, prior = tiny(3), tiny(4)
         prior.eval()
         prompt = torch.randint(1, 30, (1, 20)).cuda()
@@ -119,9 +119,9 @@ class PolicyUpdate(unittest.TestCase):
         behaviour = gf.behaviour_logp(agent, prompt, pn, gens)
         adv = torch.tensor([1.0, -1.0, 1.0, -1.0]).cuda()
         norms = []
-        for w in (1.0, 5.0):
+        for kl in (0.0, 10.0):
             opt = torch.optim.SGD(agent.parameters(), lr=0.0)
-            cfg = argparse.Namespace(micro_batch=2, pos_adv_weight=w, log_ratio_clamp=0.7, kl_coef=0.0, ent_coef=0.0, grad_clip=1e9)
+            cfg = argparse.Namespace(micro_batch=2, log_ratio_clamp=0.7, kl_coef=kl, ent_coef=0.0, grad_clip=1e9)
             norms.append(gf.policy_update(agent, prior, opt, prompt, pn, gens, None, behaviour, adv, 4, cfg)["grad_norm"])
         self.assertNotAlmostEqual(norms[0], norms[1], places=3)
 
