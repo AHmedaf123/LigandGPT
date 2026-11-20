@@ -35,16 +35,18 @@ OBJECTIVES_ORDER = ["docking", "bioactivity", "qed", "sa", "energy", "torsion"]
 
 FIELDS = [
     "step", "phase", "stage", "n_valid", "n_total", "validity",
-    "heavy_atoms_mean", "size_hit_rate",
+    "heavy_atoms_mean", "heavy_atoms_lt18", "heavy_atoms_18_28", "heavy_atoms_28_38", "heavy_atoms_gt38",
+    "size_hit_rate",
     "docking_mean", "docking_norm_mean", "bioactivity_mean", "bioactivity_norm_mean",
     "qed_mean", "qed_norm_mean", "sa_mean", "sa_norm_mean",
     "energy_mean", "energy_norm_mean", "torsion_mean", "torsion_norm_mean",
-    "steric_mean",
-    "reward_mean", "advantage_mean", "kl_to_prior", "entropy",
+    "steric_mean", "ligand_efficiency_mean",
+    "reward_mean", "advantage_mean", "advantage_std",
+    "kl_seq_sum", "kl_per_token", "entropy",
     "log_ratio_mean", "percent_in_band", "grad_norm",
     "replay_fraction", "baseline_value",
     "dock_fail_embed", "dock_fail_meeko", "dock_fail_nopose", "dock_fail_timeout",
-    "wall_seconds",
+    "t_sample", "t_score", "t_update", "wall_seconds",
 ]
 
 
@@ -235,7 +237,9 @@ def policy_update(agent, prior, optimizer, prompt_ids, prompt_nums, gens, masks,
             optimizer.zero_grad(set_to_none=True)
             return dict(nan=True)
         loss.backward()
-        acc["kl_seq"].append(((lp.detach() - plp) * mask).sum(1))
+        acc["kl_seq_sum"].append(((lp.detach() - plp) * mask).sum(1))
+        acc["kl_per_tok"].append(((lp.detach() - plp) * mask).sum(1) / n_tok)
+        acc["n_tok"].append(n_tok)
         acc["entropy"].append(entropy.detach())
         acc["raw"].append(raw.detach())
     grad_norm = float(torch.nn.utils.clip_grad_norm_(agent.parameters(), cfg.grad_clip))
@@ -243,11 +247,62 @@ def policy_update(agent, prior, optimizer, prompt_ids, prompt_nums, gens, masks,
         optimizer.zero_grad(set_to_none=True)
         return dict(nan=True)
     optimizer.step()
-    kl_seq, entropy, raw = (torch.cat(acc[k]) for k in ("kl_seq", "entropy", "raw"))
+    kl_sum, kl_tok, entropy, raw = (torch.cat(acc[k]) for k in ("kl_seq_sum", "kl_per_tok", "entropy", "raw"))
     ratio_fresh = torch.exp(raw[:n_fresh])
     in_band = ((ratio_fresh >= 0.8) & (ratio_fresh <= 1.2)).float().mean() * 100
-    return dict(nan=False, kl_to_prior=float(kl_seq[:n_fresh].mean()), entropy=float(entropy.mean()), log_ratio_mean=float(raw.mean()),
+    return dict(nan=False,
+                kl_seq_sum=float(kl_sum[:n_fresh].mean()),
+                kl_per_token=float(kl_tok[:n_fresh].mean()),
+                entropy=float(entropy.mean()), log_ratio_mean=float(raw.mean()),
                 percent_in_band=float(in_band), grad_norm=grad_norm)
+
+
+def compute_gradient_cosines(agent, prior, prompt_ids, prompt_nums, gens, masks, behaviour, norm, results, smiles_list, valid, active_objs, cfg):
+    """Compute cosine similarity between per-objective policy gradients on the current batch.
+    Returns dict of pairwise cosines, or None if fewer than 2 active objectives."""
+    if len(active_objs) < 2:
+        return None
+    param_list = [p for p in agent.parameters() if p.requires_grad]
+    obj_grads = {}
+    for obj in active_objs:
+        agent.zero_grad()
+        total_loss = torch.tensor(0.0, device='cuda')
+        n = 0
+        for s in range(0, len(gens), cfg.micro_batch):
+            sl = slice(s, s + cfg.micro_batch)
+            ids, nums, mask, allowed = pack(prompt_ids, prompt_nums, gens[sl],
+                                             None if masks is None else masks[sl])
+            lp, _ = sequence_log_probs(agent, ids, nums, allowed)
+            seq = (lp * mask).sum(1)
+            raw = seq - behaviour[sl]
+            ratio = torch.exp(raw.clamp(-cfg.log_ratio_clamp, cfg.log_ratio_clamp))
+            # Per-objective reward for this slice
+            obj_rewards = []
+            for i_global in range(sl.start, min(sl.stop, len(gens))):
+                st, sc, _ = results[i_global]
+                if valid[i_global] and sc is not None and sc.get(obj) is not None:
+                    obj_rewards.append(norm(obj, sc[obj]))
+                else:
+                    obj_rewards.append(0.0)
+            obj_r = torch.tensor(obj_rewards, device='cuda')
+            surr = -(ratio * obj_r).sum()
+            total_loss = total_loss + surr
+            n += len(obj_rewards)
+        if n > 0:
+            (total_loss / n).backward()
+            grad = torch.cat([p.grad.flatten() for p in param_list if p.grad is not None])
+            obj_grads[obj] = grad.detach().clone()
+        agent.zero_grad()
+    if len(obj_grads) < 2:
+        return None
+    cosines = {}
+    objs = list(obj_grads.keys())
+    for i in range(len(objs)):
+        for j in range(i + 1, len(objs)):
+            g1, g2 = obj_grads[objs[i]], obj_grads[objs[j]]
+            cos = float(torch.nn.functional.cosine_similarity(g1.unsqueeze(0), g2.unsqueeze(0)))
+            cosines[f"{objs[i]}_vs_{objs[j]}"] = cos
+    return cosines
 
 
 def reserve_gpu(gib=4.2):
@@ -367,9 +422,12 @@ def run_target(target, args, prior, voc, tk, txn, keys, split, oracles, gnn, tmp
     os.makedirs(out_dir, exist_ok=True)
 
     # Load normaliser
-    bounds_path = os.path.join(args.out, f"calibrated_bounds_target{target}.json")
-    if not os.path.exists(bounds_path):
-        bounds_path = os.path.join("runs", "baseline", f"calibrated_bounds_target{target}.json")
+    if getattr(args, "bounds_file", None) and os.path.exists(args.bounds_file):
+        bounds_path = args.bounds_file
+    else:
+        bounds_path = os.path.join(args.out, f"calibrated_bounds_target{target}.json")
+        if not os.path.exists(bounds_path):
+            bounds_path = os.path.join("runs", "baseline", f"calibrated_bounds_target{target}.json")
     if os.path.exists(bounds_path):
         norm = FixedNormalizer.load(bounds_path)
         print(f"target {target}: loaded bounds from {bounds_path}", flush=True)
@@ -380,6 +438,13 @@ def run_target(target, args, prior, voc, tk, txn, keys, split, oracles, gnn, tmp
         bounds = {k: (v["lo"], v["hi"], v["minimize"]) for k, v in db.items()}
         norm = FixedNormalizer(bounds)
         print(f"target {target}: using hard-coded bounds", flush=True)
+
+    # Load docking vs heavy atoms linear fit for size residual (adaptive arm focus metric)
+    docking_fit = None
+    if os.path.exists(bounds_path):
+        with open(bounds_path) as f_bounds:
+            bounds_data = json.load(f_bounds)
+        docking_fit = bounds_data.get("docking_vs_heavy_atoms_fit")
 
     agent = LigandGPT(vocab_size=len(voc), d_model=768, nhead=12, num_layers=12, dim_feedforward=3072, context_length=2048).cuda()
     agent.load_state_dict(state_dict)
@@ -398,6 +463,8 @@ def run_target(target, args, prior, voc, tk, txn, keys, split, oracles, gnn, tmp
         "active_objs": [],
         "phase_start": 0,
         "introductions": [],
+        "focus_history": [],
+        "L_j": {},
     }
     if arm == "adaptive":
         arm_state["active_objs"] = [ADAPTIVE_ORDER[0]]
@@ -494,6 +561,7 @@ def run_target(target, args, prior, voc, tk, txn, keys, split, oracles, gnn, tmp
             print(f"  step {step}: stage switch {prev_stage}->{stage}, baseline & replay reset", flush=True)
 
         # ---- Sample ----
+        t_sample_start = time.time()
         rows_ids, _, step_masks = dec.sample_smiles(
             agent, voc, prompt_ids, prompt_nums, args.batch_size,
             structured=True, valence=True, top_k=10, temperature=1.0,
@@ -509,8 +577,11 @@ def run_target(target, args, prior, voc, tk, txn, keys, split, oracles, gnn, tmp
             smiles_list.append(s or "")
         beh = behaviour_logp(agent, prompt_ids, prompt_nums, gens, gen_masks)
 
+        t_sample_end = time.time()
+
         # ---- Score ----
         results, dock_fails = score_batch(smiles_list, valid, ctx)
+        t_score_end = time.time()
 
         # Compute rewards
         rewards = np.zeros(len(results))
@@ -537,6 +608,8 @@ def run_target(target, args, prior, voc, tk, txn, keys, split, oracles, gnn, tmp
                     detail[o] = sc.get(o)
                     detail[o + "_norm"] = norm(o, sc.get(o))
                 detail["steric"] = sc.get("steric")
+                if sc.get("docking") is not None and n_heavy and n_heavy > 0:
+                    detail["ligand_efficiency"] = sc["docking"] / n_heavy
             details.append(detail)
 
         # Advantage
@@ -584,6 +657,23 @@ def run_target(target, args, prior, voc, tk, txn, keys, split, oracles, gnn, tmp
             stats = policy_update(agent, prior, optimizer, prompt_ids, prompt_nums,
                                   all_gens, all_masks, all_beh, all_adv, len(gens), args)
 
+        t_update_end = time.time()
+
+        # ---- Gradient cosine similarity every 25 steps ----
+        if not in_warmup and step % 25 == 0 and len(active_objs) >= 2:
+            t_gc_start = time.time()
+            gc = compute_gradient_cosines(agent, prior, prompt_ids, prompt_nums,
+                                          gens, gen_masks, beh, norm, results, smiles_list,
+                                          valid, active_objs, args)
+            t_gc = time.time() - t_gc_start
+            if gc is not None:
+                gc["step"] = step
+                gc["compute_seconds"] = t_gc
+                gc_path = os.path.join(out_dir, "gradient_cosines.jsonl")
+                with open(gc_path, "a") as f_gc:
+                    f_gc.write(json.dumps(gc, default=float) + "\n")
+                print(f"  step {step}: gradient cosines ({t_gc:.1f}s): {', '.join(f'{k}={v:.3f}' for k,v in gc.items() if k not in ('step','compute_seconds'))}", flush=True)
+
         # ---- Replay buffer update ----
         for i, (st, sc, _) in enumerate(results):
             if valid[i] and rewards[i] > 0:
@@ -601,40 +691,71 @@ def run_target(target, args, prior, voc, tk, txn, keys, split, oracles, gnn, tmp
         if len(valid_ma) >= 15 and step >= warmup_steps and np.mean(valid_ma) < 0.25:
             print(f"  WARNING: validity collapse! MA(15)={np.mean(valid_ma):.3f} at step {step}", flush=True)
 
-        # ---- Adaptive: check introduction ----
-        if arm == "adaptive" and not in_warmup and len(arm_state["active_objs"]) < len(ADAPTIVE_ORDER):
-            newest_obj = arm_state["active_objs"][-1]
-            steps_in_phase = step - arm_state["phase_start"]
-            if steps_in_phase >= args.adaptive_min_phase:
-                # check metric
-                # We need prior stats for threshold - use bounds
-                lo, hi, minimize = norm.bounds[newest_obj]
-                prior_mean = (lo + hi) / 2
-                prior_sd = (hi - lo) / 3.29  # P5-P95 ~ 3.29 SD
-                threshold = prior_mean - 0.10 * prior_sd if minimize else prior_mean + 0.10 * prior_sd
-                # average over last 15 steps from details
-                # simplified: use current step's mean
-                recent_vals = [d[newest_obj] for d in details if d.get("valid") and d.get(newest_obj) is not None]
-                if recent_vals:
-                    metric_val = np.mean(recent_vals)
-                    beats = (metric_val < threshold) if minimize else (metric_val > threshold)
-                    forced = steps_in_phase >= args.adaptive_forced_intro
-                    if beats or forced:
-                        next_idx = len(arm_state["active_objs"])
-                        if next_idx < len(ADAPTIVE_ORDER):
-                            new_obj = ADAPTIVE_ORDER[next_idx]
-                            arm_state["active_objs"].append(new_obj)
-                            arm_state["phase_start"] = step
-                            arm_state["introductions"].append(dict(
-                                step=step, objective=new_obj,
-                                metric_value=float(metric_val), threshold=float(threshold),
-                                forced=forced
-                            ))
-                            baseline = None
-                            replay_buffer = []
-                            print(f"  step {step}: ADAPTIVE introduced {new_obj} (metric={metric_val:.3f}, threshold={threshold:.3f}, forced={forced})", flush=True)
-                            # Save checkpoint at introduction
-                            torch.save(agent.state_dict(), os.path.join(out_dir, f"ckpt_intro_{new_obj}_step{step}.pt"))
+        # ---- Adaptive: update focus metric history and check introduction ----
+        if arm == "adaptive" and not in_warmup:
+            # Compute focus metrics for all objectives this step
+            step_focus = {}
+            for obj in ADAPTIVE_ORDER:
+                raw_vals = [d[obj] for d in details if d.get("valid") and d.get(obj) is not None]
+                if obj == "docking" and raw_vals and docking_fit is not None:
+                    ha_vals = [d["n_heavy"] for d in details if d.get("valid") and d.get("n_heavy") is not None and d.get("docking") is not None]
+                    dock_vals = [d["docking"] for d in details if d.get("valid") and d.get("docking") is not None]
+                    residuals = [dv - (docking_fit["intercept"] + docking_fit["slope"] * hv)
+                                 for dv, hv in zip(dock_vals, ha_vals)]
+                    step_focus[obj] = float(np.mean(residuals)) if residuals else float("nan")
+                elif raw_vals:
+                    step_focus[obj] = float(np.mean(raw_vals))
+                else:
+                    step_focus[obj] = float("nan")
+            arm_state.setdefault("focus_history", []).append(step_focus)
+
+            if len(arm_state["active_objs"]) < len(ADAPTIVE_ORDER):
+                newest_obj = arm_state["active_objs"][-1]
+                steps_in_phase = step - arm_state["phase_start"]
+                if steps_in_phase >= args.adaptive_min_phase:
+                    lo, hi, minimize = norm.bounds[newest_obj]
+                    prior_sd_obj = (hi - lo) / 3.29
+                    # L_j: baseline level at introduction
+                    L_j = arm_state.get("L_j", {}).get(newest_obj)
+                    if L_j is None:
+                        # Compute from first 15 entries of focus_history (or all if fewer)
+                        hist = arm_state["focus_history"]
+                        window = [h.get(newest_obj, float("nan")) for h in hist[:15]]
+                        window = [v for v in window if not np.isnan(v)]
+                        L_j = float(np.mean(window)) if window else float("nan")
+                        arm_state.setdefault("L_j", {})[newest_obj] = L_j
+                    # Current 15-step MA
+                    recent_hist = arm_state["focus_history"][-15:]
+                    recent_vals = [h.get(newest_obj, float("nan")) for h in recent_hist]
+                    recent_vals = [v for v in recent_vals if not np.isnan(v)]
+                    if recent_vals and not np.isnan(L_j):
+                        metric_val = float(np.mean(recent_vals))
+                        improvement = (L_j - metric_val) if minimize else (metric_val - L_j)
+                        threshold = args.adaptive_k * prior_sd_obj
+                        beats = improvement >= threshold
+                        forced = steps_in_phase >= args.adaptive_forced_intro
+                        if beats or forced:
+                            next_idx = len(arm_state["active_objs"])
+                            if next_idx < len(ADAPTIVE_ORDER):
+                                new_obj = ADAPTIVE_ORDER[next_idx]
+                                arm_state["active_objs"].append(new_obj)
+                                arm_state["phase_start"] = step
+                                # Record L_j for the new objective from last 15 steps
+                                window = [h.get(new_obj, float("nan")) for h in arm_state["focus_history"][-15:]]
+                                window = [v for v in window if not np.isnan(v)]
+                                arm_state.setdefault("L_j", {})[new_obj] = float(np.mean(window)) if window else float("nan")
+                                arm_state["introductions"].append(dict(
+                                    step=step, objective=new_obj,
+                                    trigger_obj=newest_obj, metric_value=float(metric_val),
+                                    L_j=L_j, improvement=float(improvement),
+                                    threshold=float(threshold), forced=forced,
+                                    milestone=beats and not forced,
+                                ))
+                                baseline = None
+                                replay_buffer = []
+                                trigger = "milestone" if (beats and not forced) else "forced"
+                                print(f"  step {step}: ADAPTIVE introduced {new_obj} ({trigger}: {newest_obj} improved {improvement:.3f} vs threshold {threshold:.3f})", flush=True)
+                                torch.save(agent.state_dict(), os.path.join(out_dir, f"ckpt_intro_{new_obj}_step{step}.pt"))
 
         # ---- Metrics ----
         scored = [(i, sc) for i, (st, sc, _) in enumerate(results) if st == "scored" and sc is not None]
@@ -645,6 +766,19 @@ def run_target(target, args, prior, voc, tk, txn, keys, split, oracles, gnn, tmp
                 if mol:
                     heavy_valid.append(mol.GetNumHeavyAtoms())
         size_hits = sum(1 for h in heavy_valid if 18 <= h <= 38)
+        ha_lt18 = sum(1 for h in heavy_valid if h < 18)
+        ha_18_28 = sum(1 for h in heavy_valid if 18 <= h < 28)
+        ha_28_38 = sum(1 for h in heavy_valid if 28 <= h <= 38)
+        ha_gt38 = sum(1 for h in heavy_valid if h > 38)
+        # Ligand efficiency: docking / heavy_atoms for scored molecules
+        le_vals = []
+        for idx, sc in scored:
+            if sc.get("docking") is not None and smiles_list[idx]:
+                mol_le = Chem.MolFromSmiles(smiles_list[idx])
+                if mol_le:
+                    n_ha = mol_le.GetNumHeavyAtoms()
+                    if n_ha > 0:
+                        le_vals.append(sc["docking"] / n_ha)
         mean_of = lambda n: float(np.mean([sc[n] for _, sc in scored if sc.get(n) is not None])) if scored else float("nan")
         norm_mean_of = lambda n: float(np.mean([norm(n, sc.get(n)) for _, sc in scored if sc.get(n) is not None])) if scored else float("nan")
         nan = stats.get("nan", False)
@@ -655,6 +789,8 @@ def run_target(target, args, prior, voc, tk, txn, keys, split, oracles, gnn, tmp
             n_valid=sum(valid), n_total=len(valid),
             validity=v_rate,
             heavy_atoms_mean=float(np.mean(heavy_valid)) if heavy_valid else float("nan"),
+            heavy_atoms_lt18=ha_lt18, heavy_atoms_18_28=ha_18_28,
+            heavy_atoms_28_38=ha_28_38, heavy_atoms_gt38=ha_gt38,
             size_hit_rate=size_hits / max(len(heavy_valid), 1),
             docking_mean=mean_of("docking"), docking_norm_mean=norm_mean_of("docking"),
             bioactivity_mean=mean_of("bioactivity"), bioactivity_norm_mean=norm_mean_of("bioactivity"),
@@ -663,9 +799,12 @@ def run_target(target, args, prior, voc, tk, txn, keys, split, oracles, gnn, tmp
             energy_mean=mean_of("energy"), energy_norm_mean=norm_mean_of("energy"),
             torsion_mean=mean_of("torsion"), torsion_norm_mean=norm_mean_of("torsion"),
             steric_mean=mean_of("steric"),
+            ligand_efficiency_mean=float(np.mean(le_vals)) if le_vals else float("nan"),
             reward_mean=float(rewards.mean()),
             advantage_mean=float(adv_fresh.mean()),
-            kl_to_prior=stat("kl_to_prior"), entropy=stat("entropy"),
+            advantage_std=float(adv_fresh.std()),
+            kl_seq_sum=stat("kl_seq_sum"), kl_per_token=stat("kl_per_token"),
+            entropy=stat("entropy"),
             log_ratio_mean=stat("log_ratio_mean"), percent_in_band=stat("percent_in_band"),
             grad_norm=stat("grad_norm"),
             replay_fraction=len(chosen) / len(all_gens),
@@ -674,6 +813,9 @@ def run_target(target, args, prior, voc, tk, txn, keys, split, oracles, gnn, tmp
             dock_fail_meeko=dock_fails.get("meeko", 0),
             dock_fail_nopose=dock_fails.get("nopose", 0),
             dock_fail_timeout=dock_fails.get("timeout", 0),
+            t_sample=t_sample_end - t_sample_start,
+            t_score=t_score_end - t_sample_end,
+            t_update=t_update_end - t_score_end,
             wall_seconds=time.time() - t0,
         )
         writer.writerow({k: (round(v, 5) if isinstance(v, float) else v) for k, v in row.items()})
@@ -683,11 +825,22 @@ def run_target(target, args, prior, voc, tk, txn, keys, split, oracles, gnn, tmp
             f_detail.write(json.dumps(d, default=float) + "\n")
         f_detail.flush()
 
+        # Save top-3 poses per step (re-dock to get the PDBQT)
+        scored_with_dock = [(i, sc, smiles_list[i]) for i, (st, sc, _) in enumerate(results)
+                            if st == "scored" and sc is not None and sc.get("docking") is not None]
+        scored_with_dock.sort(key=lambda x: x[1]["docking"])
+        if scored_with_dock:
+            pose_dir = os.path.join(out_dir, "poses")
+            os.makedirs(pose_dir, exist_ok=True)
+            for rank, (idx, sc, smi) in enumerate(scored_with_dock[:3]):
+                sf.dock_and_save_pose(smi, ctx["rec"], ctx["center"], ctx["tmp"],
+                                      os.path.join(pose_dir, f"step{step}_rank{rank}.pdbqt"))
+
         print(f"step {step:3d} {phase}{'(s'+str(stage)+')' if not in_warmup else ''} "
               f"valid {sum(valid):2d}/{len(valid)} "
               f"reward {row['reward_mean']:+.3f} "
               f"dock {row['docking_mean']:+.2f} "
-              f"kl {row['kl_to_prior']:.4f} "
+              f"kl {row['kl_per_token']:.4f} "
               f"band {row['percent_in_band']:.0f}% "
               f"replay {row['replay_fraction']:.2f} "
               f"{row['wall_seconds']:.0f}s", flush=True)
@@ -756,6 +909,8 @@ def main():
     # Adaptive params
     ap.add_argument("--adaptive_min_phase", type=int, default=40)
     ap.add_argument("--adaptive_forced_intro", type=int, default=100)
+    ap.add_argument("--adaptive_k", type=float, default=0.25)
+    ap.add_argument("--bounds_file", default=None, help="Path to calibrated_bounds JSON (overrides auto-discovery)")
     args = ap.parse_args()
 
     random.seed(args.seed)

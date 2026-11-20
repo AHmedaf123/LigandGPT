@@ -2,8 +2,10 @@ import os
 import hashlib
 import subprocess
 import tempfile
+import time
 from collections import Counter
-from concurrent.futures import ThreadPoolExecutor
+import multiprocessing as mp
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from functools import reduce
 from typing import List, Tuple, Optional, Dict, Callable, Any, NamedTuple
 import numpy as np
@@ -383,9 +385,18 @@ def execute_qvina_docking(command: List[str]) -> bool:
             command,
             capture_output=True,
             text=True,
-            timeout=60
+            timeout=120,
+            start_new_session=True,
         )
         return result.returncode == 0
+    except subprocess.TimeoutExpired as e:
+        # Kill the whole process group so child processes don't linger
+        import os, signal
+        try:
+            os.killpg(e.pid, signal.SIGKILL)
+        except (ProcessLookupError, PermissionError):
+            pass
+        return False
     except Exception:
         return False
 def parse_docking_score_from_file(file_path: str) -> Optional[float]:
@@ -628,6 +639,92 @@ def convert_score_result_to_list(result: MoleculeScoreResult) -> List[Optional[f
         result.internal_energy_score,
         result.bioactivity_score
     ]
+def _dock_worker(smiles, receptor_file, box_center, temp_directory, result_conn):
+    """Target for a child process: dock one molecule and send the result back."""
+    try:
+        score = perform_qvina_docking(smiles, receptor_file, box_center, temp_directory)
+        result_conn.send(score)
+    except Exception:
+        result_conn.send(None)
+    finally:
+        result_conn.close()
+
+
+def dock_batch_with_timeout(smiles_list, receptor_file, box_center, temp_directory,
+                            per_mol_timeout=180, n_workers=4):
+    """Dock a list of SMILES using child processes that can be killed on timeout.
+    Returns dict {smiles: score_or_None}."""
+    results = {}
+    active = {}  # smiles -> (Process, Connection)
+    queue = list(smiles_list)
+
+    while queue or active:
+        while queue and len(active) < n_workers:
+            smi = queue.pop(0)
+            parent_conn, child_conn = mp.Pipe(duplex=False)
+            p = mp.Process(target=_dock_worker,
+                           args=(smi, receptor_file, box_center, temp_directory, child_conn),
+                           daemon=True)
+            p.start()
+            child_conn.close()
+            active[smi] = (p, parent_conn, time.time())
+
+        finished = []
+        for smi, (p, conn, t0) in active.items():
+            elapsed = time.time() - t0
+            if not p.is_alive():
+                try:
+                    results[smi] = conn.recv() if conn.poll(0) else None
+                except (EOFError, OSError):
+                    results[smi] = None
+                conn.close()
+                p.join(1)
+                finished.append(smi)
+            elif elapsed > per_mol_timeout:
+                p.kill()
+                p.join(2)
+                conn.close()
+                results[smi] = None
+                finished.append(smi)
+
+        for smi in finished:
+            del active[smi]
+
+        if active and not finished:
+            time.sleep(0.5)
+
+    return results
+
+
+def dock_and_save_pose(smiles, receptor_file, box_center, temp_directory, save_path, box_size=None):
+    """Dock a molecule and copy the docked PDBQT to save_path."""
+    if box_size is None:
+        box_size = [20, 20, 20]
+    receptor_path = determine_receptor_file_path(receptor_file)
+    if receptor_path is None:
+        return
+    ligand_pdbqt, docked_pdbqt, ligand_sdf = generate_ligand_file_paths(temp_directory, smiles)
+    try:
+        molecule = prepare_ligand_molecule(smiles)
+        if molecule is None:
+            return
+        if not write_molecule_to_sdf(molecule, ligand_sdf):
+            return
+        if not convert_sdf_to_pdbqt(ligand_sdf, ligand_pdbqt):
+            return
+        command = build_qvina_command(receptor_path, ligand_pdbqt, docked_pdbqt, box_center, box_size,
+                                      seed=qvina_seed_from_smiles(smiles))
+        if not execute_qvina_docking(command):
+            return
+        if os.path.exists(docked_pdbqt):
+            import shutil
+            shutil.copy2(docked_pdbqt, save_path)
+    except Exception:
+        pass
+    finally:
+        cleanup_temporary_files([ligand_sdf, ligand_pdbqt, docked_pdbqt])
+
+
 def calculate_scores_for_batch(
     smiles_batch: List[str],
     receptor_file: str,
@@ -643,13 +740,8 @@ def calculate_scores_for_batch(
     current_molecule_cache = molecule_cache.copy()
     current_score_cache = score_cache.copy()        
     pending = [s for s in dict.fromkeys(smiles_batch) if generate_cache_key(s, receptor_file) not in current_score_cache]
-    def dock_one(smiles):
-        try:
-            return perform_qvina_docking(smiles, receptor_file, box_center, temp_directory)
-        except Exception:                             # e.g. RDKit raises on an empty SMILES: no score, not a crash
-            return None
-    with ThreadPoolExecutor(cpu_quota()) as pool:     # QVina is a subprocess, so threads give real parallelism; one job per CPU
-        docked = dict(zip(pending, pool.map(dock_one, pending)))
+    docked = dock_batch_with_timeout(pending, receptor_file, box_center, temp_directory,
+                                        per_mol_timeout=180, n_workers=cpu_quota())
     for smiles in smiles_batch:
         cache_key = generate_cache_key(smiles, receptor_file)            
         if cache_key in current_score_cache:
