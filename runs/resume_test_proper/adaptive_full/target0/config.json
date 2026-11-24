@@ -1,0 +1,44 @@
+{
+ "args": {
+  "ckpt_load_path": "/home/coder/project/LigandGPT/runs/probe_new/pa_warmup/target0/ckpt_warmup_end.pt",
+  "vocab_path": "./ProtLigVoc.txt",
+  "data_path": "./data",
+  "out": "/home/coder/project/LigandGPT/runs/resume_test_proper/adaptive_full",
+  "targets": [
+   0
+  ],
+  "arm": "adaptive",
+  "n_steps": 20,
+  "warmup_steps": 0,
+  "stage_length": 20,
+  "batch_size": 32,
+  "micro_batch": 1,
+  "learning_rate": 1e-06,
+  "replay": 8,
+  "kl_coef": 1.0,
+  "ent_coef": 0.005,
+  "log_ratio_clamp": 0.7,
+  "grad_clip": 5.0,
+  "max_new_tokens": 200,
+  "seed": 5,
+  "resume": false,
+  "probe": false,
+  "adaptive_min_phase": 40,
+  "adaptive_forced_intro": 100,
+  "adaptive_k": 0.25,
+  "bounds_file": "/home/coder/project/LigandGPT/runs/baseline_v2/calibrated_bounds_target0.json"
+ },
+ "prompt_tokens": 1641,
+ "token_budget": 200,
+ "receptor": "./data/receptors_pdbqt/BSD_ASPTE_1_130_0/2z3h_A_rec.pdbqt",
+ "center": [
+  24.671398162841797,
+  34.53477096557617,
+  104.87581634521484
+ ],
+ "arm": "adaptive",
+ "warmup_steps": 0,
+ "total_steps": 20,
+ "stage_length": 20,
+ "bounds": "/home/coder/project/LigandGPT/runs/baseline_v2/calibrated_bounds_target0.json"
+}

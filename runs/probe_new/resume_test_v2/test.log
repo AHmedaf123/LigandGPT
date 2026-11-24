@@ -1,0 +1,69 @@
+=== PHASE 1: Run 8 steps ===
+parameters: 91,743,745
+Found local copy...
+Successfully loaded bioactivity GNN model from /home/coder/project/LigandGPT/GNN/outputs/pdbbind_finetune/best_model.pt
+target 0: loaded bounds from runs/baseline/calibrated_bounds_target0.json
+target 0: prompt 1641, budget 200, arm=curriculum_pairs, warmup=0, total=8
+  step 0: stage switch 0->1, baseline & replay reset
+step   0 curriculum_pairs(s1) valid 21/32 reward +2.064 dock -6.54 kl 0.0000 band 100% replay 0.00 68s
+step   1 curriculum_pairs(s1) valid 26/32 reward +2.528 dock -6.65 kl 0.0002 band 100% replay 0.20 192s
+step   2 curriculum_pairs(s1) valid 22/32 reward +2.327 dock -6.78 kl 0.0010 band 100% replay 0.20 65s
+step   3 curriculum_pairs(s1) valid 29/32 reward +2.899 dock -6.53 kl 0.0016 band 100% replay 0.20 83s
+step   4 curriculum_pairs(s1) valid 24/32 reward +2.645 dock -6.88 kl 0.0034 band 100% replay 0.20 72s
+step   5 curriculum_pairs(s1) valid 24/32 reward +2.473 dock -6.76 kl 0.0035 band 100% replay 0.20 74s
+step   6 curriculum_pairs(s1) valid 27/32 reward +2.742 dock -6.89 kl 0.0018 band 100% replay 0.20 91s
+step   7 curriculum_pairs(s1) valid 22/32 reward +2.271 dock -6.64 kl 0.0089 band 100% replay 0.20 79s
+=== PHASE 1 COMPLETE ===
+Steps before: 8
+ckpt_a.pt: {
+  "step": 6,
+  "baseline": 2.3212342751816726,
+  "replay_len": 100,
+  "arm_state": {
+    "active_objs": "[]",
+    "phase_start": "0",
+    "introductions": "[]"
+  }
+}
+ckpt_b.pt: {
+  "step": 7,
+  "baseline": 2.316168341795002,
+  "replay_len": 100,
+  "arm_state": {
+    "active_objs": "[]",
+    "phase_start": "0",
+    "introductions": "[]"
+  }
+}
+=== SIMULATING CRASH: truncating metrics to 6 rows (step 0-4) ===
+Steps after truncation: 5
+=== PHASE 2: Resume from checkpoint ===
+parameters: 91,743,745
+Found local copy...
+Successfully loaded bioactivity GNN model from /home/coder/project/LigandGPT/GNN/outputs/pdbbind_finetune/best_model.pt
+target 0: loaded bounds from runs/baseline/calibrated_bounds_target0.json
+RESUMED from runs/probe_new/resume_test_v2/target0/ckpt_b.pt at step 8
+target 0: prompt 1641, budget 200, arm=curriculum_pairs, warmup=0, total=8
+=== PHASE 2 COMPLETE ===
+Steps after resume: 5
+ckpt_a.pt (after resume): {
+  "step": 6,
+  "baseline": 2.3212342751816726,
+  "replay_len": 100,
+  "arm_state": {
+    "active_objs": "[]",
+    "phase_start": "0",
+    "introductions": "[]"
+  }
+}
+ckpt_b.pt (after resume): {
+  "step": 7,
+  "baseline": 2.316168341795002,
+  "replay_len": 100,
+  "arm_state": {
+    "active_objs": "[]",
+    "phase_start": "0",
+    "introductions": "[]"
+  }
+}
+=== RESUME TEST DONE ===

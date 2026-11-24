@@ -1,0 +1,8 @@
+{
+ "git_commit": "ebd4ef151f69488daca1284467e0e84e9d875915",
+ "seed": 5,
+ "target": 1,
+ "pocket_id": "GLMU_STRPN_2_459_0/4aaw_A_rec_4ac3_r83_lig_tt_min_0_pocket10.pdb",
+ "torch_version": "2.11.0+cu128",
+ "numpy_version": "2.5.4"
+}

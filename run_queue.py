@@ -41,14 +41,13 @@ def current_step(base, arm, target, seed):
         return max(sum(1 for _ in f) - 1, 0)
 
 
-def build_cmd(arm, target, seed, base, warmup_ckpt_dir, bounds_dir):
-    ckpt = os.path.join(warmup_ckpt_dir, f"target{target}", "ckpt_warmup_end.pt")
+def build_cmd(arm, target, seed, base, prior_ckpt, bounds_dir):
     out = run_dir(base, arm, target, seed)
     bounds = os.path.join(bounds_dir, f"calibrated_bounds_target{target}.json")
     n = run_steps(arm)
     cmd = [
         sys.executable, "generation_finetuning.py",
-        "--ckpt_load_path", ckpt,
+        "--ckpt_load_path", prior_ckpt,
         "--targets", str(target), "--seed", str(seed),
         "--arm", arm,
         "--n_steps", str(n), "--warmup_steps", str(WARMUP_STEPS),
@@ -65,8 +64,8 @@ def build_cmd(arm, target, seed, base, warmup_ckpt_dir, bounds_dir):
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--out", default="runs/final")
-    p.add_argument("--warmup_ckpt_dir", default="runs/final/warmup",
-                    help="Dir containing targetN/ckpt_warmup_end.pt")
+    p.add_argument("--prior_ckpt", default="final.pt",
+                    help="Pretrained model checkpoint (prior and agent starting weights)")
     p.add_argument("--bounds_dir", default="runs/baseline_v2",
                     help="Dir containing calibrated_bounds_targetN.json")
     p.add_argument("--seeds", type=int, nargs="+", default=[5],
@@ -93,7 +92,7 @@ def main():
                     done += 1
                     continue
 
-                cmd = build_cmd(arm, target, seed, args.out, args.warmup_ckpt_dir, args.bounds_dir)
+                cmd = build_cmd(arm, target, seed, args.out, args.prior_ckpt, args.bounds_dir)
                 step = current_step(args.out, arm, target, seed)
                 print(f"[RUN]  {tag}: {step}/{run_steps(arm)} steps completed")
                 if args.dry_run:

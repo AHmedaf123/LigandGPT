@@ -1,0 +1,8 @@
+{
+ "git_commit": "09d5b5edb561fde38706321bb521db02457fb7e6",
+ "seed": 99,
+ "target": 0,
+ "pocket_id": "BSD_ASPTE_1_130_0/2z3h_A_rec_1wn6_bst_lig_tt_docked_3_pocket10.pdb",
+ "torch_version": "2.11.0+cu128",
+ "numpy_version": "2.5.4"
+}

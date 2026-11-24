@@ -1,0 +1,145 @@
+[Wed Nov 18 06:19:03 PM PKT 2026] Steps completed so far: 40 / 150
+[Wed Nov 18 06:19:03 PM PKT 2026] Starting/resuming P-C.2 curriculum_pairs...
+parameters: 91,743,745
+Found local copy...
+Successfully loaded bioactivity GNN model from /home/coder/project/LigandGPT/GNN/outputs/pdbbind_finetune/best_model.pt
+target 0: loaded bounds from runs/baseline/calibrated_bounds_target0.json
+RESUMED from runs/probe_new/pc_curriculum_pairs/target0/ckpt_b.pt at step 40
+target 0: prompt 1641, budget 200, arm=curriculum_pairs, warmup=0, total=150
+Traceback (most recent call last):
+  File "/home/coder/project/LigandGPT/generation_finetuning.py", line 782, in <module>
+    main()
+    ~~~~^^
+  File "/home/coder/project/LigandGPT/generation_finetuning.py", line 778, in main
+    run_target(t, args, prior, voc, tk, txn, keys, split, oracles, gnn, tmp, state_dict)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/coder/project/LigandGPT/generation_finetuning.py", line 573, in run_target
+    stats = policy_update(agent, prior, optimizer, prompt_ids, prompt_nums,
+                          all_gens, all_masks, all_beh, all_adv, len(gens), args)
+  File "/home/coder/project/LigandGPT/generation_finetuning.py", line 218, in policy_update
+    ids, nums, mask, allowed = pack(prompt_ids, prompt_nums, gens[sl], None if masks is None else masks[sl])
+                               ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/coder/project/LigandGPT/generation_finetuning.py", line 181, in pack
+    allowed = None if masks is None else torch.ones(len(gens), T - 1, masks[0].shape[-1], dtype=torch.bool)
+                                                                      ^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'shape'
+[Wed Nov 18 06:21:29 PM PKT 2026] P-C.2 finished successfully
+[Wed Nov 18 06:27:22 PM PKT 2026] Steps completed so far: 40 / 150
+[Wed Nov 18 06:27:22 PM PKT 2026] Starting/resuming P-C.2 curriculum_pairs...
+parameters: 91,743,745
+Found local copy...
+Successfully loaded bioactivity GNN model from /home/coder/project/LigandGPT/GNN/outputs/pdbbind_finetune/best_model.pt
+target 0: loaded bounds from runs/baseline/calibrated_bounds_target0.json
+RESUMED from runs/probe_new/pc_curriculum_pairs/target0/ckpt_b.pt at step 40
+target 0: prompt 1641, budget 200, arm=curriculum_pairs, warmup=0, total=150
+step  40 curriculum_pairs(s1) valid 29/32 reward +3.205 dock -6.78 kl 1.1669 band 100% replay 0.20 104s
+step  41 curriculum_pairs(s1) valid 22/32 reward +2.354 dock -6.80 kl 1.0074 band 100% replay 0.20 75s
+step  42 curriculum_pairs(s1) valid 28/32 reward +2.982 dock -7.34 kl 1.9923 band 100% replay 0.20 159s
+step  43 curriculum_pairs(s1) valid 23/32 reward +2.642 dock -6.76 kl 1.7485 band 100% replay 0.20 106s
+step  44 curriculum_pairs(s1) valid 27/32 reward +2.902 dock -6.94 kl 1.5485 band 100% replay 0.20 144s
+step  45 curriculum_pairs(s1) valid 27/32 reward +3.049 dock -7.14 kl 1.4337 band 100% replay 0.20 120s
+step  46 curriculum_pairs(s1) valid 24/32 reward +2.497 dock -6.79 kl 2.0935 band 100% replay 0.20 108s
+step  47 curriculum_pairs(s1) valid 25/32 reward +2.743 dock -7.09 kl 1.2996 band 100% replay 0.20 120s
+step  48 curriculum_pairs(s1) valid 21/32 reward +2.103 dock -6.79 kl 1.8582 band 100% replay 0.20 183s
+step  49 curriculum_pairs(s1) valid 27/32 reward +3.031 dock -6.87 kl 1.7486 band 100% replay 0.20 121s
+step  50 curriculum_pairs(s1) valid 28/32 reward +2.963 dock -6.78 kl 1.6145 band 100% replay 0.20 101s
+step  51 curriculum_pairs(s1) valid 20/32 reward +2.215 dock -6.84 kl 1.2834 band 100% replay 0.20 74s
+step  52 curriculum_pairs(s1) valid 24/32 reward +2.641 dock -6.91 kl 1.2965 band 100% replay 0.20 62s
+step  53 curriculum_pairs(s1) valid 28/32 reward +2.985 dock -7.17 kl 1.7782 band 100% replay 0.20 84s
+step  54 curriculum_pairs(s1) valid 25/32 reward +2.509 dock -6.97 kl 2.7486 band 100% replay 0.20 105s
+step  55 curriculum_pairs(s1) valid 25/32 reward +2.765 dock -7.00 kl 1.7263 band 100% replay 0.20 113s
+step  56 curriculum_pairs(s1) valid 22/32 reward +2.202 dock -6.90 kl 2.0017 band 100% replay 0.20 98s
+step  57 curriculum_pairs(s1) valid 26/32 reward +2.721 dock -6.87 kl 2.3812 band 100% replay 0.20 83s
+step  58 curriculum_pairs(s1) valid 26/32 reward +2.764 dock -6.77 kl 1.9102 band 100% replay 0.20 105s
+step  59 curriculum_pairs(s1) valid 25/32 reward +2.586 dock -7.08 kl 2.7491 band 100% replay 0.20 103s
+step  60 curriculum_pairs(s1) valid 23/32 reward +2.549 dock -7.09 kl 2.3891 band 100% replay 0.20 84s
+step  61 curriculum_pairs(s1) valid 30/32 reward +3.377 dock -7.17 kl 2.3256 band 100% replay 0.20 82s
+step  62 curriculum_pairs(s1) valid 27/32 reward +2.993 dock -7.15 kl 2.2729 band 100% replay 0.20 91s
+step  63 curriculum_pairs(s1) valid 26/32 reward +2.870 dock -6.79 kl 2.3330 band 100% replay 0.20 86s
+step  64 curriculum_pairs(s1) valid 27/32 reward +3.068 dock -7.15 kl 3.2344 band 100% replay 0.20 168s
+step  65 curriculum_pairs(s1) valid 25/32 reward +2.627 dock -7.11 kl 1.5022 band 100% replay 0.20 63s
+step  66 curriculum_pairs(s1) valid 30/32 reward +3.270 dock -7.16 kl 2.9306 band 100% replay 0.20 73s
+step  67 curriculum_pairs(s1) valid 24/32 reward +2.592 dock -6.98 kl 3.3132 band 100% replay 0.20 117s
+step  68 curriculum_pairs(s1) valid 27/32 reward +3.056 dock -7.17 kl 2.9402 band 100% replay 0.20 116s
+step  69 curriculum_pairs(s1) valid 27/32 reward +2.953 dock -7.19 kl 2.9443 band 100% replay 0.20 101s
+step  70 curriculum_pairs(s1) valid 26/32 reward +2.868 dock -6.94 kl 2.5326 band 100% replay 0.20 74s
+step  71 curriculum_pairs(s1) valid 28/32 reward +3.157 dock -7.18 kl 3.3980 band 100% replay 0.20 67s
+step  72 curriculum_pairs(s1) valid 30/32 reward +3.449 dock -7.10 kl 2.1491 band 100% replay 0.20 81s
+step  73 curriculum_pairs(s1) valid 27/32 reward +2.845 dock -7.07 kl 2.3684 band 100% replay 0.20 104s
+step  74 curriculum_pairs(s1) valid 27/32 reward +2.960 dock -7.08 kl 2.9008 band 100% replay 0.20 54s
+step  75 curriculum_pairs(s1) valid 25/32 reward +2.640 dock -6.86 kl 3.3014 band 100% replay 0.20 85s
+step  76 curriculum_pairs(s1) valid 29/32 reward +3.246 dock -7.02 kl 3.3986 band 100% replay 0.20 80s
+[RDKit] WARNING:[19:31:48] UFFTYPER: Warning: hybridization set to SP3 for atom 22
+step  77 curriculum_pairs(s1) valid 26/32 reward +2.659 dock -6.84 kl 2.6056 band 100% replay 0.20 78s
+step  78 curriculum_pairs(s1) valid 30/32 reward +3.384 dock -7.12 kl 2.5013 band 100% replay 0.20 79s
+step  79 curriculum_pairs(s1) valid 27/32 reward +2.903 dock -7.27 kl 3.8276 band 100% replay 0.20 59s
+step  80 curriculum_pairs(s1) valid 30/32 reward +3.412 dock -7.46 kl 3.4324 band 100% replay 0.20 94s
+[RDKit] ERROR:[19:37:05] UFFTYPER: Unrecognized atom type: S_5+4 (0)
+step  81 curriculum_pairs(s1) valid 30/32 reward +3.262 dock -7.32 kl 3.0459 band 100% replay 0.20 55s
+step  82 curriculum_pairs(s1) valid 28/32 reward +3.162 dock -7.19 kl 3.6832 band 100% replay 0.20 63s
+step  83 curriculum_pairs(s1) valid 26/32 reward +2.745 dock -6.96 kl 2.4562 band 100% replay 0.20 62s
+step  84 curriculum_pairs(s1) valid 26/32 reward +2.651 dock -7.00 kl 3.5058 band 100% replay 0.20 68s
+step  85 curriculum_pairs(s1) valid 24/32 reward +2.723 dock -7.54 kl 4.5672 band 100% replay 0.20 113s
+step  86 curriculum_pairs(s1) valid 27/32 reward +2.994 dock -7.29 kl 4.3582 band 100% replay 0.20 61s
+step  87 curriculum_pairs(s1) valid 27/32 reward +2.740 dock -6.66 kl 3.5569 band 100% replay 0.20 117s
+step  88 curriculum_pairs(s1) valid 28/32 reward +3.196 dock -7.58 kl 5.0334 band 100% replay 0.20 62s
+step  89 curriculum_pairs(s1) valid 27/32 reward +2.969 dock -7.31 kl 4.8406 band 100% replay 0.20 84s
+step  90 curriculum_pairs(s1) valid 29/32 reward +3.182 dock -7.53 kl 5.1730 band 100% replay 0.20 65s
+step  91 curriculum_pairs(s1) valid 29/32 reward +3.442 dock -8.16 kl 5.5257 band 100% replay 0.20 68s
+step  92 curriculum_pairs(s1) valid 27/32 reward +3.000 dock -7.09 kl 3.8715 band 100% replay 0.20 74s
+step  93 curriculum_pairs(s1) valid 26/32 reward +2.777 dock -7.27 kl 4.4180 band 100% replay 0.20 51s
+step  94 curriculum_pairs(s1) valid 24/32 reward +2.422 dock -7.11 kl 4.3971 band 100% replay 0.20 74s
+step  95 curriculum_pairs(s1) valid 29/32 reward +3.263 dock -7.24 kl 3.6469 band 100% replay 0.20 73s
+step  96 curriculum_pairs(s1) valid 27/32 reward +2.798 dock -7.13 kl 4.6858 band 100% replay 0.20 58s
+step  97 curriculum_pairs(s1) valid 25/32 reward +2.597 dock -6.71 kl 5.0908 band 100% replay 0.20 96s
+step  98 curriculum_pairs(s1) valid 32/32 reward +3.663 dock -7.55 kl 5.0337 band 100% replay 0.20 65s
+step  99 curriculum_pairs(s1) valid 27/32 reward +3.085 dock -7.52 kl 5.1275 band 100% replay 0.20 77s
+step 100 curriculum_pairs(s1) valid 31/32 reward +3.459 dock -7.25 kl 4.5045 band 100% replay 0.20 69s
+[RDKit] WARNING:[20:02:06] UFFTYPER: Warning: hybridization set to SP3 for atom 0
+step 101 curriculum_pairs(s1) valid 28/32 reward +3.188 dock -7.32 kl 4.5379 band 100% replay 0.20 73s
+step 102 curriculum_pairs(s1) valid 29/32 reward +3.303 dock -7.38 kl 5.5406 band 100% replay 0.20 116s
+[RDKit] ERROR:[20:05:21] UFFTYPER: Unrecognized atom type: S_5+4 (20)
+step 103 curriculum_pairs(s1) valid 28/32 reward +3.022 dock -7.04 kl 4.0914 band 100% replay 0.20 81s
+step 104 curriculum_pairs(s1) valid 27/32 reward +3.133 dock -7.23 kl 4.3895 band 100% replay 0.20 66s
+step 105 curriculum_pairs(s1) valid 27/32 reward +3.086 dock -7.24 kl 5.2348 band 100% replay 0.20 85s
+step 106 curriculum_pairs(s1) valid 29/32 reward +3.192 dock -7.29 kl 5.1101 band 100% replay 0.20 163s
+step 107 curriculum_pairs(s1) valid 28/32 reward +3.104 dock -7.12 kl 5.4021 band 100% replay 0.20 130s
+step 108 curriculum_pairs(s1) valid 31/32 reward +3.373 dock -6.77 kl 4.5324 band 100% replay 0.20 231s
+step 109 curriculum_pairs(s1) valid 27/32 reward +3.038 dock -7.35 kl 4.7431 band 100% replay 0.20 95s
+step 110 curriculum_pairs(s1) valid 25/32 reward +2.669 dock -7.22 kl 4.4024 band 100% replay 0.20 141s
+step 111 curriculum_pairs(s1) valid 27/32 reward +3.033 dock -7.30 kl 4.8158 band 100% replay 0.20 138s
+step 112 curriculum_pairs(s1) valid 30/32 reward +3.465 dock -7.59 kl 4.0897 band 100% replay 0.20 71s
+step 113 curriculum_pairs(s1) valid 31/32 reward +3.603 dock -7.28 kl 4.2791 band 100% replay 0.20 98s
+step 114 curriculum_pairs(s1) valid 29/32 reward +3.098 dock -6.87 kl 4.4054 band 100% replay 0.20 107s
+step 115 curriculum_pairs(s1) valid 30/32 reward +3.209 dock -7.05 kl 4.0075 band 100% replay 0.20 119s
+step 116 curriculum_pairs(s1) valid 25/32 reward +2.770 dock -6.87 kl 5.1988 band 100% replay 0.20 120s
+step 117 curriculum_pairs(s1) valid 29/32 reward +3.256 dock -7.10 kl 3.1722 band 100% replay 0.20 76s
+step 118 curriculum_pairs(s1) valid 31/32 reward +3.402 dock -7.00 kl 3.7060 band 100% replay 0.20 98s
+step 119 curriculum_pairs(s1) valid 31/32 reward +3.606 dock -7.25 kl 5.0992 band 100% replay 0.20 97s
+step 120 curriculum_pairs(s1) valid 29/32 reward +3.211 dock -7.16 kl 4.2386 band 100% replay 0.20 94s
+step 121 curriculum_pairs(s1) valid 28/32 reward +3.099 dock -7.02 kl 3.1279 band 100% replay 0.20 185s
+step 122 curriculum_pairs(s1) valid 26/32 reward +2.862 dock -6.99 kl 3.6443 band 100% replay 0.20 106s
+step 123 curriculum_pairs(s1) valid 26/32 reward +2.878 dock -7.35 kl 4.3380 band 100% replay 0.20 141s
+step 124 curriculum_pairs(s1) valid 27/32 reward +3.067 dock -7.05 kl 3.9899 band 100% replay 0.20 91s
+step 125 curriculum_pairs(s1) valid 30/32 reward +3.496 dock -7.35 kl 3.5300 band 100% replay 0.20 108s
+step 126 curriculum_pairs(s1) valid 29/32 reward +3.352 dock -7.28 kl 5.0755 band 100% replay 0.20 157s
+step 127 curriculum_pairs(s1) valid 26/32 reward +2.974 dock -7.28 kl 4.3556 band 100% replay 0.20 108s
+step 128 curriculum_pairs(s1) valid 28/32 reward +3.204 dock -7.33 kl 4.8526 band 100% replay 0.20 75s
+step 129 curriculum_pairs(s1) valid 32/32 reward +3.653 dock -7.24 kl 5.2677 band 100% replay 0.20 131s
+[RDKit] ERROR:[20:58:46] UFFTYPER: Unrecognized atom type: S_5+4 (12)
+step 130 curriculum_pairs(s1) valid 28/32 reward +3.291 dock -7.25 kl 3.8235 band 100% replay 0.20 77s
+step 131 curriculum_pairs(s1) valid 28/32 reward +3.215 dock -7.27 kl 4.2592 band 100% replay 0.20 97s
+step 132 curriculum_pairs(s1) valid 28/32 reward +3.114 dock -7.53 kl 4.8782 band 100% replay 0.20 60s
+step 133 curriculum_pairs(s1) valid 28/32 reward +3.104 dock -7.11 kl 4.5880 band 100% replay 0.20 66s
+step 134 curriculum_pairs(s1) valid 28/32 reward +3.243 dock -7.44 kl 5.1772 band 100% replay 0.20 70s
+step 135 curriculum_pairs(s1) valid 31/32 reward +3.585 dock -7.32 kl 4.9812 band 100% replay 0.20 82s
+step 136 curriculum_pairs(s1) valid 30/32 reward +3.607 dock -7.38 kl 4.6076 band 100% replay 0.20 74s
+step 137 curriculum_pairs(s1) valid 29/32 reward +3.114 dock -7.12 kl 5.6476 band 100% replay 0.20 85s
+[Thu Nov 19 01:22:08 AM PKT 2026] Steps completed so far: 138 / 150
+[Thu Nov 19 01:22:08 AM PKT 2026] Starting/resuming P-C.2 curriculum_pairs...
+parameters: 91,743,745
+Found local copy...
+Successfully loaded bioactivity GNN model from /home/coder/project/LigandGPT/GNN/outputs/pdbbind_finetune/best_model.pt
+target 0: loaded bounds from runs/baseline/calibrated_bounds_target0.json
+RESUMED from runs/probe_new/pc_curriculum_pairs/target0/ckpt_b.pt at step 138
+target 0: prompt 1641, budget 200, arm=curriculum_pairs, warmup=0, total=150
