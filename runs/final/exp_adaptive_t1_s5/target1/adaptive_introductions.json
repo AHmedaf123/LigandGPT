@@ -1,0 +1,57 @@
+[
+ {
+  "step": 97,
+  "objective": "bioactivity",
+  "trigger_obj": "docking",
+  "metric_value": 0.18293613929874156,
+  "L_j": 0.4419584118112726,
+  "improvement": 0.25902227251253107,
+  "threshold": 0.2575987841945287,
+  "forced": false,
+  "milestone": true
+ },
+ {
+  "step": 137,
+  "objective": "qed",
+  "trigger_obj": "bioactivity",
+  "metric_value": -8.469991500964094,
+  "L_j": -8.031426113590134,
+  "improvement": 0.4385653873739592,
+  "threshold": 0.2620971981877614,
+  "forced": false,
+  "milestone": true
+ },
+ {
+  "step": 177,
+  "objective": "sa",
+  "trigger_obj": "qed",
+  "metric_value": 0.5926764597204423,
+  "L_j": 0.4677269655690371,
+  "improvement": 0.12494949415140516,
+  "threshold": 0.04930184776372515,
+  "forced": false,
+  "milestone": true
+ },
+ {
+  "step": 217,
+  "objective": "torsion",
+  "trigger_obj": "sa",
+  "metric_value": 5.079504023428755,
+  "L_j": 5.527192335111768,
+  "improvement": 0.44768831168301304,
+  "threshold": 0.3426088586362795,
+  "forced": false,
+  "milestone": true
+ },
+ {
+  "step": 257,
+  "objective": "energy",
+  "trigger_obj": "torsion",
+  "metric_value": 1.2105967991144113,
+  "L_j": 1.7288604384595747,
+  "improvement": 0.5182636393451634,
+  "threshold": 0.3232282077506269,
+  "forced": false,
+  "milestone": true
+ }
+]

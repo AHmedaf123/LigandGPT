@@ -77,10 +77,7 @@ venv.bak/
 Thumbs.db
 
 # Project specific
-logs/
 checkpoints/
-checkpoints_docking/
-generated_molecules/
 *.pth
 !docking/qvina02
 

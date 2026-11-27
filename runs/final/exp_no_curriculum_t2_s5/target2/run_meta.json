@@ -1,0 +1,8 @@
+{
+ "git_commit": "9fef6a210388f7a856fe3296c1ebc87b0c8448cd",
+ "seed": 5,
+ "target": 2,
+ "pocket_id": "GRK4_HUMAN_1_578_0/4yhj_A_rec_4yhj_an2_lig_tt_min_0_pocket10.pdb",
+ "torch_version": "2.11.0+cu128",
+ "numpy_version": "2.5.4"
+}

@@ -1,0 +1,44 @@
+{
+ "args": {
+  "ckpt_load_path": "final.pt",
+  "vocab_path": "./ProtLigVoc.txt",
+  "data_path": "./data",
+  "out": "runs/final/exp_adaptive_t1_s5",
+  "targets": [
+   1
+  ],
+  "arm": "adaptive",
+  "n_steps": 775,
+  "warmup_steps": 75,
+  "stage_length": 700,
+  "batch_size": 32,
+  "micro_batch": 1,
+  "learning_rate": 1e-06,
+  "replay": 8,
+  "kl_coef": 1.0,
+  "ent_coef": 0.005,
+  "log_ratio_clamp": 0.7,
+  "grad_clip": 5.0,
+  "max_new_tokens": 200,
+  "seed": 5,
+  "resume": true,
+  "probe": false,
+  "adaptive_min_phase": 40,
+  "adaptive_forced_intro": 100,
+  "adaptive_k": 0.25,
+  "bounds_file": "runs/baseline_v2/calibrated_bounds_target1.json"
+ },
+ "prompt_tokens": 1577,
+ "token_budget": 200,
+ "receptor": "./data/receptors_pdbqt/GLMU_STRPN_2_459_0/4aaw_A_rec.pdbqt",
+ "center": [
+  44.01021957397461,
+  37.20588684082031,
+  83.87215423583984
+ ],
+ "arm": "adaptive",
+ "warmup_steps": 75,
+ "total_steps": 775,
+ "stage_length": 700,
+ "bounds": "runs/baseline_v2/calibrated_bounds_target1.json"
+}
